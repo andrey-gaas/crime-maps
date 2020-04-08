@@ -21,14 +21,16 @@ function DesctopMenu() {
           }}
         >
           <div className={classes.header}>
-            <div className={classes.searchContainer}>
-              <img src={LogoDark} alt="" height="35px" />
-              <InputBase
-                className={classes.search}
-                placeholder="Поиск по Crime Maps..."
-              />
+            <div className={classes.darkBG}>
+              <div className={classes.searchContainer}>
+                <img src={LogoDark} alt="" height="35px" />
+                <InputBase
+                  className={classes.search}
+                  placeholder="Поиск по Crime Maps..."
+                />
+              </div>
+              <Geo />
             </div>
-            <Geo />
           </div>
         </Drawer>
     </Hidden>

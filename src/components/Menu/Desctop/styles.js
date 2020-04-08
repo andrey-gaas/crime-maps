@@ -16,7 +16,7 @@ export default makeStyles(theme => ({
     height: 200,
     backgroundImage: `url(${cityBackground})`,
     backgroundSize: 'cover',
-    backgroundRepeat: 'no-repeat'
+    backgroundRepeat: 'no-repeat',
   },
   searchContainer: {
     display: 'flex',
@@ -29,5 +29,10 @@ export default makeStyles(theme => ({
   },
   search: {
     width: '86%'
-  }
+  },
+  darkBG: {
+    paddingTop: 1,
+    height: '100%',
+    backgroundColor: 'rgba(0, 0, 0, .5)',
+  },
 }));
