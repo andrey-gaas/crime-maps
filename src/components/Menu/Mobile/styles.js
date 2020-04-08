@@ -1,6 +1,6 @@
 import { makeStyles } from '@material-ui/core/styles';
 
-const width = 270;
+const width = "80%";
 const index = 1000;
 
 export default makeStyles(theme => ({
