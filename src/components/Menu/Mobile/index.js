@@ -12,6 +12,7 @@ import {
 } from '@material-ui/icons';
 import useStyles from './styles';
 import LogoDark from '../../../images/logo_dark.svg';
+import Geo from '../Geo';
 
 function MobileMenu() {
   const classes = useStyles();
@@ -41,6 +42,7 @@ function MobileMenu() {
             <ArrowIcon />
           </IconButton>
         </div>
+        <Geo />
       </SwipeableDrawer>
     </Hidden>
   );
