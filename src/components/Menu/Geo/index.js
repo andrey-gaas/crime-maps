@@ -1,4 +1,7 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import {
   Typography,
   IconButton
@@ -6,8 +9,11 @@ import {
 import { Edit as EditIcon } from '@material-ui/icons';
 import useStyles from './styles';
 import gerb from '../../../images/emblems/novosibirsk-gerb.svg';
+import { fetchCities } from '../../../store/AC/cities';
 
-function Geo() {
+function Geo(props) {
+  const { fetchCities } = props;
+  
   const classes = useStyles();
 
   return (
@@ -19,11 +25,19 @@ function Geo() {
         Санкт-Петербург
       </Typography>
       <div className={classes.grow} />
-      <IconButton>
+      <IconButton onClick={fetchCities}>
         <EditIcon className={classes.changeCityButton} />
       </IconButton>
     </div>
   );
 }
 
-export default Geo;
+Geo.propTypes = {
+  fetchCities: PropTypes.func.isRequired
+};
+
+const mapDispatchToProps = dispatch => bindActionCreators({
+  fetchCities
+}, dispatch);
+
+export default connect(null, mapDispatchToProps)(Geo);

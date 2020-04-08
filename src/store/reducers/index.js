@@ -1,3 +1,6 @@
-export default function(store = {}) {
-  return store;
-};
+import { combineReducers } from 'redux';
+import cities from './cities';
+
+export default combineReducers({
+  cities
+});
