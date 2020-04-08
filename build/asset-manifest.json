@@ -1,0 +1,25 @@
+{
+  "files": {
+    "main.css": "/static/css/main.331cf375.chunk.css",
+    "main.js": "/static/js/main.dcf1c240.chunk.js",
+    "main.js.map": "/static/js/main.dcf1c240.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.ab553200.js",
+    "runtime-main.js.map": "/static/js/runtime-main.ab553200.js.map",
+    "static/js/2.a3826b30.chunk.js": "/static/js/2.a3826b30.chunk.js",
+    "static/js/2.a3826b30.chunk.js.map": "/static/js/2.a3826b30.chunk.js.map",
+    "index.html": "/index.html",
+    "precache-manifest.812b67d97c764b43fa622223f0df382e.js": "/precache-manifest.812b67d97c764b43fa622223f0df382e.js",
+    "service-worker.js": "/service-worker.js",
+    "static/css/main.331cf375.chunk.css.map": "/static/css/main.331cf375.chunk.css.map",
+    "static/js/2.a3826b30.chunk.js.LICENSE.txt": "/static/js/2.a3826b30.chunk.js.LICENSE.txt",
+    "static/media/logo_dark.svg": "/static/media/logo_dark.6ea33164.svg",
+    "static/media/novosibirsk-gerb.svg": "/static/media/novosibirsk-gerb.2c7e8a94.svg",
+    "static/media/novosibirsk.jpg": "/static/media/novosibirsk.3223fede.jpg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.ab553200.js",
+    "static/js/2.a3826b30.chunk.js",
+    "static/css/main.331cf375.chunk.css",
+    "static/js/main.dcf1c240.chunk.js"
+  ]
+}
