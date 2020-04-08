@@ -10,6 +10,9 @@ const PORT = process.env.PORT || config.get('port');
 
 app.use(express.json({ exptended: true }));
 
+/* Routes */
+app.use('/api/cities', require('./routes/cities'));
+
 if (process.env.NODE_ENV === 'production') {
   app.use('/', express.static(path.join(__dirname, 'build')));
 
