@@ -1,23 +1,23 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "453072e676c69b769f39bac4f75ae046",
+    "revision": "e4f13aa33057fc03f1e9469bcfbca43a",
     "url": "/index.html"
   },
   {
-    "revision": "a4fa0abe2fb05b801d64",
+    "revision": "94c70ab116797cb55792",
     "url": "/static/css/main.331cf375.chunk.css"
   },
   {
-    "revision": "d20b0e8764cacadc9999",
-    "url": "/static/js/2.a3826b30.chunk.js"
+    "revision": "91d3bdc02463613bd891",
+    "url": "/static/js/2.3283ab43.chunk.js"
   },
   {
     "revision": "278be41389e3536a5347a9018737729d",
-    "url": "/static/js/2.a3826b30.chunk.js.LICENSE.txt"
+    "url": "/static/js/2.3283ab43.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "a4fa0abe2fb05b801d64",
-    "url": "/static/js/main.d9d1a663.chunk.js"
+    "revision": "94c70ab116797cb55792",
+    "url": "/static/js/main.346a343d.chunk.js"
   },
   {
     "revision": "f938d7bac29684014da5",
@@ -28,8 +28,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/static/media/logo_dark.6ea33164.svg"
   },
   {
-    "revision": "2c7e8a940a21603d1913040ae641eb9b",
-    "url": "/static/media/novosibirsk-gerb.2c7e8a94.svg"
+    "revision": "f2328259acd31a06da3ca7911a77b5c3",
+    "url": "/static/media/novosibirsk-gerb.f2328259.svg"
   },
   {
     "revision": "3223fedefb3208849852a64bdbcc3adb",
