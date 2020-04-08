@@ -22,7 +22,7 @@ function DesctopMenu() {
         >
           <div className={classes.header}>
             <div className={classes.searchContainer}>
-              <img src={LogoDark} alt="Crime Maps" height="35px" />
+              <img src={LogoDark} alt="" height="35px" />
               <InputBase
                 className={classes.search}
                 placeholder="Поиск по Crime Maps..."
