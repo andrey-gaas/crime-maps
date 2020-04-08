@@ -1,22 +1,22 @@
 import { makeStyles } from '@material-ui/core/styles';
 import cityBackground from '../../images/novosibirsk.jpg'
 
-const drawerWidth = '20%';
+const drawerWidth = 360;
 
-export const styles = makeStyles(theme => ({
-  desctopDrawer: {
+export const desctopMenu = makeStyles(theme => ({
+  root: {
     width: drawerWidth,
     flexShrink: 0,
     whiteSpace: 'nowrap',
   },
-  desctopDrawerOpen: {
+  open: {
     width: drawerWidth,
     transition: theme.transitions.create('width', {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.enteringScreen,
     }),
   },
-  desctopDrawerClose: {
+  close: {
     transition: theme.transitions.create('width', {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
@@ -44,19 +44,12 @@ export const styles = makeStyles(theme => ({
   },
   search: {
     width: '86%'
-  }
-}));
+  },
 
-export const geoStyles = makeStyles(theme => ({
-  root: {
-    display: 'flex',
-    margin: theme.spacing(3),
-    overflowX: 'hidden'
-  },
-  cityName: {
-    color: '#fff'
-  },
-  emblem: {
-    marginRight: theme.spacing(1)
+  buttonMenu: {
+    position: 'absolute',
+    top: theme.spacing(2),
+    left: theme.spacing(1),
+    zIndex: 99999,
   }
 }));

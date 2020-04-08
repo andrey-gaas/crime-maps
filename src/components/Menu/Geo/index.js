@@ -2,8 +2,8 @@ import React from 'react';
 import {
   Typography
 } from '@material-ui/core';
-import { geoStyles as useStyles } from './styles';
-import gerb from '../../images/novosibirsk-gerb.svg';
+import useStyles from './styles';
+import gerb from '../../../images/novosibirsk-gerb.svg';
 
 function Geo() {
   const classes = useStyles();
