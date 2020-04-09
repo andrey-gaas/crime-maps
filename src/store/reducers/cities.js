@@ -1,8 +1,9 @@
-import { ADD, OPEN_SELECTOR, CLOSE_SELECTOR } from '../actions/cities';
+import { ADD, OPEN_SELECTOR, CLOSE_SELECTOR, ERROR } from '../actions/cities';
 
 const initialState = {
   isSelectorOpen: false,
-  data: []
+  data: [],
+  error: false,
 };
 
 function cities(state = initialState, action) {
@@ -13,6 +14,8 @@ function cities(state = initialState, action) {
       return {...state, isSelectorOpen: true};
     case CLOSE_SELECTOR:
       return {...state, isSelectorOpen: false};
+    case ERROR:
+      return {...state, error: action.error};
     default:
       return state;
   }
