@@ -1,9 +1,16 @@
-import { ADD, OPEN_SELECTOR, CLOSE_SELECTOR, ERROR } from '../actions/cities';
+import {
+  ADD,
+  OPEN_SELECTOR,
+  CLOSE_SELECTOR,
+  ERROR,
+  LOADING
+} from '../actions/cities';
 
 const initialState = {
-  isSelectorOpen: false,
   data: [],
+  isSelectorOpen: false,
   error: false,
+  loading: true,
 };
 
 function cities(state = initialState, action) {
@@ -16,6 +23,8 @@ function cities(state = initialState, action) {
       return {...state, isSelectorOpen: false};
     case ERROR:
       return {...state, error: action.error};
+    case LOADING:
+      return {...state, loading: action.loading};
     default:
       return state;
   }
