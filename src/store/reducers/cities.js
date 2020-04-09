@@ -1,7 +1,6 @@
 import {
   ADD,
-  OPEN_SELECTOR,
-  CLOSE_SELECTOR,
+  MODAL,
   ERROR,
   LOADING
 } from '../actions/cities';
@@ -17,10 +16,8 @@ function cities(state = initialState, action) {
   switch(action.type) {
     case ADD:
       return {...state, data: action.cities};
-    case OPEN_SELECTOR:
-      return {...state, isSelectorOpen: true};
-    case CLOSE_SELECTOR:
-      return {...state, isSelectorOpen: false};
+    case MODAL:
+      return {...state, isSelectorOpen: action.isOpen};
     case ERROR:
       return {...state, error: action.error};
     case LOADING:
