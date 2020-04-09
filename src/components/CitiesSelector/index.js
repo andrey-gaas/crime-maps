@@ -6,9 +6,9 @@ import {
 } from '@material-ui/core';
 
 function CitiesSelector(props) {
-  console.log(props);
+  const { isOpen } = props;
   return (
-    <Dialog open={true}>
+    <Dialog open={isOpen}>
       sadsdads
     </Dialog>
   );

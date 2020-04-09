@@ -1,11 +1,12 @@
-import { takeLatest, call } from 'redux-saga/effects';
+import { takeLatest, call, put } from 'redux-saga/effects';
 import axios from 'axios';
 import { FETCH_CITIES } from '../actions/cities';
+import { setCities } from '../AC/cities';
 
 function* fetchCities() {
   try {
-    const result = yield call(axios.get, '/api/cities/');
-    console.log(result);
+    const { data } = yield call(axios.get, '/api/cities/');
+    yield put(setCities(data));
   } catch(e) {
     console.log(e.message);
   }
