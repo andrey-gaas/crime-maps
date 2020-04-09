@@ -9,10 +9,10 @@ import {
 import { Edit as EditIcon } from '@material-ui/icons';
 import useStyles from './styles';
 import gerb from '../../../images/emblems/novosibirsk-gerb.svg';
-import { fetchCities } from '../../../store/AC/cities';
+import { fetchCities, setModal } from '../../../store/AC/cities';
 
 function Geo(props) {
-  const { fetchCities } = props;
+  const { /* fetchCities, */ setModal } = props;
   
   const classes = useStyles();
 
@@ -25,7 +25,7 @@ function Geo(props) {
         Санкт-Петербург
       </Typography>
       <div className={classes.grow} />
-      <IconButton onClick={fetchCities}>
+      <IconButton onClick={() => setModal(true)}>
         <EditIcon className={classes.changeCityButton} />
       </IconButton>
     </div>
@@ -33,11 +33,13 @@ function Geo(props) {
 }
 
 Geo.propTypes = {
-  fetchCities: PropTypes.func.isRequired
+  fetchCities: PropTypes.func.isRequired,
+  setModal: PropTypes.func.isRequired,
 };
 
 const mapDispatchToProps = dispatch => bindActionCreators({
-  fetchCities
+  fetchCities,
+  setModal
 }, dispatch);
 
 export default connect(null, mapDispatchToProps)(Geo);
