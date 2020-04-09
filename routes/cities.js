@@ -16,7 +16,7 @@ router.get('/', async (req, res) => {
 
 router.post('/', async (req, res) => {
   try {
-    const { title, name } = req.body;
+    const { title, name, lat, lng } = req.body;
     const cities = await City.find();
 
     const candidate = cities.find(city => city.name === name);
@@ -30,11 +30,13 @@ router.post('/', async (req, res) => {
     const city = new City({
       id,
       title,
-      name
+      name,
+      lat,
+      lng
     });
 
     await city.save();
-    res.send({ id, title, name });
+    res.send({ id, title, name, lat, lng });
 
   } catch(e) {
     console.log(e.message);

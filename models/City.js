@@ -15,6 +15,14 @@ const schema = new Schema({
     type: String,
     required: true,
     unique: true
+  },
+  lat: {
+    type: Number,
+    required: true
+  },
+  lng: {
+    type: Number,
+    required: true
   }
 });
 
