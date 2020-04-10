@@ -6,8 +6,13 @@ import {
   Dialog,
   DialogTitle,
   DialogContent,
+  DialogActions,
   IconButton,
-  Typography
+  Typography,
+  List,
+  ListItem,
+  ListItemText,
+  Button,
 } from '@material-ui/core';
 import {
   Close as CloseIcon,
@@ -21,7 +26,8 @@ function CitiesSelector(props) {
   const {
     isOpen,
     loading,
-    setModal
+    setModal,
+    cities,
   } = props;
 
   return (
@@ -46,14 +52,30 @@ function CitiesSelector(props) {
             </Typography>
           )
         }
+        {
+          !loading && (
+            <List component="nav">
+              {
+                cities.map(city =>
+                  <ListItem button key={city.id}>
+                    <ListItemText>{city.name}</ListItemText>
+                  </ListItem>
+                )
+              }
+            </List>
+          )
+        }
       </DialogContent>
+      <DialogActions className={classes.actions}>
+        <Button>Подтвердить</Button>
+      </DialogActions>
     </Dialog>
   );
 }
 
 CitiesSelector.propTypes = {
   isOpen: PropTypes.bool.isRequired,
-  data: PropTypes.array.isRequired,
+  cities: PropTypes.array.isRequired,
   loading: PropTypes.bool.isRequired,
   error: PropTypes.bool.isRequired,
   setModal: PropTypes.func.isRequired
@@ -66,7 +88,7 @@ const mapStateToProps = ({ cities: {
   error,
 }}) => ({
   isOpen: isSelectorOpen,
-  data,
+  cities: data,
   loading,
   error
 });

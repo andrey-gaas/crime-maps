@@ -26,5 +26,9 @@ export default makeStyles(theme => ({
     '100%': {
       transform: 'rotate(-360deg)',
     },
-  }
+  },
+  actions: {
+    backgroundColor: '#eee',
+    borderTop: '1px solid #cecece',
+  },
 }));
