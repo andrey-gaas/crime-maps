@@ -2,7 +2,8 @@ import {
   ADD,
   MODAL,
   ERROR,
-  LOADING
+  LOADING,
+  CHANGE_CITY,
 } from '../actions/cities';
 
 const initialState = {
@@ -23,6 +24,8 @@ function cities(state = initialState, action) {
       return {...state, error: action.error};
     case LOADING:
       return {...state, loading: action.loading};
+    case CHANGE_CITY:
+      return {...state, selectedCity: action.id};
     default:
       return state;
   }
