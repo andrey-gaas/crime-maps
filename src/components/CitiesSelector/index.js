@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
@@ -12,16 +12,19 @@ import {
   List,
   ListItem,
   ListItemText,
+  ListItemSecondaryAction,
   Button,
 } from '@material-ui/core';
 import {
   Close as CloseIcon,
   Loop as LoopIcon,
+  Check as CheckIcon,
 } from '@material-ui/icons';
 import { setModal } from '../../store/AC/cities';
 import useStyles from './styles';
 
 function CitiesSelector(props) {
+  const [selectedCity, setSelectedCity] = useState(null);
   const classes = useStyles();
   const {
     isOpen,
@@ -57,8 +60,21 @@ function CitiesSelector(props) {
             <List component="nav">
               {
                 cities.map(city =>
-                  <ListItem button key={city.id}>
+                  <ListItem
+                    button
+                    key={city.id}
+                    selected={city.id === selectedCity}
+                    onClick={() => setSelectedCity(city.id)}
+                  >
                     <ListItemText>{city.name}</ListItemText>
+                    {
+                      city.id === selectedCity &&
+                        <ListItemSecondaryAction>
+                          <IconButton>
+                            <CheckIcon />
+                          </IconButton>
+                        </ListItemSecondaryAction>
+                    }
                   </ListItem>
                 )
               }
