@@ -1,9 +1,10 @@
 import { makeStyles } from '@material-ui/core/styles';
-import cityBackground from '../../../images/novosibirsk.jpg'
+import backgrounds from '../cityBackgrounds';
 
 const drawerWidth = 360;
 
 export default makeStyles(theme => ({
+  ...backgrounds,
   root: {
     width: drawerWidth,
     flexShrink: 0
@@ -14,9 +15,6 @@ export default makeStyles(theme => ({
   header: {
     position: 'relative',
     height: 200,
-    backgroundImage: `url(${cityBackground})`,
-    backgroundSize: 'cover',
-    backgroundRepeat: 'no-repeat',
   },
   searchContainer: {
     display: 'flex',
