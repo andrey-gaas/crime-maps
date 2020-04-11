@@ -6,6 +6,7 @@ import { setCities, setError, setLoading } from '../AC/cities';
 function* fetchCities() {
   try {
     const { data } = yield call(axios.get, '/api/cities/');
+    localStorage.setItem('citiesList', JSON.stringify(data));
     yield put(setCities(data));
     yield put(setError(false));
     yield put(setLoading(false));

@@ -26,6 +26,7 @@ import useStyles from './styles';
 function CitiesSelector(props) {
   const [selectedCity, setSelectedCity] = useState(null);
   const handleClick = id => {
+    localStorage.setItem('selectedCity', id);
     changeCity(id);
     setModal(false);
   };
