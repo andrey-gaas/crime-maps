@@ -16,8 +16,6 @@ function DesctopMenu(props) {
   const classes = makeStyles();
   const selectedCity = citiesList.find(city => city.id === selectedCityId);
 
-  console.log(selectedCity.title);
-
   return (
     <Hidden smDown implementation="css">
       <Drawer

@@ -20,17 +20,22 @@ import {
   Loop as LoopIcon,
   Check as CheckIcon,
 } from '@material-ui/icons';
-import { setModal } from '../../store/AC/cities';
+import { setModal, changeCity } from '../../store/AC/cities';
 import useStyles from './styles';
 
 function CitiesSelector(props) {
   const [selectedCity, setSelectedCity] = useState(null);
+  const handleClick = id => {
+    changeCity(id);
+    setModal(false);
+  };
   const classes = useStyles();
   const {
     isOpen,
     loading,
     setModal,
     cities,
+    changeCity,
   } = props;
 
   return (
@@ -83,7 +88,7 @@ function CitiesSelector(props) {
         }
       </DialogContent>
       <DialogActions className={classes.actions}>
-        <Button>Подтвердить</Button>
+        <Button onClick={() => handleClick(selectedCity)}>Подтвердить</Button>
       </DialogActions>
     </Dialog>
   );
@@ -94,7 +99,8 @@ CitiesSelector.propTypes = {
   cities: PropTypes.array.isRequired,
   loading: PropTypes.bool.isRequired,
   error: PropTypes.bool.isRequired,
-  setModal: PropTypes.func.isRequired
+  setModal: PropTypes.func.isRequired,
+  changeCity: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = ({ cities: {
@@ -110,7 +116,8 @@ const mapStateToProps = ({ cities: {
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators({
-  setModal
+  setModal,
+  changeCity,
 }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(CitiesSelector);
