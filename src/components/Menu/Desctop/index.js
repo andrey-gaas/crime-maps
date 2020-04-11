@@ -12,14 +12,12 @@ import Geo from '../Geo';
 
 function DesctopMenu(props) {
   const {
-    selectedCityId,
-    citiesList,
+    selectedCity,
     loading,
     fetchCities,
     setModal,
   } = props;
   const classes = makeStyles();
-  const selectedCity = citiesList.find(city => city.id === selectedCityId);
 
   return (
     <Hidden smDown implementation="css">
@@ -43,6 +41,8 @@ function DesctopMenu(props) {
                 loading={loading}
                 fetchCities={fetchCities}
                 setModal={setModal}
+                titleCity={selectedCity.title}
+                city={selectedCity.name}
               />
             </div>
           </div>
@@ -52,8 +52,7 @@ function DesctopMenu(props) {
 }
 
 DesctopMenu.propTypes = {
-  selectedCityId: PropTypes.number.isRequired,
-  citiesList: PropTypes.array.isRequired,
+  selectedCity: PropTypes.object.isRequired,
   loading: PropTypes.bool.isRequired,
   fetchCities: PropTypes.func.isRequired,
   setModal: PropTypes.func.isRequired,

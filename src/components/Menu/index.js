@@ -10,20 +10,23 @@ function Menu(props) {
   const {
     fetchCities,
     setModal,
-    selectedCity,
+    selectedCityId,
     citiesList,
     loading,
   } = props;
+
+  const selectedCity = citiesList.find(city => city.id === selectedCityId);
+
   return (
     <nav>
       <DesctopMenu
-        selectedCityId={selectedCity}
-        citiesList={citiesList}
+        selectedCity={selectedCity}
         loading={loading}
         fetchCities={fetchCities}
         setModal={setModal}
       />
       <Mobile
+        selectedCity={selectedCity}
         loading={loading}
         fetchCities={fetchCities}
         setModal={setModal}
@@ -35,13 +38,13 @@ function Menu(props) {
 Menu.propTypes = {
   fetchCities: PropTypes.func.isRequired,
   setModal: PropTypes.func.isRequired,
-  selectedCity: PropTypes.number.isRequired,
+  selectedCityId: PropTypes.number.isRequired,
   citiesList: PropTypes.array.isRequired,
   loading: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = ({ cities: { selectedCity, data, loading } }) => ({
-  selectedCity,
+  selectedCityId: selectedCity,
   citiesList: data,
   loading,
 });

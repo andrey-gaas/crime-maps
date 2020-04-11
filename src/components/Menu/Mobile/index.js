@@ -16,7 +16,12 @@ import LogoDark from '../../../images/logo_dark.svg';
 import Geo from '../Geo';
 
 function MobileMenu(props) {
-  const { loading, fetchCities, setModal } = props;
+  const {
+    loading,
+    fetchCities,
+    setModal,
+    selectedCity,
+  } = props;
   const classes = useStyles();
   const [isOpen, setOpen] = useState(false);
   const toggleMenu = value => setOpen(value);
@@ -48,6 +53,8 @@ function MobileMenu(props) {
           loading={loading}
           fetchCities={fetchCities}
           setModal={setModal}
+          titleCity={selectedCity.title}
+          city={selectedCity.name}
         />
       </SwipeableDrawer>
     </Hidden>
@@ -58,6 +65,7 @@ MobileMenu.propTypes = {
   fetchCities: PropTypes.func.isRequired,
   setModal: PropTypes.func.isRequired,
   loading: PropTypes.bool.isRequired,
+  selectedCity: PropTypes.object.isRequired,
 };
 
 export default MobileMenu;
