@@ -89,7 +89,7 @@ function CitiesSelector(props) {
         }
       </DialogContent>
       <DialogActions className={classes.actions}>
-        <Button onClick={() => handleClick(selectedCity)}>Подтвердить</Button>
+        <Button onClick={() => handleClick(selectedCity)} disabled={selectedCity === null}>Подтвердить</Button>
       </DialogActions>
     </Dialog>
   );
