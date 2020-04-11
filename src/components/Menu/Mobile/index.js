@@ -1,20 +1,22 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import {
   Hidden,
   SwipeableDrawer,
   Fab,
   Typography,
-  IconButton
+  IconButton,
 } from '@material-ui/core';
 import {
   Menu as MenuIcon,
-  ArrowBackIos as ArrowIcon
+  ArrowBackIos as ArrowIcon,
 } from '@material-ui/icons';
 import useStyles from './styles';
 import LogoDark from '../../../images/logo_dark.svg';
 import Geo from '../Geo';
 
-function MobileMenu() {
+function MobileMenu(props) {
+  const { loading, fetchCities, setModal } = props;
   const classes = useStyles();
   const [isOpen, setOpen] = useState(false);
   const toggleMenu = value => setOpen(value);
@@ -42,10 +44,20 @@ function MobileMenu() {
             <ArrowIcon />
           </IconButton>
         </div>
-        <Geo />
+        <Geo
+          loading={loading}
+          fetchCities={fetchCities}
+          setModal={setModal}
+        />
       </SwipeableDrawer>
     </Hidden>
   );
 }
+
+MobileMenu.propTypes = {
+  fetchCities: PropTypes.func.isRequired,
+  setModal: PropTypes.func.isRequired,
+  loading: PropTypes.bool.isRequired,
+};
 
 export default MobileMenu;

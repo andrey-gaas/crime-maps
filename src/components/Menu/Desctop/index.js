@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
 import {
   Drawer,
   Hidden,
@@ -12,7 +11,13 @@ import LogoDark from '../../../images/logo_dark.svg';
 import Geo from '../Geo';
 
 function DesctopMenu(props) {
-  const { selectedCityId, citiesList } = props;
+  const {
+    selectedCityId,
+    citiesList,
+    loading,
+    fetchCities,
+    setModal,
+  } = props;
   const classes = makeStyles();
   const selectedCity = citiesList.find(city => city.id === selectedCityId);
 
@@ -34,7 +39,11 @@ function DesctopMenu(props) {
                   placeholder="Поиск по Crime Maps..."
                 />
               </div>
-              <Geo />
+              <Geo
+                loading={loading}
+                fetchCities={fetchCities}
+                setModal={setModal}
+              />
             </div>
           </div>
         </Drawer>
@@ -45,11 +54,9 @@ function DesctopMenu(props) {
 DesctopMenu.propTypes = {
   selectedCityId: PropTypes.number.isRequired,
   citiesList: PropTypes.array.isRequired,
+  loading: PropTypes.bool.isRequired,
+  fetchCities: PropTypes.func.isRequired,
+  setModal: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = ({ cities: { selectedCity, data } }) => ({
-  selectedCityId: selectedCity,
-  citiesList: data,
-});
-
-export default connect(mapStateToProps)(DesctopMenu);
+export default DesctopMenu;
