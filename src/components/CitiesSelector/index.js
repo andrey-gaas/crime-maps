@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
+import { connect, batch } from 'react-redux';
 import {
   Dialog,
   DialogTitle,
@@ -21,14 +21,19 @@ import {
   Check as CheckIcon,
 } from '@material-ui/icons';
 import { setModal, changeCity } from '../../store/AC/cities';
+import { changeCoordinates } from '../../store/AC/map';
 import useStyles from './styles';
 
 function CitiesSelector(props) {
-  const [selectedCity, setSelectedCity] = useState(null);
+  const [selectedCityId, setSelectedCityId] = useState(null);
   const handleClick = id => {
+    const city = cities.find(city => city.id === id);
     localStorage.setItem('selectedCity', id);
-    changeCity(id);
-    setModal(false);
+    batch(() => {
+      changeCity(id);
+      setModal(false);
+      changeCoordinates(city.lat, city.lng);
+    });
   };
   const classes = useStyles();
   const {
@@ -37,6 +42,7 @@ function CitiesSelector(props) {
     setModal,
     cities,
     changeCity,
+    changeCoordinates,
   } = props;
 
   return (
@@ -69,12 +75,12 @@ function CitiesSelector(props) {
                   <ListItem
                     button
                     key={city.id}
-                    selected={city.id === selectedCity}
-                    onClick={() => setSelectedCity(city.id)}
+                    selected={city.id === selectedCityId}
+                    onClick={() => setSelectedCityId(city.id)}
                   >
                     <ListItemText>{city.name}</ListItemText>
                     {
-                      city.id === selectedCity &&
+                      city.id === selectedCityId &&
                         <ListItemSecondaryAction>
                           <IconButton>
                             <CheckIcon />
@@ -89,7 +95,7 @@ function CitiesSelector(props) {
         }
       </DialogContent>
       <DialogActions className={classes.actions}>
-        <Button onClick={() => handleClick(selectedCity)} disabled={selectedCity === null}>Подтвердить</Button>
+        <Button onClick={() => handleClick(selectedCityId)} disabled={selectedCityId === null}>Подтвердить</Button>
       </DialogActions>
     </Dialog>
   );
@@ -102,6 +108,7 @@ CitiesSelector.propTypes = {
   error: PropTypes.bool.isRequired,
   setModal: PropTypes.func.isRequired,
   changeCity: PropTypes.func.isRequired,
+  changeCoordinates: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = ({ cities: {
@@ -119,6 +126,7 @@ const mapStateToProps = ({ cities: {
 const mapDispatchToProps = dispatch => bindActionCreators({
   setModal,
   changeCity,
+  changeCoordinates,
 }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(CitiesSelector);

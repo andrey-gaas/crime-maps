@@ -9,7 +9,7 @@ function Map(props) {
   return (
     <LeafletMap
         center={[lat, lng]}
-        zoom={15}
+        zoom={13}
         maxZoom={17}
         attributionControl={true}
         zoomControl={false}
