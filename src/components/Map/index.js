@@ -1,12 +1,16 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import { Map as LeafletMap, TileLayer, Marker, Popup } from 'react-leaflet';
 
-function Map() {
+function Map(props) {
+  const { lat, lng } = props;
+
   return (
     <LeafletMap
-        center={[54.983376, 82.892057]}
+        center={[lat, lng]}
         zoom={15}
-        maxZoom={100}
+        maxZoom={17}
         attributionControl={true}
         zoomControl={false}
         doubleClickZoom={true}
@@ -27,4 +31,14 @@ function Map() {
   );
 }
 
-export default Map;
+Map.propTypes = {
+  lat: PropTypes.number.isRequired,
+  lng: PropTypes.number.isRequired,
+};
+
+const mapStateToProps = ({ map }) => ({
+  lat: map.lat,
+  lng: map.lng,
+});
+
+export default connect(mapStateToProps)(Map);
