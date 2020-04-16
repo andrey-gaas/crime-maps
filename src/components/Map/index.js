@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Map as LeafletMap, TileLayer, Marker, Popup } from 'react-leaflet';
+import { Map as LeafletMap, TileLayer, Marker } from 'react-leaflet';
 
 function Map(props) {
-  const { lat, lng } = props;
+  const { lat, lng, geodata } = props;
 
   return (
     <LeafletMap
@@ -22,11 +22,13 @@ function Map(props) {
         <TileLayer
           url='http://{s}.tile.osm.org/{z}/{x}/{y}.png'
         />
-        <Marker position={[54.983376, 82.892057]}>
-          <Popup>
-            Popup for any custom information.
-          </Popup>
-        </Marker>
+        {
+          geodata ?
+            <Marker position={[geodata.coords.latitude, geodata.coords.longitude]}>
+              
+            </Marker>
+            : null
+        }
       </LeafletMap>
   );
 }
@@ -34,11 +36,13 @@ function Map(props) {
 Map.propTypes = {
   lat: PropTypes.number.isRequired,
   lng: PropTypes.number.isRequired,
+  geodata: PropTypes.object,
 };
 
-const mapStateToProps = ({ map }) => ({
+const mapStateToProps = ({ map, geodata }) => ({
   lat: map.lat,
   lng: map.lng,
+  geodata: geodata.geodata,
 });
 
 export default connect(mapStateToProps)(Map);
