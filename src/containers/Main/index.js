@@ -17,8 +17,6 @@ function Main(props) {
   } = props;
   const classes = useStyles();
 
-  console.log(geodata);
-
   return (
     <div className={classes.root}>
       <Menu />

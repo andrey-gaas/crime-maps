@@ -1,10 +1,21 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
+import { connect, batch } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import { Map as LeafletMap, TileLayer, Marker } from 'react-leaflet';
+import { changeCoordinates } from '../../store/AC/map';
 
 function Map(props) {
-  const { lat, lng, geodata } = props;
+  const {
+    lat,
+    lng,
+    geodata,
+    changeCoordinates,
+  } = props;
+  const handleDrag = ({ target }) => {
+    const { lat, lng } = target.getCenter();
+    changeCoordinates(lat, lng);
+  };
 
   return (
     <LeafletMap
@@ -18,6 +29,7 @@ function Map(props) {
         dragging={true}
         animate={true}
         easeLinearity={0.35}
+        onDragEnd={handleDrag}
       >
         <TileLayer
           url='http://{s}.tile.osm.org/{z}/{x}/{y}.png'
@@ -37,6 +49,7 @@ Map.propTypes = {
   lat: PropTypes.number.isRequired,
   lng: PropTypes.number.isRequired,
   geodata: PropTypes.object,
+  changeCoordinates: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = ({ map, geodata }) => ({
@@ -45,4 +58,8 @@ const mapStateToProps = ({ map, geodata }) => ({
   geodata: geodata.geodata,
 });
 
-export default connect(mapStateToProps)(Map);
+const mapDispatchToProps = dispatch => bindActionCreators({
+  changeCoordinates,
+}, dispatch);
+
+export default connect(mapStateToProps, mapDispatchToProps)(Map);
