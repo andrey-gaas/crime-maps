@@ -2,8 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import L from 'leaflet';
 import { Map as LeafletMap, TileLayer, Marker } from 'react-leaflet';
 import { changeCoordinates } from '../../store/AC/map';
+import userPinIcon from '../../images/user-pin.svg';
 
 function Map(props) {
   const {
@@ -12,10 +14,17 @@ function Map(props) {
     geodata,
     changeCoordinates,
   } = props;
+
   const handleDrag = ({ target }) => {
     const { lat, lng } = target.getCenter();
     changeCoordinates(lat, lng);
   };
+
+  const iconPerson = new L.Icon({
+    iconUrl: userPinIcon,
+    iconRetinaUrl: userPinIcon,
+    iconSize: new L.Point(50, 75),
+  });
 
   return (
     <LeafletMap
@@ -36,7 +45,10 @@ function Map(props) {
         />
         {
           geodata ?
-            <Marker position={[geodata.coords.latitude, geodata.coords.longitude]}>
+            <Marker
+              position={[geodata.coords.latitude, geodata.coords.longitude]}
+              icon={iconPerson}
+            >
               
             </Marker>
             : null
