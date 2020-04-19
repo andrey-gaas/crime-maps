@@ -3,7 +3,11 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Fab } from '@material-ui/core';
-import { NearMe as NearMeIcon } from '@material-ui/icons';
+import {
+  NearMe as NearMeIcon,
+  ZoomIn as ZoomInIcon,
+  ZoomOut as ZoomOutIcon,
+} from '@material-ui/icons';
 import Menu from '../../components/Menu';
 import Map from '../../components/Map';
 import CitiesSelector from '../../components/CitiesSelector';
@@ -31,6 +35,19 @@ function Main(props) {
       >
         <NearMeIcon />
       </Fab>
+      <div className={classes.zoomButtonsContainer}>
+        <Fab
+          size="large"
+        >
+          <ZoomInIcon />
+        </Fab>
+        <Fab
+          size="large"
+          className={classes.buttonZoomOut}
+        >
+          <ZoomOutIcon />
+        </Fab>
+      </div>
     </div>
   );
 }

@@ -9,6 +9,26 @@ export default makeStyles(theme => ({
     position: 'absolute',
     bottom: theme.spacing(3),
     right: theme.spacing(3),
-    zIndex: 1000
+    zIndex: 1000,
+  },
+  zoomButtonsContainer: {
+    display: 'flex',
+    flexDirection: 'column',
+    position: 'absolute',
+    top: theme.spacing(1),
+    right: theme.spacing(1),
+    zIndex: 1000,
+  },
+  buttonZoomOut: {
+    marginTop: theme.spacing(1),
+  },
+  [theme.breakpoints.up('md')]: {
+    zoomButtonsContainer: {
+      top: theme.spacing(3),
+      right: theme.spacing(3),
+    },
+    buttonZoomOut: {
+      marginTop: theme.spacing(1),
+    },
   },
 }));
