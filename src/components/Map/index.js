@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { connect, batch } from 'react-redux';
+import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Map as LeafletMap, TileLayer, Marker } from 'react-leaflet';
 import { changeCoordinates } from '../../store/AC/map';
