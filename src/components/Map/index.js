@@ -4,15 +4,17 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import L from 'leaflet';
 import { Map as LeafletMap, TileLayer, Marker } from 'react-leaflet';
-import { changeCoordinates } from '../../store/AC/map';
+import { changeCoordinates, changeZoom } from '../../store/AC/map';
 import userPinIcon from '../../images/user-pin.svg';
 
 function Map(props) {
   const {
     lat,
     lng,
+    zoom,
     geodata,
     changeCoordinates,
+    changeZoom,
   } = props;
 
   const handleDrag = ({ target }) => {
@@ -29,8 +31,9 @@ function Map(props) {
   return (
     <LeafletMap
         center={[lat, lng]}
-        zoom={13}
+        zoom={zoom}
         maxZoom={17}
+        minZoom={5}
         attributionControl={true}
         zoomControl={false}
         doubleClickZoom={true}
@@ -39,6 +42,7 @@ function Map(props) {
         animate={true}
         easeLinearity={0.35}
         onDragEnd={handleDrag}
+        onZoomEnd={test => changeZoom(test.target.getZoom())}
       >
         <TileLayer
           url='http://{s}.tile.osm.org/{z}/{x}/{y}.png'
@@ -62,16 +66,20 @@ Map.propTypes = {
   lng: PropTypes.number.isRequired,
   geodata: PropTypes.object,
   changeCoordinates: PropTypes.func.isRequired,
+  zoom: PropTypes.number.isRequired,
+  changeZoom: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = ({ map, geodata }) => ({
   lat: map.lat,
   lng: map.lng,
+  zoom: map.zoom,
   geodata: geodata.geodata,
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators({
   changeCoordinates,
+  changeZoom,
 }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(Map);

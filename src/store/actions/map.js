@@ -1,1 +1,2 @@
 export const CHANGE_COORDINATES = 'CHANGE_COORDINATES';
+export const CHANGE_ZOOM = 'CHANGE_ZOOM';
