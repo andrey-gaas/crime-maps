@@ -6,6 +6,7 @@ import L from 'leaflet';
 import { Map as LeafletMap, TileLayer, Marker } from 'react-leaflet';
 import { changeCoordinates, changeZoom } from '../../store/AC/map';
 import userPinIcon from '../../images/user-pin.svg';
+import { MAX_ZOOM, MIN_ZOOM } from '../../constants/map';
 
 function Map(props) {
   const {
@@ -32,8 +33,8 @@ function Map(props) {
     <LeafletMap
         center={[lat, lng]}
         zoom={zoom}
-        maxZoom={17}
-        minZoom={5}
+        maxZoom={MAX_ZOOM}
+        minZoom={MIN_ZOOM}
         attributionControl={true}
         zoomControl={false}
         doubleClickZoom={true}

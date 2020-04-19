@@ -12,14 +12,32 @@ import Menu from '../../components/Menu';
 import Map from '../../components/Map';
 import CitiesSelector from '../../components/CitiesSelector';
 import useStyles from './styles';
-import { changeCoordinates } from '../../store/AC/map';
+import {
+  changeCoordinates,
+  incrementZoom,
+  decrementZoom,
+} from '../../store/AC/map';
+import { MAX_ZOOM, MIN_ZOOM } from '../../constants/map';
 
 function Main(props) {
   const {
     changeCoordinates,
     geodata,
+    incrementZoom,
+    decrementZoom,
+    zoom,
   } = props;
   const classes = useStyles();
+
+  const zoomIn = () => {
+    if (zoom === MAX_ZOOM) return;
+    incrementZoom();
+  };
+
+  const zoomOut = () => {
+    if (zoom === MIN_ZOOM) return;
+    decrementZoom();
+  };
 
   return (
     <div className={classes.root}>
@@ -38,12 +56,14 @@ function Main(props) {
       <div className={classes.zoomButtonsContainer}>
         <Fab
           size="large"
+          onClick={zoomIn}
         >
           <ZoomInIcon />
         </Fab>
         <Fab
           size="large"
           className={classes.buttonZoomOut}
+          onClick={zoomOut}
         >
           <ZoomOutIcon />
         </Fab>
@@ -55,12 +75,20 @@ function Main(props) {
 Main.propTypes = {
   changeCoordinates: PropTypes.func.isRequired,
   geodata: PropTypes.object,
+  incrementZoom: PropTypes.func.isRequired,
+  decrementZoom: PropTypes.func.isRequired,
+  zoom: PropTypes.number.isRequired,
 };
 
-const mapStateToProps = ({ geodata }) => ({ geodata: geodata.geodata });
+const mapStateToProps = ({ geodata, map}) => ({
+  geodata: geodata.geodata,
+  zoom: map.zoom,
+});
 
 const mapDispatchToProps = dispatch => bindActionCreators({
   changeCoordinates,
+  incrementZoom,
+  decrementZoom,
 }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(Main);

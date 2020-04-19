@@ -1,17 +1,17 @@
 {
   "files": {
     "main.css": "/static/css/main.331cf375.chunk.css",
-    "main.js": "/static/js/main.7d9623a4.chunk.js",
-    "main.js.map": "/static/js/main.7d9623a4.chunk.js.map",
+    "main.js": "/static/js/main.63a1828b.chunk.js",
+    "main.js.map": "/static/js/main.63a1828b.chunk.js.map",
     "runtime-main.js": "/static/js/runtime-main.ab553200.js",
     "runtime-main.js.map": "/static/js/runtime-main.ab553200.js.map",
-    "static/js/2.7e5d3b08.chunk.js": "/static/js/2.7e5d3b08.chunk.js",
-    "static/js/2.7e5d3b08.chunk.js.map": "/static/js/2.7e5d3b08.chunk.js.map",
+    "static/js/2.4fd2db2b.chunk.js": "/static/js/2.4fd2db2b.chunk.js",
+    "static/js/2.4fd2db2b.chunk.js.map": "/static/js/2.4fd2db2b.chunk.js.map",
     "index.html": "/index.html",
-    "precache-manifest.f9395cc754203406e64cc41a3d66a64e.js": "/precache-manifest.f9395cc754203406e64cc41a3d66a64e.js",
+    "precache-manifest.9d9d0e9c8ef6d1f52697285ed4852ab6.js": "/precache-manifest.9d9d0e9c8ef6d1f52697285ed4852ab6.js",
     "service-worker.js": "/service-worker.js",
     "static/css/main.331cf375.chunk.css.map": "/static/css/main.331cf375.chunk.css.map",
-    "static/js/2.7e5d3b08.chunk.js.LICENSE.txt": "/static/js/2.7e5d3b08.chunk.js.LICENSE.txt",
+    "static/js/2.4fd2db2b.chunk.js.LICENSE.txt": "/static/js/2.4fd2db2b.chunk.js.LICENSE.txt",
     "static/media/krasnoyarsk.svg": "/static/media/krasnoyarsk.0bba5569.svg",
     "static/media/krasnoyarsk.jpg": "/static/media/krasnoyarsk.aaf9cd5c.jpg",
     "static/media/logo_dark.svg": "/static/media/logo_dark.6ea33164.svg",
@@ -21,8 +21,8 @@
   },
   "entrypoints": [
     "static/js/runtime-main.ab553200.js",
-    "static/js/2.7e5d3b08.chunk.js",
+    "static/js/2.4fd2db2b.chunk.js",
     "static/css/main.331cf375.chunk.css",
-    "static/js/main.7d9623a4.chunk.js"
+    "static/js/main.63a1828b.chunk.js"
   ]
 }

@@ -1,4 +1,9 @@
-import { CHANGE_COORDINATES, CHANGE_ZOOM } from '../actions/map';
+import {
+  CHANGE_COORDINATES,
+  SET_ZOOM,
+  INCREMENT_ZOOM,
+  DECREMENT_ZOOM,
+} from '../actions/map';
 
 const selectedCity = +JSON.parse(localStorage.getItem('selectedCity'));
 const savedCities = JSON.parse(localStorage.getItem('citiesList'));
@@ -24,8 +29,12 @@ export default function(state = initialState, action) {
   switch(action.type) {
     case CHANGE_COORDINATES:
       return { ...state, lat: action.lat, lng: action.lng };
-    case CHANGE_ZOOM:
+    case SET_ZOOM:
       return { ...state, zoom: action.zoom };
+    case INCREMENT_ZOOM:
+      return { ...state, zoom: ++state.zoom };
+    case DECREMENT_ZOOM:
+      return { ...state, zoom: --state.zoom };
     default:
       return state;
   }
