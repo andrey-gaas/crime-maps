@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/static/css/main.331cf375.chunk.css",
-    "main.js": "/static/js/main.63a1828b.chunk.js",
-    "main.js.map": "/static/js/main.63a1828b.chunk.js.map",
+    "main.js": "/static/js/main.4ddefea4.chunk.js",
+    "main.js.map": "/static/js/main.4ddefea4.chunk.js.map",
     "runtime-main.js": "/static/js/runtime-main.ab553200.js",
     "runtime-main.js.map": "/static/js/runtime-main.ab553200.js.map",
     "static/js/2.4fd2db2b.chunk.js": "/static/js/2.4fd2db2b.chunk.js",
     "static/js/2.4fd2db2b.chunk.js.map": "/static/js/2.4fd2db2b.chunk.js.map",
     "index.html": "/index.html",
-    "precache-manifest.9d9d0e9c8ef6d1f52697285ed4852ab6.js": "/precache-manifest.9d9d0e9c8ef6d1f52697285ed4852ab6.js",
+    "precache-manifest.c2b6d7c3d783c48a17f8fd3be9468f0e.js": "/precache-manifest.c2b6d7c3d783c48a17f8fd3be9468f0e.js",
     "service-worker.js": "/service-worker.js",
     "static/css/main.331cf375.chunk.css.map": "/static/css/main.331cf375.chunk.css.map",
     "static/js/2.4fd2db2b.chunk.js.LICENSE.txt": "/static/js/2.4fd2db2b.chunk.js.LICENSE.txt",
@@ -17,12 +17,12 @@
     "static/media/logo_dark.svg": "/static/media/logo_dark.6ea33164.svg",
     "static/media/novosibirsk.jpg": "/static/media/novosibirsk.3223fede.jpg",
     "static/media/novosibirsk.svg": "/static/media/novosibirsk.f2328259.svg",
-    "static/media/user-pin.svg": "/static/media/user-pin.03d5aba4.svg"
+    "static/media/user-pin.svg": "/static/media/user-pin.ed058a81.svg"
   },
   "entrypoints": [
     "static/js/runtime-main.ab553200.js",
     "static/js/2.4fd2db2b.chunk.js",
     "static/css/main.331cf375.chunk.css",
-    "static/js/main.63a1828b.chunk.js"
+    "static/js/main.4ddefea4.chunk.js"
   ]
 }

@@ -26,7 +26,7 @@ function Map(props) {
   const iconPerson = new L.Icon({
     iconUrl: userPinIcon,
     iconRetinaUrl: userPinIcon,
-    iconSize: new L.Point(50, 75),
+    iconSize: new L.Point(40, 75),
   });
 
   return (
