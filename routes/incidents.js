@@ -46,10 +46,10 @@ router.post('/', async (req, res) => {
       throw new SyntaxError('object is invalid');
     }
 
-    const incidents = await Incident.find({});
+    const lastIncident = await Incident.find({}).limit(1).sort({ $natural: -1 });
 
     const incident = new Incident({
-      id: incidents[incidents.length].id + 1,
+      id: lastIncident[0].id + 1,
       views: 0,
       type,
       title,
@@ -67,21 +67,35 @@ router.post('/', async (req, res) => {
   }
 });
 
-router.put('/', async (req, res) => {
+router.put('/:id', async (req, res) => {
   try {
-    const { id } = req.body;
-
-    if (isUndefined(id)) {
-      throw new SyntaxError('need id');
-    }
-    
-    const oldVariant = await Incident.findOneAndUpdate({ id }, req.body);
+    const oldVariant = await Incident.findOneAndUpdate({ id: req.params.id }, req.body);
 
     res.send(oldVariant);
 
   } catch (e) {
     res.status(500).send(e.message);
   }
+});
+
+router.delete('/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const deletedIncident = await Incident.findOneAndDelete({ id });
+    
+    if (deletedIncident === null) {
+      throw new Error('incident not found');
+    }
+
+    res.send('OK');
+
+  } catch (e) {
+    res.status(500).send(e.message);
+  }
+
+
+
 });
 
 module.exports = router;
