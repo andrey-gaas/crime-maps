@@ -49,7 +49,7 @@ router.post('/', async (req, res) => {
     const incidents = await Incident.find({});
 
     const incindent = new Incident({
-      id: incidents.length + 1,
+      id: incidents[incidents.length].id + 1,
       views: 0,
       type,
       title,
