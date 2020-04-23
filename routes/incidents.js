@@ -48,7 +48,7 @@ router.post('/', async (req, res) => {
 
     const incidents = await Incident.find({});
 
-    const incindent = new Incident({
+    const incident = new Incident({
       id: incidents[incidents.length].id + 1,
       views: 0,
       type,
@@ -59,10 +59,27 @@ router.post('/', async (req, res) => {
       media,
     });
 
-    await incindent.save();
+    await incident.save();
     res.send('OK');
 
   } catch(e) {
+    res.status(500).send(e.message);
+  }
+});
+
+router.put('/', async (req, res) => {
+  try {
+    const { id } = req.body;
+
+    if (isUndefined(id)) {
+      throw new SyntaxError('need id');
+    }
+    
+    const oldVariant = await Incident.findOneAndUpdate({ id }, req.body);
+
+    res.send(oldVariant);
+
+  } catch (e) {
     res.status(500).send(e.message);
   }
 });
