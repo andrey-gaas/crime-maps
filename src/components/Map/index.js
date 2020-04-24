@@ -2,11 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import L from 'leaflet';
 import { Map as LeafletMap, TileLayer, Marker } from 'react-leaflet';
 import { changeCoordinates, changeZoom } from '../../store/AC/map';
-import userPinIcon from '../../images/user-pin.svg';
 import { MAX_ZOOM, MIN_ZOOM } from '../../constants/map';
+import getIcon from './getIcon';
 
 function Map(props) {
   const {
@@ -16,18 +15,13 @@ function Map(props) {
     geodata,
     changeCoordinates,
     changeZoom,
+    incidents,
   } = props;
 
   const handleDrag = ({ target }) => {
     const { lat, lng } = target.getCenter();
     changeCoordinates(lat, lng);
   };
-
-  const iconPerson = new L.Icon({
-    iconUrl: userPinIcon,
-    iconRetinaUrl: userPinIcon,
-    iconSize: new L.Point(40, 75),
-  });
 
   return (
     <LeafletMap
@@ -52,11 +46,21 @@ function Map(props) {
           geodata ?
             <Marker
               position={[geodata.coords.latitude, geodata.coords.longitude]}
-              icon={iconPerson}
+              icon={getIcon()}
             >
               
             </Marker>
             : null
+        }
+        {
+          incidents.map(
+            incident =>
+              <Marker
+                key={incident.id}
+                position={incident.coords}
+                icon={getIcon(incident.type)}
+              />
+          )
         }
       </LeafletMap>
   );
@@ -69,13 +73,15 @@ Map.propTypes = {
   changeCoordinates: PropTypes.func.isRequired,
   zoom: PropTypes.number.isRequired,
   changeZoom: PropTypes.func.isRequired,
+  incidents: PropTypes.array.isRequired,
 };
 
-const mapStateToProps = ({ map, geodata }) => ({
+const mapStateToProps = ({ map, geodata, incidents }) => ({
   lat: map.lat,
   lng: map.lng,
   zoom: map.zoom,
   geodata: geodata.geodata,
+  incidents: incidents.data,
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators({
