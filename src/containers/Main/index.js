@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -17,6 +17,7 @@ import {
   incrementZoom,
   decrementZoom,
 } from '../../store/AC/map';
+import { fetchAllIncidents } from '../../store/AC/incidents';
 import { MAX_ZOOM, MIN_ZOOM } from '../../constants/map';
 
 function Main(props) {
@@ -26,8 +27,16 @@ function Main(props) {
     incrementZoom,
     decrementZoom,
     zoom,
+    fetchAllIncidents,
+    loading,
   } = props;
   const classes = useStyles();
+
+  useEffect(() => {
+    if (loading) {
+      fetchAllIncidents();
+    }
+  }, [loading, fetchAllIncidents]);
 
   const zoomIn = () => {
     if (zoom === MAX_ZOOM) return;
@@ -78,17 +87,21 @@ Main.propTypes = {
   incrementZoom: PropTypes.func.isRequired,
   decrementZoom: PropTypes.func.isRequired,
   zoom: PropTypes.number.isRequired,
+  fetchAllIncidents: PropTypes.func.isRequired,
+  loading: PropTypes.bool.isRequired,
 };
 
-const mapStateToProps = ({ geodata, map}) => ({
+const mapStateToProps = ({ geodata, map, incidents }) => ({
   geodata: geodata.geodata,
   zoom: map.zoom,
+  loading: incidents.isLoading,
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators({
   changeCoordinates,
   incrementZoom,
   decrementZoom,
+  fetchAllIncidents,
 }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(Main);
