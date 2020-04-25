@@ -22,6 +22,7 @@ export default function getIcon(type) {
 
   return new L.Icon({
     iconUrl,
-    iconSize: new L.Point(40, 75),
+    iconSize: new L.Point(40, 60),
+    iconAnchor: [20, 60]
   });
 };
