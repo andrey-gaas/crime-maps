@@ -1,11 +1,16 @@
-import { takeLatest, call, put } from 'redux-saga/effects';
+import { takeLatest, call, put, select } from 'redux-saga/effects';
 import axios from 'axios';
 import { FETCH_ALL_INCIDENTS } from '../actions/incidents';
 import { setError, setLoading, setIncidents } from '../AC/incidents';
 
 function* fetchAllIncidents() {
   try {
-    const { data } = yield call(axios.get, '/api/incidents/');
+    const { selectedCityId, cities } = yield select(({ cities }) => ({
+      selectedCityId: cities.selectedCity,
+      cities: cities.data,
+    }));
+    const { title: city } = cities.find(city => city.id === selectedCityId);
+    const { data } = yield call(axios.get, `/api/incidents/${city}`);
     
     yield put(setError(false));
     yield put(setLoading(false));

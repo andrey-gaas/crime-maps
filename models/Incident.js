@@ -33,6 +33,14 @@ const schema = new Schema({
   media: {
     type: Array,
     required: true,
+  },
+  city: {
+    type: String,
+    required: true,
+  },
+  date: {
+    type: Number,
+    required: true,
   }
 });
 

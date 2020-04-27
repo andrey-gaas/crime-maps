@@ -7,9 +7,10 @@ function isUndefined(value) {
   return value === undefined;
 }
 
-router.get('/', async (req, res) => {
+router.get('/:city', async (req, res) => {
   try {
-    const incidents = await Incident.find({});
+    const { city } = req.params;
+    const incidents = await Incident.find({ city });
     res.send(incidents);
   } catch(e) {
     res.status(500).send({ error: e.message });
@@ -33,15 +34,26 @@ router.get('/:id', async (req, res) => {
 router.post('/', async (req, res) => {
 
   try {
-    const { type, title, text, coords, sources, media } = req.body;
+    const {
+      type,
+      title,
+      text,
+      coords,
+      sources,
+      media,
+      city,
+      date,
+    } = req.body;
 
     if (
-      isUndefined(type) ||
-      isUndefined(title) ||
-      isUndefined(text) ||
-      isUndefined(coords) ||
+      isUndefined(type)    ||
+      isUndefined(title)   ||
+      isUndefined(text)    ||
+      isUndefined(coords)  ||
       isUndefined(sources) ||
-      isUndefined(media)
+      isUndefined(media)   ||
+      isUndefined(city)    ||
+      isUndefined(date)
     ) {
       throw new SyntaxError('object is invalid');
     }
@@ -49,7 +61,7 @@ router.post('/', async (req, res) => {
     const lastIncident = await Incident.find({}).limit(1).sort({ $natural: -1 });
 
     const incident = new Incident({
-      id: lastIncident[0].id + 1,
+      id: lastIncident[0] ? lastIncident[0].id + 1 : 1,
       views: 0,
       type,
       title,
@@ -57,6 +69,8 @@ router.post('/', async (req, res) => {
       coords,
       sources,
       media,
+      city,
+      date,
     });
 
     await incident.save();
