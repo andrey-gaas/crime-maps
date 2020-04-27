@@ -1,7 +1,8 @@
 import { takeLatest, call, put } from 'redux-saga/effects';
 import axios from 'axios';
-import { FETCH_CITIES } from '../actions/cities';
-import { setCities, setError, setLoading } from '../AC/cities';
+import { FETCH_CITIES, CHANGE_CITY } from '../actions/cities';
+import { setCities, setError, setLoading, changeSelectedCity } from '../AC/cities';
+import { fetchAllIncidents } from '../AC/incidents';
 
 function* fetchCities() {
   try {
@@ -16,6 +17,17 @@ function* fetchCities() {
   }
 }
 
+function* changeCity(props) {
+  try {
+    const { id } = props;
+    yield put(fetchAllIncidents(id));
+    yield put(changeSelectedCity(id));
+  } catch(error) {
+    console.error(error.message);
+  }
+}
+
 export default function* () {
   yield takeLatest(FETCH_CITIES, fetchCities);
+  yield takeLatest(CHANGE_CITY, changeCity);
 }

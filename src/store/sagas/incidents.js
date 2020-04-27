@@ -3,13 +3,13 @@ import axios from 'axios';
 import { FETCH_ALL_INCIDENTS } from '../actions/incidents';
 import { setError, setLoading, setIncidents } from '../AC/incidents';
 
-function* fetchAllIncidents() {
+function* fetchIncidents(props) {
+  const cityId = props.id;
   try {
-    const { selectedCityId, cities } = yield select(({ cities }) => ({
-      selectedCityId: cities.selectedCity,
+    const { cities } = yield select(({ cities }) => ({
       cities: cities.data,
     }));
-    const { title: city } = cities.find(city => city.id === selectedCityId);
+    const { title: city } = cities.find(city => city.id === cityId);
     const { data } = yield call(axios.get, `/api/incidents/${city}`);
     
     yield put(setError(false));
@@ -22,5 +22,5 @@ function* fetchAllIncidents() {
 }
 
 export default function* () {
-  yield takeLatest(FETCH_ALL_INCIDENTS, fetchAllIncidents);
+  yield takeLatest(FETCH_ALL_INCIDENTS, fetchIncidents);
 };

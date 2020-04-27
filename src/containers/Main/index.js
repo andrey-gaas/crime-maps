@@ -29,14 +29,15 @@ function Main(props) {
     zoom,
     fetchAllIncidents,
     loading,
+    selectedCityid,
   } = props;
   const classes = useStyles();
 
   useEffect(() => {
     if (loading) {
-      fetchAllIncidents();
+      fetchAllIncidents(selectedCityid);
     }
-  }, [loading, fetchAllIncidents]);
+  }, [loading, fetchAllIncidents, selectedCityid]);
 
   const zoomIn = () => {
     if (zoom === MAX_ZOOM) return;
@@ -89,12 +90,14 @@ Main.propTypes = {
   zoom: PropTypes.number.isRequired,
   fetchAllIncidents: PropTypes.func.isRequired,
   loading: PropTypes.bool.isRequired,
+  selectedCityid: PropTypes.number.isRequired,
 };
 
-const mapStateToProps = ({ geodata, map, incidents }) => ({
+const mapStateToProps = ({ geodata, map, incidents, cities }) => ({
   geodata: geodata.geodata,
   zoom: map.zoom,
   loading: incidents.isLoading,
+  selectedCityid: cities.selectedCity,
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators({

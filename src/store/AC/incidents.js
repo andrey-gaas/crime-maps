@@ -6,7 +6,7 @@ import {
   SET_INCIDENTS,
 } from '../actions/incidents';
 
-export const fetchAllIncidents = () => ({ type: FETCH_ALL_INCIDENTS });
+export const fetchAllIncidents = id => ({ type: FETCH_ALL_INCIDENTS, id });
 export const fetchIncident = id => ({ type: FETCH_INCIDENT, id });
 export const setLoading = value => ({ type: SET_LOADING, value });
 export const setError = error => ({ type: SET_ERROR, error });
