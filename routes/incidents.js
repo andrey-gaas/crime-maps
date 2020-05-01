@@ -81,9 +81,9 @@ router.post('/', async (req, res) => {
   }
 });
 
-router.put('/:id', async (req, res) => {
+router.put('/', async (req, res) => {
   try {
-    const oldVariant = await Incident.findOneAndUpdate({ id: req.params.id }, req.body);
+    const oldVariant = await Incident.findOneAndUpdate({ id: req.body.id }, req.body);
 
     res.send(oldVariant);
 
