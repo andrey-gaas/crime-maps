@@ -11,6 +11,7 @@ import {
 import Menu from '../../components/Menu';
 import Map from '../../components/Map';
 import CitiesSelector from '../../components/CitiesSelector';
+import Incident from '../../components/Incident';
 import useStyles from './styles';
 import {
   changeCoordinates,
@@ -18,6 +19,7 @@ import {
   decrementZoom,
 } from '../../store/AC/map';
 import { fetchAllIncidents } from '../../store/AC/incidents';
+import { closeIncident } from '../../store/AC/incident';
 import { MAX_ZOOM, MIN_ZOOM } from '../../constants/map';
 
 function Main(props) {
@@ -30,6 +32,8 @@ function Main(props) {
     fetchAllIncidents,
     loading,
     selectedCityid,
+    incident,
+    closeIncident,
   } = props;
   const classes = useStyles();
 
@@ -78,6 +82,7 @@ function Main(props) {
           <ZoomOutIcon />
         </Fab>
       </div>
+      { incident && <Incident incident={incident} close={closeIncident} /> }
     </div>
   );
 }
@@ -91,13 +96,16 @@ Main.propTypes = {
   fetchAllIncidents: PropTypes.func.isRequired,
   loading: PropTypes.bool.isRequired,
   selectedCityid: PropTypes.number.isRequired,
+  incident: PropTypes.object,
+  closeIncident: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = ({ geodata, map, incidents, cities }) => ({
+const mapStateToProps = ({ geodata, map, incidents, cities, incident }) => ({
   geodata: geodata.geodata,
   zoom: map.zoom,
   loading: incidents.isLoading,
   selectedCityid: cities.selectedCity,
+  incident,
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators({
@@ -105,6 +113,7 @@ const mapDispatchToProps = dispatch => bindActionCreators({
   incrementZoom,
   decrementZoom,
   fetchAllIncidents,
+  closeIncident,
 }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(Main);

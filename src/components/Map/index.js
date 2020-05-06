@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Map as LeafletMap, TileLayer, Marker } from 'react-leaflet';
 import { changeCoordinates, changeZoom } from '../../store/AC/map';
+import { openIncident } from '../../store/AC/incident';
 import { MAX_ZOOM, MIN_ZOOM } from '../../constants/map';
 import getIcon from './getIcon';
 
@@ -16,6 +17,7 @@ function Map(props) {
     changeCoordinates,
     changeZoom,
     incidents,
+    openIncident,
   } = props;
 
   const handleDrag = ({ target }) => {
@@ -59,6 +61,7 @@ function Map(props) {
                 key={incident.id}
                 position={incident.coords}
                 icon={getIcon(incident.type)}
+                onClick={() => openIncident(incident)}
               />
           )
         }
@@ -74,6 +77,7 @@ Map.propTypes = {
   zoom: PropTypes.number.isRequired,
   changeZoom: PropTypes.func.isRequired,
   incidents: PropTypes.array.isRequired,
+  openIncident: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = ({ map, geodata, incidents }) => ({
@@ -87,6 +91,7 @@ const mapStateToProps = ({ map, geodata, incidents }) => ({
 const mapDispatchToProps = dispatch => bindActionCreators({
   changeCoordinates,
   changeZoom,
+  openIncident,
 }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(Map);
