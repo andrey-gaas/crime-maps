@@ -7,6 +7,8 @@ import {
   IconButton,
   Typography,
   Link,
+  useTheme,
+  useMediaQuery,
 } from '@material-ui/core';
 import {
   Close as CloseIcon,
@@ -44,6 +46,8 @@ function Incident(props) {
 
   const classes = useStyles();
   const date = getDate(timestamp);
+  const theme = useTheme();
+  const fullScreen = useMediaQuery(theme.breakpoints.down('sm'));
 
   return (
     <Dialog
@@ -51,6 +55,7 @@ function Incident(props) {
       onClose={close}
       maxWidth="md"
       fullWidth
+      fullScreen={fullScreen}
     >
       <DialogTitle className={classes.titleContainer}>
         {title}
