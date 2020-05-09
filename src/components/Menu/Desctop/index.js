@@ -9,6 +9,7 @@ import cn from 'classnames';
 import makeStyles from './styles';
 import LogoDark from '../../../images/logo_dark.svg';
 import Geo from '../Geo';
+import Auth from '../Auth';
 
 function DesctopMenu(props) {
   const {
@@ -46,6 +47,7 @@ function DesctopMenu(props) {
               />
             </div>
           </div>
+          <Auth />
         </Drawer>
     </Hidden>
   );

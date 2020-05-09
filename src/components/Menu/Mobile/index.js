@@ -14,6 +14,7 @@ import {
 import useStyles from './styles';
 import LogoDark from '../../../images/logo_dark.svg';
 import Geo from '../Geo';
+import Auth from '../Auth';
 
 function MobileMenu(props) {
   const {
@@ -56,6 +57,7 @@ function MobileMenu(props) {
           titleCity={selectedCity.title}
           city={selectedCity.name}
         />
+        <Auth />
       </SwipeableDrawer>
     </Hidden>
   );
