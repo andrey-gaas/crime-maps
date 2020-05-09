@@ -5,6 +5,7 @@ import { bindActionCreators } from 'redux';
 import { CssBaseline } from '@material-ui/core';
 import { Switch, Route } from 'react-router-dom';
 import Main from '../Main';
+import SignIn from '../SignIn';
 import { setLocation, setLocationError } from '../../store/AC/geodata';
 
 function App(props) {
@@ -17,6 +18,7 @@ function App(props) {
       <CssBaseline />
       <Switch>
         <Route exact path="/" component={Main} />
+        <Route path="/sign-in" component={SignIn} />
       </Switch>
     </Fragment>
   );

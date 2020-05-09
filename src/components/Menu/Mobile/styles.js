@@ -1,4 +1,5 @@
 import { makeStyles } from '@material-ui/core/styles';
+import { GRADIENT } from '../../../constants/styles';
 
 const width = "80%";
 const index = 1000;
@@ -19,7 +20,7 @@ export default makeStyles(theme => ({
     alignItems: 'center',
     padding: theme.spacing(2),
     paddingRight: theme.spacing(0),
-    background: 'linear-gradient(45deg, #2196F3 30%, #21CBF3 90%)'
+    background: GRADIENT,
   },
   title: {
     marginLeft: theme.spacing(1),

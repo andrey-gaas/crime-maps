@@ -11,7 +11,7 @@ function Auth(props) {
 
   return (
     <div className={classes.root}>
-      <Link to="/login" className={classes.link}>
+      <Link to="/sign-in" className={classes.link}>
         <Button
           color="primary"
           variant="contained"
