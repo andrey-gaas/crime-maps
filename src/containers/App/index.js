@@ -6,6 +6,7 @@ import { CssBaseline } from '@material-ui/core';
 import { Switch, Route } from 'react-router-dom';
 import Main from '../Main';
 import SignIn from '../SignIn';
+import SignUp from '../SignUp';
 import { setLocation, setLocationError } from '../../store/AC/geodata';
 
 function App(props) {
@@ -19,6 +20,7 @@ function App(props) {
       <Switch>
         <Route exact path="/" component={Main} />
         <Route path="/sign-in" component={SignIn} />
+        <Route path="/sign-up" component={SignUp} />
       </Switch>
     </Fragment>
   );

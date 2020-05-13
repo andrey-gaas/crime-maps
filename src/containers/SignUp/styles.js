@@ -1,12 +1,12 @@
 import { makeStyles } from '@material-ui/core/styles';
-import { BLUE_GRADIENT } from '../../constants/styles';
+import { ORANGE_GRADIENT } from '../../constants/styles';
 
 export default makeStyles(theme => ({
   root: {
     display: 'flex',
     flexDirection: 'column',
     height: '100%',
-    background: BLUE_GRADIENT,
+    background: ORANGE_GRADIENT,
   },
   logoContainer: {
     display: 'flex',
