@@ -2,7 +2,11 @@ import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { Fab } from '@material-ui/core';
+import {
+  Fab,
+  ButtonGroup,
+  Button,
+} from '@material-ui/core';
 import {
   NearMe as NearMeIcon,
   ZoomIn as ZoomInIcon,
@@ -68,19 +72,14 @@ function Main(props) {
         <NearMeIcon />
       </Fab>
       <div className={classes.zoomButtonsContainer}>
-        <Fab
-          size="large"
-          onClick={zoomIn}
-        >
-          <ZoomInIcon />
-        </Fab>
-        <Fab
-          size="large"
-          className={classes.buttonZoomOut}
-          onClick={zoomOut}
-        >
-          <ZoomOutIcon />
-        </Fab>
+        <ButtonGroup orientation="vertical">
+          <Button variant="contained" onClick={zoomIn}>
+            <ZoomInIcon />
+          </Button>
+          <Button variant="contained" onClick={zoomOut}>
+            <ZoomOutIcon />
+          </Button>
+        </ButtonGroup>
       </div>
       { incident && <Incident incident={incident} close={closeIncident} /> }
     </div>
