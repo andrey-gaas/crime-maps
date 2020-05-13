@@ -13,8 +13,7 @@ function Auth(props) {
     <div className={classes.root}>
       <Link to="/sign-in" className={classes.link}>
         <Button
-          color="primary"
-          variant="contained"
+          variant="outlined"
           size="large"
           fullWidth
           className={classes.button}

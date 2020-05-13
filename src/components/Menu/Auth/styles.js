@@ -1,4 +1,5 @@
 import { makeStyles } from '@material-ui/core/styles';
+import { ORANGE } from '../../../constants/styles';
 
 export default makeStyles(theme => ({
   root: {
@@ -9,5 +10,9 @@ export default makeStyles(theme => ({
   },
   button: {
     borderRadius: 0,
+    color: ORANGE,
+    borderColor: ORANGE,
+    borderLeft: 'none',
+    borderRight: 'none',
   }
 }));
