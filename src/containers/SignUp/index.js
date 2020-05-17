@@ -1,4 +1,7 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import { Link } from 'react-router-dom';
 import {
   Paper,
@@ -6,23 +9,62 @@ import {
   TextField,
   Button,
 } from '@material-ui/core';
+import emailValidator from 'email-validator';
 import useStyles from './styles';
 import logo from '../../images/logo_dark.svg';
+import { requestSignUp } from '../../store/AC/auth';
+import { NAME_TEMPLATE, PASSWORD_TEMPLATE } from '../../constants/forms';
 
-function SignUp() {
+function SignUp(props) {
+  const { requestSignUp } = props;
   const classes = useStyles();
   const [fields, setFields] = useState({
     name: '',
     email: '',
     password: '',
-    passwordConfirm: '',
+    nameError: '',
+    emailError: '',
+    passwordError: '',
   });
+  const [isDisabled, setDisabled] = useState(false);
 
   const handleChange = ({ target }) => setFields({
     ...fields,
     [target.name]: target.value,
+    [target.name + 'Error']: '',
   });
 
+  const handleClick = () => {
+    const {
+      name,
+      email,
+      password,
+    } = fields;
+    let nameError = '';
+    let emailError = '';
+    let passwordError = '';
+
+    if (!name || name.length < 6 || name.length > 16) nameError = 'Имя должно содержать от 6 до 16 символов.';
+    if (!name.match(NAME_TEMPLATE)) nameError = 'Допустимы только латинские и кириллические символы, а так же числа.';
+
+    if (!emailValidator.validate(email)) emailError = 'Введите корректный E-Mail.';
+
+    if (!password || password.length < 6 || password.length > 16) passwordError = 'Пароль должен содержать от 6 до 16 символов.';
+    if (!password.match(PASSWORD_TEMPLATE)) passwordError = 'Допустимы только латинские символы и числа.';
+
+    if (nameError || emailError || passwordError) {
+      setFields({
+        ...fields,
+        nameError,
+        emailError,
+        passwordError,
+      });
+      return;
+    }
+
+    setDisabled(true);
+    requestSignUp(fields);
+  };
 
   return (
     <div className={classes.root}>
@@ -41,6 +83,8 @@ function SignUp() {
             name="name"
             value={fields.name}
             onChange={handleChange}
+            error={!!fields.nameError}
+            helperText={fields.nameError}
             className={classes.textField}
             label="Имя на сайте"
           />
@@ -49,6 +93,8 @@ function SignUp() {
             name="email"
             value={fields.email}
             onChange={handleChange}
+            error={!!fields.emailError}
+            helperText={fields.emailError}
             className={classes.textField}
             label="E-Mail"
           />
@@ -58,6 +104,8 @@ function SignUp() {
             value={fields.password}
             type="password"
             onChange={handleChange}
+            error={!!fields.passwordError}
+            helperText={fields.passwordError}
             className={classes.textField}
             label="Пароль"
           />
@@ -68,6 +116,8 @@ function SignUp() {
             size="large"
             className={classes.button}
             fullWidth
+            onClick={handleClick}
+            disabled={isDisabled}
           >
             Зарегистрироваться
           </Button>
@@ -96,4 +146,12 @@ function SignUp() {
   );
 }
 
-export default SignUp;
+SignUp.propTypes = {
+  requestSignUp: PropTypes.func.isRequired,
+};
+
+const mapDispatchToProps = dispatch => bindActionCreators({
+  requestSignUp,
+}, dispatch);
+
+export default connect(null, mapDispatchToProps)(SignUp);

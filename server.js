@@ -13,6 +13,7 @@ app.use(express.json({ exptended: true }));
 /* Routes */
 app.use('/api/cities', require('./routes/cities'));
 app.use('/api/incidents', require('./routes/incidents'));
+app.use('/api/auth', require('./routes/auth'));
 
 if (process.env.NODE_ENV === 'production') {
   app.use('/', express.static(path.join(__dirname, 'build')));
