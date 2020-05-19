@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
+import { connect, batch } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Link } from 'react-router-dom';
 import {
@@ -14,36 +14,40 @@ import emailValidator from 'email-validator';
 import useStyles from './styles';
 import logo from '../../images/logo_dark.svg';
 import { requestSignUp } from '../../store/AC/auth';
+import { changeField } from '../../store/AC/forms';
 import { NAME_TEMPLATE, PASSWORD_TEMPLATE } from '../../constants/forms';
 
 function SignUp(props) {
   const {
     snackbar,
-    isDisabled,
+    isButtonDisabled,
     requestSignUp,
+    changeField,
+    name,
+    nameError,
+    email,
+    emailError,
+    password,
+    passwordError,
   } = props;
   const classes = useStyles();
-  const [fields, setFields] = useState({
-    name: '',
-    email: '',
-    password: '',
-    nameError: '',
-    emailError: '',
-    passwordError: '',
+
+  const changeName = ({ target }) => batch(() => {
+    changeField('signUpName', target.value);
+    changeField('signUpNameError', '');
   });
 
-  const handleChange = ({ target }) => setFields({
-    ...fields,
-    [target.name]: target.value,
-    [target.name + 'Error']: '',
+  const changeEmail = ({ target }) => batch(() => {
+    changeField('signUpEmail', target.value);
+    changeField('signUpEmailError', '');
+  });
+
+  const changePassword = ({ target }) => batch(() => {
+    changeField('signUpPassword', target.value);
+    changeField('signUpPasswordError', '');
   });
 
   const handleClick = () => {
-    const {
-      name,
-      email,
-      password,
-    } = fields;
     let nameError = '';
     let emailError = '';
     let passwordError = '';
@@ -57,16 +61,15 @@ function SignUp(props) {
     if (!password.match(PASSWORD_TEMPLATE)) passwordError = 'Допустимы только латинские символы и числа.';
 
     if (nameError || emailError || passwordError) {
-      setFields({
-        ...fields,
-        nameError,
-        emailError,
-        passwordError,
+      batch(() => {
+        changeField('signUpNameError', nameError);
+        changeField('signUpEmailError', emailError);
+        changeField('signUpPasswordError', passwordError);
       });
       return;
     }
 
-    requestSignUp(fields);
+    requestSignUp({ name, email, password });
   };
 
   return (
@@ -84,31 +87,31 @@ function SignUp(props) {
         <div className={classes.form}>
           <TextField
             name="name"
-            value={fields.name}
-            onChange={handleChange}
-            error={!!fields.nameError}
-            helperText={fields.nameError}
+            value={name}
+            onChange={changeName}
+            error={!!nameError}
+            helperText={nameError}
             className={classes.textField}
             label="Имя на сайте"
           />
 
           <TextField
             name="email"
-            value={fields.email}
-            onChange={handleChange}
-            error={!!fields.emailError}
-            helperText={fields.emailError}
+            value={email}
+            onChange={changeEmail}
+            error={!!emailError}
+            helperText={emailError}
             className={classes.textField}
             label="E-Mail"
           />
 
           <TextField
             name="password"
-            value={fields.password}
+            value={password}
             type="password"
-            onChange={handleChange}
-            error={!!fields.passwordError}
-            helperText={fields.passwordError}
+            onChange={changePassword}
+            error={!!passwordError}
+            helperText={passwordError}
             className={classes.textField}
             label="Пароль"
           />
@@ -120,7 +123,7 @@ function SignUp(props) {
             className={classes.button}
             fullWidth
             onClick={handleClick}
-            disabled={isDisabled}
+            disabled={isButtonDisabled}
           >
             Зарегистрироваться
           </Button>
@@ -159,22 +162,42 @@ function SignUp(props) {
 }
 
 SignUp.propTypes = {
-  snackbar: PropTypes.string,
-  isDisabled: PropTypes.bool,
-  requestSignUp: PropTypes.func.isRequired,
+  snackbar:         PropTypes.string,
+  requestSignUp:    PropTypes.func.isRequired,
+  changeField:      PropTypes.func.isRequired,
+  name:             PropTypes.string,
+  nameError:        PropTypes.string,
+  email:            PropTypes.string,
+  emailError:       PropTypes.string,
+  password:         PropTypes.string,
+  passwordError:    PropTypes.string,
+  isButtonDisabled: PropTypes.bool,
 };
 
 SignUp.defaultProps = {
-  isDisabled: false,
+  name:             '',
+  nameError:        '',
+  email:            '',
+  emailError:       '',
+  password:         '',
+  passwordError:    '',
+  isButtonDisabled: false,
 };
 
-const mapStateToProps = ({ system }) => ({
-  snackbar: system.signUpSnackbar,
-  isDisabled: system.signUpDisabledButton,
+const mapStateToProps = ({ system, forms }) => ({
+  snackbar:         system.signUpSnackbar,
+  name:             forms.signUpName,
+  nameError:        forms.signUpNameError,
+  email:            forms.signUpEmail,
+  emailError:       forms.signUpEmailError,
+  password:         forms.signUpPassword,
+  passwordError:    forms.signUpPasswordError,
+  isButtonDisabled: forms.signUpButtonDisabled,
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators({
   requestSignUp,
+  changeField,
 }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(SignUp);
