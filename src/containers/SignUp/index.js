@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect, batch } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import {
   Paper,
   Typography,
@@ -29,6 +29,7 @@ function SignUp(props) {
     emailError,
     password,
     passwordError,
+    redirect,
   } = props;
   const classes = useStyles();
 
@@ -74,6 +75,7 @@ function SignUp(props) {
 
   return (
     <div className={classes.root}>
+      { redirect && <Redirect to="/sign-in" /> }
       <div className={classes.logoContainer}>
         <Typography variant="h5">Crime Maps</Typography>
         <img src={logo} alt="" className={classes.logo} />
@@ -172,6 +174,7 @@ SignUp.propTypes = {
   password:         PropTypes.string,
   passwordError:    PropTypes.string,
   isButtonDisabled: PropTypes.bool,
+  redirect:         PropTypes.bool,
 };
 
 SignUp.defaultProps = {
@@ -182,10 +185,12 @@ SignUp.defaultProps = {
   password:         '',
   passwordError:    '',
   isButtonDisabled: false,
+  redirect:         false,
 };
 
 const mapStateToProps = ({ system, forms }) => ({
   snackbar:         system.signUpSnackbar,
+  redirect:         system.signUpRedirectToSignIn,
   name:             forms.signUpName,
   nameError:        forms.signUpNameError,
   email:            forms.signUpEmail,

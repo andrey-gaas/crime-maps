@@ -28,8 +28,6 @@ router.post('/sign-up', async (req, res) => {
 
     const salt = bcrypt.genSaltSync(10);
 
-    console.log(lastUser);
-
     const user = new User({
       id: lastUser.length ? lastUser[0].id + 1 : 0,
       name,
