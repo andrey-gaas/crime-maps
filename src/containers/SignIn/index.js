@@ -1,15 +1,22 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
+import { connect, batch } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import { Link } from 'react-router-dom';
 import {
   Paper,
   Typography,
   TextField,
   Button,
+  Snackbar,
 } from '@material-ui/core';
 import useStyles from './styles';
 import logo from '../../images/logo_dark.svg';
 
 function SignIn(props) {
+  const {
+    snackbar, 
+  } = props;
   const classes = useStyles();
   const [fields, setFields] = useState({
     email: '',
@@ -80,8 +87,28 @@ function SignIn(props) {
           </Button>
         </Link>
       </div>
+      <Snackbar
+        open={!!snackbar}
+        message={snackbar}
+        anchorOrigin={{
+          vertical: 'bottom',
+          horizontal: 'left',
+        }}
+      />
     </div>
   );
 }
 
-export default SignIn;
+SignIn.propTypes = {
+  snackbar: PropTypes.string,
+};
+
+SignIn.defaultProps = {
+  snackbar: '',
+};
+
+const mapStateToProps = ({ system }) => ({
+  snackbar: system.signInSnackbar,
+});
+
+export default connect(mapStateToProps)(SignIn);

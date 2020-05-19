@@ -17,8 +17,10 @@ function* request() {
       signUpEmail: email,
       signUpPassword: password,
     } = yield select(({ forms }) => forms);
+
     yield put(changeSystemField('signUpSnackbar', 'Регистрация нового пользователя...'));
     yield put(changeField('signUpButtonDisabled', true));
+
     const result = yield call(axios.post, ROUTE_SIGN_UP, { name, email, password });
 
     if (result.status === 201) {
@@ -39,7 +41,7 @@ function* request() {
 function* success({ data }) {
   yield put(changeSystemField('signUpSnackbar', ''));
   yield put(changeSystemField('signUpRedirectToSignIn', true));
-  yield put(changeSystemField('signInSnackbar', 'Регистрация завершена!'));
+  yield put(changeSystemField('signInSnackbar', 'Регистрация завершена, можете авторизоваться!'));
   yield put(changeSystemField('signUpRedirectToSignIn', false));
   yield delay(5000);
   yield put(changeSystemField('signInSnackbar', ''));
