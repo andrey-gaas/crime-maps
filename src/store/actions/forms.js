@@ -1,1 +1,1 @@
-export const CHANGE = 'CHANGE';
+export const CHANGE_FIELD = 'CHANGE_FIELD';

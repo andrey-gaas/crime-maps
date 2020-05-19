@@ -1,3 +1,3 @@
-import { CHANGE } from '../actions/system';
+import { CHANGE_SYSTEM_FIELD } from '../actions/system';
 
-export const change = (name, value) => ({ type: CHANGE, name, value });
+export const changeSystemField = (name, value) => ({ type: CHANGE_SYSTEM_FIELD, name, value });

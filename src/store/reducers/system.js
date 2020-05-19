@@ -1,4 +1,4 @@
-import { CHANGE } from '../actions/system';
+import { CHANGE_SYSTEM_FIELD } from '../actions/system';
 
 const initialState = {
 
@@ -6,7 +6,7 @@ const initialState = {
 
 export default function(state = initialState, action) {
   switch(action.type) {
-    case CHANGE:
+    case CHANGE_SYSTEM_FIELD:
       return { ...state, [action.name]: action.value };
     default:
       return state;

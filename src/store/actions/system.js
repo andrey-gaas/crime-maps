@@ -1,1 +1,1 @@
-export const CHANGE = 'CHANGE';
+export const CHANGE_SYSTEM_FIELD = 'CHANGE_SYSTEM_FIELD';
