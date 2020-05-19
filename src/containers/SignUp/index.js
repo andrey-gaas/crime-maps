@@ -8,6 +8,7 @@ import {
   Typography,
   TextField,
   Button,
+  Snackbar,
 } from '@material-ui/core';
 import emailValidator from 'email-validator';
 import useStyles from './styles';
@@ -16,7 +17,11 @@ import { requestSignUp } from '../../store/AC/auth';
 import { NAME_TEMPLATE, PASSWORD_TEMPLATE } from '../../constants/forms';
 
 function SignUp(props) {
-  const { requestSignUp } = props;
+  const {
+    snackbar,
+    isDisabled,
+    requestSignUp,
+  } = props;
   const classes = useStyles();
   const [fields, setFields] = useState({
     name: '',
@@ -26,7 +31,6 @@ function SignUp(props) {
     emailError: '',
     passwordError: '',
   });
-  const [isDisabled, setDisabled] = useState(false);
 
   const handleChange = ({ target }) => setFields({
     ...fields,
@@ -62,7 +66,6 @@ function SignUp(props) {
       return;
     }
 
-    setDisabled(true);
     requestSignUp(fields);
   };
 
@@ -142,16 +145,36 @@ function SignUp(props) {
           </Button>
         </Link>
       </div>
+
+      <Snackbar
+        open={!!snackbar}
+        message={snackbar}
+        anchorOrigin={{
+          vertical: 'bottom',
+          horizontal: 'left',
+        }}
+      />
     </div>
   );
 }
 
 SignUp.propTypes = {
+  snackbar: PropTypes.string,
+  isDisabled: PropTypes.bool,
   requestSignUp: PropTypes.func.isRequired,
 };
+
+SignUp.defaultProps = {
+  isDisabled: false,
+};
+
+const mapStateToProps = ({ system }) => ({
+  snackbar: system.signUpSnackbar,
+  isDisabled: system.signUpDisabledButton,
+});
 
 const mapDispatchToProps = dispatch => bindActionCreators({
   requestSignUp,
 }, dispatch);
 
-export default connect(null, mapDispatchToProps)(SignUp);
+export default connect(mapStateToProps, mapDispatchToProps)(SignUp);
