@@ -12,20 +12,23 @@ import {
 } from '@material-ui/core';
 import useStyles from './styles';
 import logo from '../../images/logo_dark.svg';
+import { changeField } from '../../store/AC/forms';
 
 function SignIn(props) {
   const {
-    snackbar, 
+    snackbar,
+    email,
+    emailError,
+    password,
+    passwordError,
+    isDisabled,
+    changeField,
   } = props;
   const classes = useStyles();
-  const [fields, setFields] = useState({
-    email: '',
-    password: '',
-  });
 
-  const handleChange = ({ target }) => setFields({
-    ...fields,
-    [target.name]: target.value,
+  const handleChange = ({ target }) => batch(() => {
+    changeField(target.name, target.value);
+    changeField(target.name + 'Error', '');
   });
 
   return (
@@ -42,16 +45,20 @@ function SignIn(props) {
 
         <div className={classes.form}>
           <TextField
-            name="email"
-            value={fields.email}
+            name="signInEmail"
+            value={email}
+            error={!!emailError}
+            helperText={emailError}
             onChange={handleChange}
             className={classes.textField}
             label="E-Mail"
           />
 
           <TextField
-            name="password"
-            value={fields.password}
+            name="signInPassword"
+            value={password}
+            error={!!passwordError}
+            helperText={passwordError}
             type="password"
             onChange={handleChange}
             className={classes.textField}
@@ -74,6 +81,7 @@ function SignIn(props) {
               variant="contained"
               className={classes.linkButton}
               fullWidth
+              disabled={isDisabled}
             >
               Зарегистрироваться
             </Button>
@@ -100,15 +108,35 @@ function SignIn(props) {
 }
 
 SignIn.propTypes = {
-  snackbar: PropTypes.string,
+  snackbar:      PropTypes.string,
+  email:         PropTypes.string,
+  emailError:    PropTypes.string,
+  password:      PropTypes.string,
+  passwordError: PropTypes.string,
+  isDisabled:    PropTypes.bool,
+  changeField:   PropTypes.func.isRequired,
 };
 
 SignIn.defaultProps = {
-  snackbar: '',
+  snackbar:      '',
+  email:         '',
+  emailError:    '',
+  password:      '',
+  passwordError: '',
+  isDisabled:    false,
 };
 
-const mapStateToProps = ({ system }) => ({
-  snackbar: system.signInSnackbar,
+const mapStateToProps = ({ system, forms }) => ({
+  snackbar:      system.signInSnackbar,
+  email:         forms.signInEmail,
+  emailError:    forms.signInEmailError,
+  password:      forms.signInPassword,
+  passwordError: forms.signInPasswordError,
+  isDisabled:    forms.signInButtonDisabled,
 });
 
-export default connect(mapStateToProps)(SignIn);
+const mapDispatchToProps = dispatch => bindActionCreators({
+  changeField,
+}, dispatch);
+
+export default connect(mapStateToProps, mapDispatchToProps)(SignIn);

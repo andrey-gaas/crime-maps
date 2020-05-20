@@ -33,19 +33,9 @@ function SignUp(props) {
   } = props;
   const classes = useStyles();
 
-  const changeName = ({ target }) => batch(() => {
-    changeField('signUpName', target.value);
-    changeField('signUpNameError', '');
-  });
-
-  const changeEmail = ({ target }) => batch(() => {
-    changeField('signUpEmail', target.value);
-    changeField('signUpEmailError', '');
-  });
-
-  const changePassword = ({ target }) => batch(() => {
-    changeField('signUpPassword', target.value);
-    changeField('signUpPasswordError', '');
+  const handleChange = ({ target }) => batch(() => {
+    changeField(target.name, target.value);
+    changeField(target.name + 'Error', '');
   });
 
   const handleClick = () => {
@@ -88,9 +78,9 @@ function SignUp(props) {
         
         <div className={classes.form}>
           <TextField
-            name="name"
+            name="signUpName"
             value={name}
-            onChange={changeName}
+            onChange={handleChange}
             error={!!nameError}
             helperText={nameError}
             className={classes.textField}
@@ -98,9 +88,9 @@ function SignUp(props) {
           />
 
           <TextField
-            name="email"
+            name="signUpEmail"
             value={email}
-            onChange={changeEmail}
+            onChange={handleChange}
             error={!!emailError}
             helperText={emailError}
             className={classes.textField}
@@ -108,10 +98,10 @@ function SignUp(props) {
           />
 
           <TextField
-            name="password"
+            name="signUpPassword"
             value={password}
             type="password"
-            onChange={changePassword}
+            onChange={handleChange}
             error={!!passwordError}
             helperText={passwordError}
             className={classes.textField}
