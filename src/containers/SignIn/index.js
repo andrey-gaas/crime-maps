@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect, batch } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import {
   Paper,
   Typography,
@@ -27,6 +27,7 @@ function SignIn(props) {
     isDisabled,
     changeField,
     signInRequest,
+    redirect,
   } = props;
   const classes = useStyles();
 
@@ -56,6 +57,7 @@ function SignIn(props) {
 
   return (
     <div className={classes.root}>
+      { redirect && <Redirect to="/" /> }
       <div className={classes.logoContainer}>
         <Typography variant="h5">Crime Maps</Typography>
         <img src={logo} alt="" className={classes.logo} />
@@ -95,6 +97,7 @@ function SignIn(props) {
             className={classes.button}
             fullWidth
             onClick={handleClick}
+            disabled={isDisabled}
           >
             Войти
           </Button>
@@ -105,7 +108,6 @@ function SignIn(props) {
               variant="contained"
               className={classes.linkButton}
               fullWidth
-              disabled={isDisabled}
             >
               Зарегистрироваться
             </Button>
@@ -138,6 +140,7 @@ SignIn.propTypes = {
   password:      PropTypes.string,
   passwordError: PropTypes.string,
   isDisabled:    PropTypes.bool,
+  redirect:      PropTypes.bool,
   changeField:   PropTypes.func.isRequired,
   signInRequest: PropTypes.func.isRequired,
 };
@@ -149,10 +152,12 @@ SignIn.defaultProps = {
   password:      '',
   passwordError: '',
   isDisabled:    false,
+  redirect:      false,
 };
 
 const mapStateToProps = ({ system, forms }) => ({
   snackbar:      system.signInSnackbar,
+  redirect:      system.signInRedirectToMain,
   email:         forms.signInEmail,
   emailError:    forms.signInEmailError,
   password:      forms.signInPassword,

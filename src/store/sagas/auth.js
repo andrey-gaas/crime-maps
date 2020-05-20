@@ -76,9 +76,15 @@ function* signInRequestSaga() {
     yield put(changeSystemField('signInSnackbar', 'Пытаемся войти...'));
     yield put(changeField('signInButtonDisabled', true));
 
-    const result = yield call(axios.post, ROUTE_SIGN_IN, { email, password });
+    const { data } = yield call(axios.post, ROUTE_SIGN_IN, { email, password });
 
-    console.log(result);
+    if (data.status === 'success') {
+      yield put(changeSystemField('signInSnackbar', 'Успешно!'));
+      yield put(signInSuccess(data));
+    } else {
+      yield put(changeSystemField('signInSnackbar', 'Неудача'));
+      yield put(signInFail(data));
+    }
   } catch(e) {
     yield put(changeSystemField('signInSnackbar', 'Произошла неизвестная ошибка, попробуйте еще раз.'));
     yield delay(5000);
@@ -88,9 +94,26 @@ function* signInRequestSaga() {
   }
 }
 
+function* signInSuccessSaga() {
+  yield put(changeSystemField('signInSnackbar', ''));
+  yield put(changeSystemField('signInRedirectToMain', true));
+  yield put(changeSystemField('signInRedirectToMain', false));
+}
+
+function* signInFailSaga(data) {
+  if (data === 'email: invalid')         yield put(changeField('signUpEmailError', 'Введите корректный E-Mail.'));
+  else if (data === 'email: not found')  yield put(changeField('signUpEmailError', 'Пользователь не найден.'));
+  else if (data === 'password: invalid') yield put(changeField('signUpEmailError', 'Введите корректный пароль.'));
+  else if (data === 'password: wrong')   yield put(changeField('signUpEmailError', 'Пароль не верный.'));
+  
+  yield put(changeSystemField('signUpSnackbar', ''));
+}
+
 export default function* () {
   yield takeEvery(SIGN_UP_REQUEST, signUpRequestSaga);
   yield takeEvery(SIGN_UP_SUCCESS, signUpSuccessSaga);
   yield takeEvery(SIGN_UP_FAIL, signUpFailSaga);
   yield takeEvery(SIGN_IN_REQUEST, signInRequestSaga);
+  yield takeEvery(SIGN_IN_SUCCESS, signInSuccessSaga);
+  yield takeEvery(SIGN_IN_FAIL, signInFailSaga);
 };

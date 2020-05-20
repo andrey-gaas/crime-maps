@@ -49,7 +49,7 @@ router.post('/sign-in', async (req, res) => {
     const candidate = await User.findOne({ email });
 
     if (candidate) {
-      res.json(candidate);
+      res.json({ status: 'success', candidate });
     } else {
       res.send('Not Found');
     }
