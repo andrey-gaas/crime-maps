@@ -2,18 +2,24 @@ const express = require('express');
 const mongoose = require('mongoose');
 const config = require('config');
 const path = require('path');
-
-
+const passport = require('passport');
 
 const app = express();
 const PORT = process.env.PORT || config.get('port');
 
 app.use(express.json({ exptended: true }));
+app.use(passport.initialize());
+require('./middleware/passport')(passport);
 
 /* Routes */
 app.use('/api/cities', require('./routes/cities'));
 app.use('/api/incidents', require('./routes/incidents'));
 app.use('/api/auth', require('./routes/auth'));
+
+
+app.get('/api/test', passport.authenticate('jwt', { session: false }), (req, res) => {
+  res.send('OK');
+});
 
 if (process.env.NODE_ENV === 'production') {
   app.use('/', express.static(path.join(__dirname, 'build')));
