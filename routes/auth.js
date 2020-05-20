@@ -59,7 +59,7 @@ router.post('/sign-in', async (req, res) => {
 
       if (passwordResult) {
         const token = jwt.sign(
-          { email: candidate.email, userId: candidate._id },
+          { email: candidate.email, id: candidate.id },
           config.get('jwt'),
           { expiresIn: 60 * 60 },
         );

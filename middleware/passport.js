@@ -11,8 +11,8 @@ module.exports = passport => {
   passport.use(
     new Strategy(options, async (payload, done) => {
       try {
-        const user = await User.findById(payload.userId).select('email id');
-        
+        const user = await User.findOne({ id: payload.id }).select('email id');
+
         if (user) {
           done(null, user);
         } else {
