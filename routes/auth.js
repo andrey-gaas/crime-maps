@@ -42,4 +42,20 @@ router.post('/sign-up', async (req, res) => {
   }
 });
 
+router.post('/sign-in', async (req, res) => {
+  try {
+    const { email, password } = req.body;
+
+    const candidate = await User.findOne({ email });
+
+    if (candidate) {
+      res.json(candidate);
+    } else {
+      res.send('Not Found');
+    }
+  } catch(e) {
+    res.status(500).send('server error');
+  }
+});
+
 module.exports = router;
