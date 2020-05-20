@@ -78,7 +78,7 @@ function* signInRequestSaga() {
 
     const { data } = yield call(axios.post, ROUTE_SIGN_IN, { email, password });
 
-    if (data.status === 'success') {
+    if (data.token) {
       yield put(changeSystemField('signInSnackbar', 'Успешно!'));
       yield put(signInSuccess(data));
     } else {
@@ -86,27 +86,28 @@ function* signInRequestSaga() {
       yield put(signInFail(data));
     }
   } catch(e) {
+    yield put(changeField('signInButtonDisabled', false));
     yield put(changeSystemField('signInSnackbar', 'Произошла неизвестная ошибка, попробуйте еще раз.'));
     yield delay(5000);
     yield put(changeSystemField('signInSnackbar', ''));
-  } finally {
-    yield put(changeField('signInButtonDisabled', false));
   }
 }
 
 function* signInSuccessSaga() {
+  yield put(changeField('signInButtonDisabled', false));
   yield put(changeSystemField('signInSnackbar', ''));
   yield put(changeSystemField('signInRedirectToMain', true));
   yield put(changeSystemField('signInRedirectToMain', false));
 }
 
-function* signInFailSaga(data) {
-  if (data === 'email: invalid')         yield put(changeField('signUpEmailError', 'Введите корректный E-Mail.'));
-  else if (data === 'email: not found')  yield put(changeField('signUpEmailError', 'Пользователь не найден.'));
-  else if (data === 'password: invalid') yield put(changeField('signUpEmailError', 'Введите корректный пароль.'));
-  else if (data === 'password: wrong')   yield put(changeField('signUpEmailError', 'Пароль не верный.'));
-  
-  yield put(changeSystemField('signUpSnackbar', ''));
+function* signInFailSaga({ data }) {
+  if (data === 'email: invalid')         yield put(changeField('signInEmailError', 'Введите корректный E-Mail.'));
+  else if (data === 'email: not found')  yield put(changeField('signInEmailError', 'Пользователь не найден.'));
+  else if (data === 'password: invalid') yield put(changeField('signInEmailError', 'Введите корректный пароль.'));
+  else if (data === 'password: wrong')   yield put(changeField('signInEmailError', 'Пароль не верный.'));
+  yield put(changeField('signInButtonDisabled', false));
+  yield delay(3000);
+  yield put(changeSystemField('signInSnackbar', ''));
 }
 
 export default function* () {
