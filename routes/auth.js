@@ -29,16 +29,31 @@ router.post('/sign-up', async (req, res) => {
     const lastUser = await User.find({}).limit(1).sort({ $natural: -1 });
 
     const salt = bcrypt.genSaltSync(10);
+    const id = lastUser.length ? lastUser[0].id + 1 : 0;
 
     const user = new User({
-      id: lastUser.length ? lastUser[0].id + 1 : 0,
+      id,
       name,
       email,
       password: bcrypt.hashSync(password, salt),
     });
 
     await user.save();
-    res.status(201).json(user);
+
+    const token = jwt.sign(
+      { email, id },
+      config.get('jwt'),
+      { expiresIn: 60 * 60 },
+    );
+
+    res.status(201).json({
+      token,
+      user: {
+        email,
+        name,
+        id,
+      }
+    });
   } catch (e) {
     res.status(500).send('server error');
   }
