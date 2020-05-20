@@ -4,13 +4,21 @@ import {
   SIGN_UP_REQUEST,
   SIGN_UP_SUCCESS,
   SIGN_UP_FAIL,
+  SIGN_IN_REQUEST,
+  SIGN_IN_SUCCESS,
+  SIGN_IN_FAIL,
 } from '../actions/auth';
-import { ROUTE_SIGN_UP } from '../../api/auth';
+import { ROUTE_SIGN_UP, ROUTE_SIGN_IN } from '../../api/auth';
 import { changeSystemField } from '../AC/system';
 import { changeField } from '../AC/forms';
-import { signUpSuccess, signUpFail } from '../AC/auth';
+import {
+  signUpSuccess,
+  signUpFail,
+  signInSuccess,
+  signInFail,
+} from '../AC/auth';
 
-function* request() {
+function* signUpRequestSaga() {
   try {
     const {
       signUpName: name,
@@ -38,7 +46,7 @@ function* request() {
   }
 }
 
-function* success({ data }) {
+function* signUpSuccessSaga({ data }) {
   yield put(changeSystemField('signUpSnackbar', ''));
   yield put(changeSystemField('signUpRedirectToSignIn', true));
   yield put(changeSystemField('signInSnackbar', 'Регистрация завершена, можете авторизоваться!'));
@@ -47,7 +55,7 @@ function* success({ data }) {
   yield put(changeSystemField('signInSnackbar', ''));
 }
 
-function* fail({ data }) {
+function* signUpFailSaga({ data }) {
   if (data === 'name: lenght')           yield put(changeField('signUpNameError', 'Имя должно содержать от 6 до 16 символов.'));
   else if (data === 'name: invalid')     yield put(changeField('signUpNameError', 'Допустимы только латинские и кириллические символы, а так же числа.'));
   else if (data === 'name: busy')        yield put(changeField('signUpNameError', 'Имя занято, попробуйте другое.'));
@@ -58,8 +66,31 @@ function* fail({ data }) {
   yield put(changeSystemField('signUpSnackbar', ''));
 }
 
+function* signInRequestSaga() {
+  try {
+    const {
+      signInEmail: email,
+      signInPassword: password,
+    } = yield select(({ forms }) => forms);
+
+    yield put(changeSystemField('signInSnackbar', 'Пытаемся войти...'));
+    yield put(changeField('signInButtonDisabled', true));
+
+    const result = yield call(axios.post, ROUTE_SIGN_IN, { email, password });
+
+    console.log(result);
+  } catch(e) {
+    yield put(changeSystemField('signInSnackbar', 'Произошла неизвестная ошибка, попробуйте еще раз.'));
+    yield delay(5000);
+    yield put(changeSystemField('signInSnackbar', ''));
+  } finally {
+    yield put(changeField('signInButtonDisabled', false));
+  }
+}
+
 export default function* () {
-  yield takeEvery(SIGN_UP_REQUEST, request);
-  yield takeEvery(SIGN_UP_SUCCESS, success);
-  yield takeEvery(SIGN_UP_FAIL, fail);
+  yield takeEvery(SIGN_UP_REQUEST, signUpRequestSaga);
+  yield takeEvery(SIGN_UP_SUCCESS, signUpSuccessSaga);
+  yield takeEvery(SIGN_UP_FAIL, signUpFailSaga);
+  yield takeEvery(SIGN_IN_REQUEST, signInRequestSaga);
 };

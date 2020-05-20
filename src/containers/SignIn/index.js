@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { connect, batch } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -10,9 +10,12 @@ import {
   Button,
   Snackbar,
 } from '@material-ui/core';
+import emailValidator from 'email-validator';
 import useStyles from './styles';
 import logo from '../../images/logo_dark.svg';
 import { changeField } from '../../store/AC/forms';
+import { signInRequest } from '../../store/AC/auth';
+import { PASSWORD_TEMPLATE } from '../../constants/forms';
 
 function SignIn(props) {
   const {
@@ -23,6 +26,7 @@ function SignIn(props) {
     passwordError,
     isDisabled,
     changeField,
+    signInRequest,
   } = props;
   const classes = useStyles();
 
@@ -30,6 +34,25 @@ function SignIn(props) {
     changeField(target.name, target.value);
     changeField(target.name + 'Error', '');
   });
+
+  const handleClick = () => {
+    let emailError = '';
+    let passwordError = '';
+
+    if (!emailValidator.validate(email)) emailError = 'Введите корректный E-Mail.';
+    if (!password || password.length < 6 || password.length > 16) passwordError = 'Введите корректный пароль.';
+    if (!password.match(PASSWORD_TEMPLATE)) passwordError = 'Введите корректный пароль.';
+
+    if (emailError || passwordError) {
+      batch(() => {
+        changeField('signInEmailError', emailError);
+        changeField('signInPasswordError', passwordError);
+      });
+      return;
+    }
+
+    signInRequest();
+  };
 
   return (
     <div className={classes.root}>
@@ -71,6 +94,7 @@ function SignIn(props) {
             size="large"
             className={classes.button}
             fullWidth
+            onClick={handleClick}
           >
             Войти
           </Button>
@@ -115,6 +139,7 @@ SignIn.propTypes = {
   passwordError: PropTypes.string,
   isDisabled:    PropTypes.bool,
   changeField:   PropTypes.func.isRequired,
+  signInRequest: PropTypes.func.isRequired,
 };
 
 SignIn.defaultProps = {
@@ -137,6 +162,7 @@ const mapStateToProps = ({ system, forms }) => ({
 
 const mapDispatchToProps = dispatch => bindActionCreators({
   changeField,
+  signInRequest,
 }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(SignIn);
