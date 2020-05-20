@@ -6,6 +6,7 @@ import map from './map';
 import geodata from './geodata';
 import incidents from './incidents';
 import incident from './incident';
+import user from './user';
 
 export default combineReducers({
   system,
@@ -15,4 +16,5 @@ export default combineReducers({
   geodata,
   incidents,
   incident,
+  user,
 });

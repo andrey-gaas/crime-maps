@@ -47,7 +47,7 @@ router.post('/sign-up', async (req, res) => {
     );
 
     res.status(201).json({
-      token,
+      token: `Bearer ${token}`,
       user: {
         email,
         name,
@@ -78,7 +78,14 @@ router.post('/sign-in', async (req, res) => {
           config.get('jwt'),
           { expiresIn: 60 * 60 },
         );
-        res.json({ token: `Bearer ${token}` });
+        res.json({
+          token: `Bearer ${token}`,
+          user: {
+            email: candidate.email,
+            name: candidate.name,
+            id: candidate.id,
+          },
+        });
       } else {
         res.send('password: wrong');
       }

@@ -11,12 +11,14 @@ import {
 import { ROUTE_SIGN_UP, ROUTE_SIGN_IN } from '../../api/auth';
 import { changeSystemField } from '../AC/system';
 import { changeField } from '../AC/forms';
+import { loginUser, setUser } from '../AC/user';
 import {
   signUpSuccess,
   signUpFail,
   signInSuccess,
   signInFail,
 } from '../AC/auth';
+import { LOGIN_USER } from '../actions/user';
 
 function* signUpRequestSaga() {
   try {
@@ -48,11 +50,10 @@ function* signUpRequestSaga() {
 
 function* signUpSuccessSaga({ data }) {
   yield put(changeSystemField('signUpSnackbar', ''));
-  yield put(changeSystemField('signUpRedirectToSignIn', true));
-  yield put(changeSystemField('signInSnackbar', 'Регистрация завершена, можете авторизоваться!'));
-  yield put(changeSystemField('signUpRedirectToSignIn', false));
-  yield delay(5000);
-  yield put(changeSystemField('signInSnackbar', ''));
+  yield put(changeField('signUpName', ''));
+  yield put(changeField('signUpEmail', ''));
+  yield put(changeField('signUpPassword', ''));
+  yield put(loginUser(data));
 }
 
 function* signUpFailSaga({ data }) {
@@ -79,10 +80,9 @@ function* signInRequestSaga() {
     const { data } = yield call(axios.post, ROUTE_SIGN_IN, { email, password });
 
     if (data.token) {
-      yield put(changeSystemField('signInSnackbar', 'Успешно!'));
       yield put(signInSuccess(data));
     } else {
-      yield put(changeSystemField('signInSnackbar', 'Неудача'));
+      yield put(changeSystemField('signInSnackbar', 'Вход не выполнен. Попробуйте еще раз.'));
       yield put(signInFail(data));
     }
   } catch(e) {
@@ -93,11 +93,12 @@ function* signInRequestSaga() {
   }
 }
 
-function* signInSuccessSaga() {
+function* signInSuccessSaga({ data }) {
   yield put(changeField('signInButtonDisabled', false));
   yield put(changeSystemField('signInSnackbar', ''));
-  yield put(changeSystemField('signInRedirectToMain', true));
-  yield put(changeSystemField('signInRedirectToMain', false));
+  yield put(changeField('signInEmail', ''));
+  yield put(changeField('signInPassword', ''));
+  yield put(loginUser(data));
 }
 
 function* signInFailSaga({ data }) {
@@ -110,6 +111,12 @@ function* signInFailSaga({ data }) {
   yield put(changeSystemField('signInSnackbar', ''));
 }
 
+function* login({ user }) {
+  console.log(user);
+  localStorage.setItem('token', user.token);
+  yield put(setUser(user.user));
+}
+
 export default function* () {
   yield takeEvery(SIGN_UP_REQUEST, signUpRequestSaga);
   yield takeEvery(SIGN_UP_SUCCESS, signUpSuccessSaga);
@@ -117,4 +124,5 @@ export default function* () {
   yield takeEvery(SIGN_IN_REQUEST, signInRequestSaga);
   yield takeEvery(SIGN_IN_SUCCESS, signInSuccessSaga);
   yield takeEvery(SIGN_IN_FAIL, signInFailSaga);
+  yield takeEvery(LOGIN_USER, login);
 };

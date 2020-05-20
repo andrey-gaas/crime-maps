@@ -1,13 +1,15 @@
 import { SET_USER, LOGOUT_USER } from '../actions/user';
 
-const initialState = {};
+const initialState = {
+  isAuth: false,
+};
 
 export default function(state = initialState, action) {
   switch(action.type) {
     case SET_USER:
-      return { ...action.user };
+      return { ...action.user, isAuth: true };
     case LOGOUT_USER:
-      return {};
+      return { isAuth: false };
     default:
       return state;
   }
