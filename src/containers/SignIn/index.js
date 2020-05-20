@@ -27,7 +27,7 @@ function SignIn(props) {
     isDisabled,
     changeField,
     signInRequest,
-    redirect,
+    isAuth,
   } = props;
   const classes = useStyles();
 
@@ -57,7 +57,7 @@ function SignIn(props) {
 
   return (
     <div className={classes.root}>
-      { redirect && <Redirect to="/" /> }
+      { isAuth && <Redirect to="/" /> }
       <div className={classes.logoContainer}>
         <Typography variant="h5">Crime Maps</Typography>
         <img src={logo} alt="" className={classes.logo} />
@@ -140,7 +140,7 @@ SignIn.propTypes = {
   password:      PropTypes.string,
   passwordError: PropTypes.string,
   isDisabled:    PropTypes.bool,
-  redirect:      PropTypes.bool,
+  isAuth:        PropTypes.bool.isRequired,
   changeField:   PropTypes.func.isRequired,
   signInRequest: PropTypes.func.isRequired,
 };
@@ -152,10 +152,9 @@ SignIn.defaultProps = {
   password:      '',
   passwordError: '',
   isDisabled:    false,
-  redirect:      false,
 };
 
-const mapStateToProps = ({ system, forms }) => ({
+const mapStateToProps = ({ system, forms, user }) => ({
   snackbar:      system.signInSnackbar,
   redirect:      system.signInRedirectToMain,
   email:         forms.signInEmail,
@@ -163,6 +162,7 @@ const mapStateToProps = ({ system, forms }) => ({
   password:      forms.signInPassword,
   passwordError: forms.signInPasswordError,
   isDisabled:    forms.signInButtonDisabled,
+  isAuth:        user.isAuth,
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators({
