@@ -8,9 +8,9 @@ import {
 } from '../actions/auth';
 
 export const requestSignUp = () => ({ type: SIGN_UP_REQUEST });
-export const signUpSuccess = data => ({ type: SIGN_UP_SUCCESS, data });
+export const signUpSuccess = () => ({ type: SIGN_UP_SUCCESS });
 export const signUpFail = data => ({ type: SIGN_UP_FAIL, data });
 
 export const signInRequest = () => ({ type: SIGN_IN_REQUEST });
-export const signInSuccess = data => ({ type: SIGN_IN_SUCCESS, data });
+export const signInSuccess = () => ({ type: SIGN_IN_SUCCESS });
 export const signInFail = data => ({ type: SIGN_IN_FAIL, data });

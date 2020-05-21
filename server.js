@@ -3,11 +3,13 @@ const mongoose = require('mongoose');
 const config = require('config');
 const path = require('path');
 const passport = require('passport');
+const cookieParser = require('cookie-parser')
 
 const app = express();
 const PORT = process.env.PORT || config.get('port');
 
 app.use(express.json({ exptended: true }));
+app.use(cookieParser());
 app.use(passport.initialize());
 require('./middleware/passport')(passport);
 

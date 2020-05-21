@@ -1,5 +1,6 @@
 import { takeEvery, call, put, select, delay } from 'redux-saga/effects';
 import axios from 'axios';
+import cookie from 'js-cookie';
 import {
   SIGN_UP_REQUEST,
   SIGN_UP_SUCCESS,
@@ -34,7 +35,7 @@ function* signUpRequestSaga() {
     const result = yield call(axios.post, ROUTE_SIGN_UP, { name, email, password });
 
     if (result.status === 201) {
-      yield put(signUpSuccess(result.data));
+      yield put(signUpSuccess());
     } else {
       yield put(signUpFail(result.data));
     }
@@ -48,12 +49,12 @@ function* signUpRequestSaga() {
   }
 }
 
-function* signUpSuccessSaga({ data }) {
+function* signUpSuccessSaga() {
   yield put(changeSystemField('signUpSnackbar', ''));
   yield put(changeField('signUpName', ''));
   yield put(changeField('signUpEmail', ''));
   yield put(changeField('signUpPassword', ''));
-  yield put(loginUser(data));
+  yield put(loginUser());
 }
 
 function* signUpFailSaga({ data }) {
@@ -79,8 +80,8 @@ function* signInRequestSaga() {
 
     const { data } = yield call(axios.post, ROUTE_SIGN_IN, { email, password });
 
-    if (data.token) {
-      yield put(signInSuccess(data));
+    if (data === 'OK') {
+      yield put(signInSuccess());
     } else {
       yield put(changeSystemField('signInSnackbar', 'Вход не выполнен. Попробуйте еще раз.'));
       yield put(signInFail(data));
@@ -93,12 +94,12 @@ function* signInRequestSaga() {
   }
 }
 
-function* signInSuccessSaga({ data }) {
+function* signInSuccessSaga() {
   yield put(changeField('signInButtonDisabled', false));
   yield put(changeSystemField('signInSnackbar', ''));
   yield put(changeField('signInEmail', ''));
   yield put(changeField('signInPassword', ''));
-  yield put(loginUser(data));
+  yield put(loginUser());
 }
 
 function* signInFailSaga({ data }) {
@@ -111,10 +112,11 @@ function* signInFailSaga({ data }) {
   yield put(changeSystemField('signInSnackbar', ''));
 }
 
-function* login({ user }) {
-  console.log(user);
-  localStorage.setItem('token', user.token);
-  yield put(setUser(user.user));
+function* login() {
+  const name = cookie.get('user-name');
+  const email = cookie.get('user-email');
+  const id = +cookie.get('user-id');
+  yield put(setUser({ name, email, id }));
 }
 
 function* logout() {

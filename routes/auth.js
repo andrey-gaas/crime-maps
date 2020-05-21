@@ -46,15 +46,15 @@ router.post('/sign-up', async (req, res) => {
       { expiresIn: 60 * 60 },
     );
 
-    res.status(201).json({
-      token: `Bearer ${token}`,
-      user: {
-        email,
-        name,
-        id,
-      }
-    });
+    const userCookie = { name, email, id };
+    
+    res.cookie('user-name', name, { maxAge: 31556926000 });
+    res.cookie('user-email', email, { maxAge: 31556926000 });
+    res.cookie('user-id', id, { maxAge: 31556926000 });
+    res.cookie('token', `Bearer ${token}`, { maxAge: 31556926000, httpOnly: true });
+    res.status(201).send('OK');
   } catch (e) {
+    console.log(e.message);
     res.status(500).send('server error');
   }
 });
@@ -78,14 +78,12 @@ router.post('/sign-in', async (req, res) => {
           config.get('jwt'),
           { expiresIn: 60 * 60 },
         );
-        res.json({
-          token: `Bearer ${token}`,
-          user: {
-            email: candidate.email,
-            name: candidate.name,
-            id: candidate.id,
-          },
-        });
+
+        res.cookie('user-name', candidate.name, { maxAge: 60 * 60 * 1000 });
+        res.cookie('user-email', candidate.email, { maxAge: 60 * 60 * 1000 });
+        res.cookie('user-id', candidate.id, { maxAge: 60 * 60 * 1000 });
+        res.cookie('token', `Bearer ${token}`, { maxAge: 31556926000, httpOnly: true });
+        res.send('OK');
       } else {
         res.send('password: wrong');
       }
