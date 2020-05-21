@@ -5,7 +5,7 @@ export default makeStyles(theme => ({
   root: {
     display: 'flex',
     flexDirection: 'column',
-    height: '100%',
+    minHeight: '100%',
     background: BLUE_GRADIENT,
   },
   logoContainer: {
