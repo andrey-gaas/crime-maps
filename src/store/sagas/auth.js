@@ -37,7 +37,7 @@ function* signUpRequestSaga() {
     yield put(changeSystemField('signUpSnackbar', 'Регистрация нового пользователя...'));
     yield put(changeField('signUpButtonDisabled', true));
 
-    const result = yield call(axios.post, ROUTE_SIGN_UP, { name, email, password });
+    const result = yield call(axios.post, ROUTE_SIGN_UP, { name: name.trim(), email: email.trim(), password });
 
     if (result.status === 201) {
       yield put(signUpSuccess());
@@ -83,7 +83,7 @@ function* signInRequestSaga() {
     yield put(changeSystemField('signInSnackbar', 'Пытаемся войти...'));
     yield put(changeField('signInButtonDisabled', true));
 
-    const { data } = yield call(axios.post, ROUTE_SIGN_IN, { email, password });
+    const { data } = yield call(axios.post, ROUTE_SIGN_IN, { email: email.trim(), password });
 
     if (data === 'OK') {
       yield put(signInSuccess());
