@@ -18,11 +18,6 @@ app.use('/api/cities', require('./routes/cities'));
 app.use('/api/incidents', require('./routes/incidents'));
 app.use('/api/auth', require('./routes/auth'));
 
-
-app.get('/api/test', passport.authenticate('jwt', { session: false }), (req, res) => {
-  res.send('OK');
-});
-
 if (process.env.NODE_ENV === 'production') {
   app.use('/', express.static(path.join(__dirname, 'build')));
 

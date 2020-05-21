@@ -5,6 +5,7 @@ import {
   SIGN_IN_REQUEST,
   SIGN_IN_SUCCESS,
   SIGN_IN_FAIL,
+  CHECK_USER_AUTH,
 } from '../actions/auth';
 
 export const requestSignUp = () => ({ type: SIGN_UP_REQUEST });
@@ -14,3 +15,5 @@ export const signUpFail = data => ({ type: SIGN_UP_FAIL, data });
 export const signInRequest = () => ({ type: SIGN_IN_REQUEST });
 export const signInSuccess = () => ({ type: SIGN_IN_SUCCESS });
 export const signInFail = data => ({ type: SIGN_IN_FAIL, data });
+
+export const checkUserAuth = () => ({ type: CHECK_USER_AUTH });

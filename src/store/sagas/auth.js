@@ -2,24 +2,29 @@ import { takeEvery, call, put, select, delay } from 'redux-saga/effects';
 import axios from 'axios';
 import cookie from 'js-cookie';
 import {
+  ROUTE_SIGN_UP,
+  ROUTE_SIGN_IN,
+  ROUTE_CHECK_AUTH,
+} from '../../api/auth';
+import {
   SIGN_UP_REQUEST,
   SIGN_UP_SUCCESS,
   SIGN_UP_FAIL,
   SIGN_IN_REQUEST,
   SIGN_IN_SUCCESS,
   SIGN_IN_FAIL,
+  CHECK_USER_AUTH,
 } from '../actions/auth';
-import { ROUTE_SIGN_UP, ROUTE_SIGN_IN } from '../../api/auth';
+import { LOGIN_USER, LOGOUT_USER_SAGA } from '../actions/user';
 import { changeSystemField } from '../AC/system';
 import { changeField } from '../AC/forms';
-import { loginUser, setUser, logoutUser } from '../AC/user';
+import { loginUser, setUser, logoutUser, logout } from '../AC/user';
 import {
   signUpSuccess,
   signUpFail,
   signInSuccess,
   signInFail,
 } from '../AC/auth';
-import { LOGIN_USER, LOGOUT_USER_SAGA } from '../actions/user';
 
 function* signUpRequestSaga() {
   try {
@@ -113,15 +118,37 @@ function* signInFailSaga({ data }) {
 }
 
 function* login() {
+  const token = cookie.get('token');
   const name = cookie.get('user-name');
   const email = cookie.get('user-email');
   const id = +cookie.get('user-id');
+  axios.defaults.headers.common['Authorization'] = token;
   yield put(setUser({ name, email, id }));
 }
 
-function* logout() {
-  localStorage.setItem('token', null);
+function* logoutSaga() {
+  axios.defaults.headers.common['Authorization'] = '';
   yield put(logoutUser());
+}
+
+function* checkUserAuth() {
+  try {
+    const token = cookie.get('token');
+    const name = cookie.get('user-name');
+    const email = cookie.get('user-email');
+    const id = +cookie.get('user-id');
+
+    if (!token || !name || !email || id === undefined) {
+      throw new Error();
+    }
+
+    axios.defaults.headers.common['Authorization'] = token;
+    const result = yield call(axios.get, ROUTE_CHECK_AUTH);
+    if (result.data === 'OK') yield put(setUser({ name, email, id }));
+    else throw new Error();
+  } catch(e) {
+    yield put(logout());
+  }
 }
 
 export default function* () {
@@ -132,5 +159,6 @@ export default function* () {
   yield takeEvery(SIGN_IN_SUCCESS, signInSuccessSaga);
   yield takeEvery(SIGN_IN_FAIL, signInFailSaga);
   yield takeEvery(LOGIN_USER, login);
-  yield takeEvery(LOGOUT_USER_SAGA, logout);
+  yield takeEvery(LOGOUT_USER_SAGA, logoutSaga);
+  yield takeEvery(CHECK_USER_AUTH, checkUserAuth);
 };
