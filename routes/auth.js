@@ -78,9 +78,9 @@ router.post('/sign-in', async (req, res) => {
           { expiresIn: 60 * 60 },
         );
 
-        res.cookie('user-name', candidate.name, { maxAge: 60 * 60 * 1000 });
-        res.cookie('user-email', candidate.email, { maxAge: 60 * 60 * 1000 });
-        res.cookie('user-id', candidate.id, { maxAge: 60 * 60 * 1000 });
+        res.cookie('user-name', candidate.name, { maxAge: 31556926000 });
+        res.cookie('user-email', candidate.email, { maxAge: 31556926000 });
+        res.cookie('user-id', candidate.id, { maxAge: 31556926000 });
         res.cookie('token', `Bearer ${token}`, { maxAge: 31556926000 });
         res.send('OK');
       } else {
