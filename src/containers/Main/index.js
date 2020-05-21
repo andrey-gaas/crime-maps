@@ -1,12 +1,11 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
+import { connect, batch } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import {
   Fab,
   ButtonGroup,
   Button,
-  Tooltip,
 } from '@material-ui/core';
 import {
   NearMe as NearMeIcon,
@@ -22,6 +21,7 @@ import {
   changeCoordinates,
   incrementZoom,
   decrementZoom,
+  changeZoom,
 } from '../../store/AC/map';
 import { fetchAllIncidents } from '../../store/AC/incidents';
 import { closeIncident } from '../../store/AC/incident';
@@ -39,6 +39,7 @@ function Main(props) {
     selectedCityid,
     incident,
     closeIncident,
+    changeZoom,
   } = props;
   const classes = useStyles();
 
@@ -58,22 +59,25 @@ function Main(props) {
     decrementZoom();
   };
 
+  const viewMe = () => batch(() => {
+    changeCoordinates(geodata.coords.latitude, geodata.coords.longitude);
+    changeZoom(16);
+  });
+
   return (
     <div className={classes.root}>
       <Menu />
       <Map />
       <CitiesSelector />
-      <Tooltip title="Мое местоположение">
-        <Fab
-          color="primary"
-          size="large"
-          className={classes.buttonUserPosition}
-          onClick={() => changeCoordinates(geodata.coords.latitude, geodata.coords.longitude)}
-          disabled={geodata === null}
-        >
-          <NearMeIcon />
-        </Fab>
-      </Tooltip>
+      <Fab
+        color="primary"
+        size="large"
+        className={classes.buttonUserPosition}
+        onClick={viewMe}
+        disabled={geodata === null}
+      >
+        <NearMeIcon />
+      </Fab>
       <div className={classes.zoomButtonsContainer}>
         <ButtonGroup orientation="vertical">
           <Button variant="contained" onClick={zoomIn}>
@@ -100,6 +104,7 @@ Main.propTypes = {
   selectedCityid:    PropTypes.number.isRequired,
   incident:          PropTypes.object,
   closeIncident:     PropTypes.func.isRequired,
+  changeZoom:        PropTypes.func.isRequired,
 };
 
 const mapStateToProps = ({ geodata, map, incidents, cities, incident }) => ({
@@ -116,6 +121,7 @@ const mapDispatchToProps = dispatch => bindActionCreators({
   decrementZoom,
   fetchAllIncidents,
   closeIncident,
+  changeZoom,
 }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(Main);
