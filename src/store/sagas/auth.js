@@ -11,14 +11,14 @@ import {
 import { ROUTE_SIGN_UP, ROUTE_SIGN_IN } from '../../api/auth';
 import { changeSystemField } from '../AC/system';
 import { changeField } from '../AC/forms';
-import { loginUser, setUser } from '../AC/user';
+import { loginUser, setUser, logoutUser } from '../AC/user';
 import {
   signUpSuccess,
   signUpFail,
   signInSuccess,
   signInFail,
 } from '../AC/auth';
-import { LOGIN_USER } from '../actions/user';
+import { LOGIN_USER, LOGOUT_USER_SAGA } from '../actions/user';
 
 function* signUpRequestSaga() {
   try {
@@ -117,6 +117,11 @@ function* login({ user }) {
   yield put(setUser(user.user));
 }
 
+function* logout() {
+  localStorage.setItem('token', null);
+  yield put(logoutUser());
+}
+
 export default function* () {
   yield takeEvery(SIGN_UP_REQUEST, signUpRequestSaga);
   yield takeEvery(SIGN_UP_SUCCESS, signUpSuccessSaga);
@@ -125,4 +130,5 @@ export default function* () {
   yield takeEvery(SIGN_IN_SUCCESS, signInSuccessSaga);
   yield takeEvery(SIGN_IN_FAIL, signInFailSaga);
   yield takeEvery(LOGIN_USER, login);
+  yield takeEvery(LOGOUT_USER_SAGA, logout);
 };
