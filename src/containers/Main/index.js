@@ -6,6 +6,7 @@ import {
   Fab,
   ButtonGroup,
   Button,
+  Tooltip,
 } from '@material-ui/core';
 import {
   NearMe as NearMeIcon,
@@ -62,15 +63,17 @@ function Main(props) {
       <Menu />
       <Map />
       <CitiesSelector />
-      <Fab
-        color="primary"
-        size="large"
-        className={classes.buttonUserPosition}
-        onClick={() => changeCoordinates(geodata.coords.latitude, geodata.coords.longitude)}
-        disabled={geodata === null}
-      >
-        <NearMeIcon />
-      </Fab>
+      <Tooltip title="Мое местоположение">
+        <Fab
+          color="primary"
+          size="large"
+          className={classes.buttonUserPosition}
+          onClick={() => changeCoordinates(geodata.coords.latitude, geodata.coords.longitude)}
+          disabled={geodata === null}
+        >
+          <NearMeIcon />
+        </Fab>
+      </Tooltip>
       <div className={classes.zoomButtonsContainer}>
         <ButtonGroup orientation="vertical">
           <Button variant="contained" onClick={zoomIn}>
@@ -88,21 +91,21 @@ function Main(props) {
 
 Main.propTypes = {
   changeCoordinates: PropTypes.func.isRequired,
-  geodata: PropTypes.object,
-  incrementZoom: PropTypes.func.isRequired,
-  decrementZoom: PropTypes.func.isRequired,
-  zoom: PropTypes.number.isRequired,
+  geodata:           PropTypes.object,
+  incrementZoom:     PropTypes.func.isRequired,
+  decrementZoom:     PropTypes.func.isRequired,
+  zoom:              PropTypes.number.isRequired,
   fetchAllIncidents: PropTypes.func.isRequired,
-  loading: PropTypes.bool.isRequired,
-  selectedCityid: PropTypes.number.isRequired,
-  incident: PropTypes.object,
-  closeIncident: PropTypes.func.isRequired,
+  loading:           PropTypes.bool.isRequired,
+  selectedCityid:    PropTypes.number.isRequired,
+  incident:          PropTypes.object,
+  closeIncident:     PropTypes.func.isRequired,
 };
 
 const mapStateToProps = ({ geodata, map, incidents, cities, incident }) => ({
-  geodata: geodata.geodata,
-  zoom: map.zoom,
-  loading: incidents.isLoading,
+  geodata:        geodata.geodata,
+  zoom:           map.zoom,
+  loading:        incidents.isLoading,
   selectedCityid: cities.selectedCity,
   incident,
 });

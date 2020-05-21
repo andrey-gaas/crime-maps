@@ -2,7 +2,8 @@ import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import {
   Typography,
-  IconButton
+  IconButton,
+  Tooltip,
 } from '@material-ui/core';
 import { Edit as EditIcon } from '@material-ui/icons';
 import useStyles from './styles';
@@ -30,19 +31,21 @@ function Geo(props) {
       </div>
       <Typography variant="h6" className={classes.cityName}>{city}</Typography>
       <div className={classes.grow} />
-      <IconButton onClick={() => setModal(true)}>
-        <EditIcon className={classes.changeCityButton} />
-      </IconButton>
+      <Tooltip title="Изменить город">
+        <IconButton onClick={() => setModal(true)}>
+          <EditIcon className={classes.changeCityButton} />
+        </IconButton>
+      </Tooltip>
     </div>
   );
 }
 
 Geo.propTypes = {
   fetchCities: PropTypes.func.isRequired,
-  setModal: PropTypes.func.isRequired,
-  loading: PropTypes.bool.isRequired,
-  titleCity: PropTypes.string.isRequired,
-  city: PropTypes.string.isRequired,
+  setModal:    PropTypes.func.isRequired,
+  loading:     PropTypes.bool.isRequired,
+  titleCity:   PropTypes.string.isRequired,
+  city:        PropTypes.string.isRequired,
 };
 
 export default Geo;
