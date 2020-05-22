@@ -16,6 +16,11 @@ import { ExpandMore as ExpandMoreIcon } from '@material-ui/icons';
 import useStyles from './styles';
 import Header from '../../components/Header';
 import { changeField } from '../../store/AC/forms';
+import {
+  validateNewName as validateName,
+  validateNewEmail as validateEmail,
+  validateNewPassword as validatePassword,
+} from '../../store/AC/settings';
 
 function Settings(props) {
   const {
@@ -29,12 +34,19 @@ function Settings(props) {
     newPassword,
     newPasswordError,
     isAuth,
+    isDisabledNameButton,
+    isDisabledEmailButton,
+    isDisabledPasswordButton,
     changeField,
+    validateName,
+    validateEmail,
+    validatePassword,
   } = props;
   const classes = useStyles();
 
   const handleChange = ({ target }) => {
     changeField(target.name, target.value);
+    changeField(target.name + 'Error', '');
   };
 
   return (
@@ -66,6 +78,8 @@ function Settings(props) {
                 variant="contained"
                 className={classes.button}
                 color="primary"
+                disabled={isDisabledNameButton}
+                onClick={validateName}
               >
                 Сохранить
               </Button>
@@ -92,6 +106,8 @@ function Settings(props) {
                 variant="contained"
                 className={classes.button}
                 color="primary"
+                onClick={validateEmail}
+                disabled={isDisabledEmailButton}
               >
                 Сохранить
               </Button>
@@ -129,6 +145,8 @@ function Settings(props) {
                 variant="contained"
                 className={classes.button}
                 color="primary"
+                disabled={isDisabledPasswordButton}
+                onClick={validatePassword}
               >
                 Сохранить
               </Button>
@@ -141,37 +159,58 @@ function Settings(props) {
 }
 
 Settings.propTypes = {
-  name:             PropTypes.string,
-  nameError:        PropTypes.string,
-  email:            PropTypes.string,
-  emailError:       PropTypes.string,
-  isAuth:           PropTypes.bool.isRequired,
-  changeField:      PropTypes.func.isRequired,
-  oldPassword:      PropTypes.string,
-  oldPasswordError: PropTypes.string,
-  newPassword:      PropTypes.string,
-  newPasswordError: PropTypes.string,
+  isAuth:                   PropTypes.bool.isRequired,
+  name:                     PropTypes.string,
+  nameError:                PropTypes.string,
+  email:                    PropTypes.string,
+  emailError:               PropTypes.string,
+  oldPassword:              PropTypes.string,
+  oldPasswordError:         PropTypes.string,
+  newPassword:              PropTypes.string,
+  newPasswordError:         PropTypes.string,
+  isDisabledNameButton:     PropTypes.bool,
+  isDisabledEmailButton:    PropTypes.bool,
+  isDisabledPasswordButton: PropTypes.bool,
+  changeField:              PropTypes.func.isRequired,
+  validateName:             PropTypes.func.isRequired,
+  validateEmail:            PropTypes.func.isRequired,
+  validatePassword:         PropTypes.func.isRequired,
 };
 
 Settings.defaultProps = {
-  name:  '',
-  email: '',
+  name:                     '',
+  nameError:                '',
+  email:                    '',
+  emailError:               '',
+  oldPassword:              '',
+  oldPasswordError:         '',
+  newPassword:              '',
+  newPasswordError:         '',
+  isDisabledNameButton:     false,
+  isDisabledEmailButton:    false,
+  isDisabledPasswordButton: false,
 };
 
 const mapStateToProps = ({ forms, user }) => ({
-  isAuth:           user.isAuth,
-  name:             forms.settingsName,
-  nameError:        forms.settingsNameError,
-  email:            forms.settingsEmail,
-  emailError:       forms.settingsEmailError,
-  oldPassword:      forms.settingsPassword,
-  oldPasswordError: forms.settingsPasswordError,
-  newPassword:      forms.settingsPassword,
-  newPasswordError: forms.settingsPassword,
+  isAuth:                   user.isAuth,
+  name:                     forms.settingsName,
+  nameError:                forms.settingsNameError,
+  email:                    forms.settingsEmail,
+  emailError:               forms.settingsEmailError,
+  oldPassword:              forms.settingsOldPassword,
+  oldPasswordError:         forms.settingsOldPasswordError,
+  newPassword:              forms.settingsNewPassword,
+  newPasswordError:         forms.settingsNewPasswordError,
+  isDisabledNameButton:     forms.settingsNameButtonDisabled,
+  isDisabledEmailButton:    forms.settingsEmailButtonDisabled,
+  isDisabledPasswordButton: forms.settingsPasswordButtonDisabled,
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators({
   changeField,
+  validateName,
+  validateEmail,
+  validatePassword,
 }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(Settings);
