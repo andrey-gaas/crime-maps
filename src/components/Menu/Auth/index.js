@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import { Link } from 'react-router-dom';
 import {
   Button,
@@ -15,6 +16,7 @@ import {
   ExitToApp as ExitToAppIcon,
 } from '@material-ui/icons';
 import useStyles from './styles';
+import { logout } from '../../../store/AC/user';
 
 function Auth(props) {
   const {
@@ -22,6 +24,7 @@ function Auth(props) {
     name,
     // id,
     avatar,
+    logout,
   } = props;
   const classes = useStyles();
 
@@ -59,7 +62,7 @@ function Auth(props) {
                 </IconButton>
               </Tooltip>
               <Tooltip title="Выход">
-                <IconButton size="small">
+                <IconButton size="small" onClick={logout}>
                   <ExitToAppIcon />
                 </IconButton>
               </Tooltip>
@@ -75,6 +78,7 @@ Auth.propTypes = {
   name:   PropTypes.string,
   id:     PropTypes.number,
   avatar: PropTypes.string,
+  logout: PropTypes.func.isRequired,
 };
 
 Auth.defaultProps = {
@@ -90,4 +94,8 @@ const mapStateToProps = ({ user }) => ({
   avatar: user.avatar,
 });
 
-export default connect(mapStateToProps)(Auth);
+const mapDispatchToProps = dispatch => bindActionCreators({
+  logout,
+}, dispatch);
+
+export default connect(mapStateToProps, mapDispatchToProps)(Auth);

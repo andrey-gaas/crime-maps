@@ -99,4 +99,12 @@ router.get('/check', passport.authenticate('jwt', { session: false }), (req, res
   res.send('OK');
 });
 
+router.get('/logout', (req, res) => {
+  res.clearCookie('token');
+  res.clearCookie('user-name');
+  res.clearCookie('user-email');
+  res.clearCookie('user-id');
+  res.send('ok');
+});
+
 module.exports = router;

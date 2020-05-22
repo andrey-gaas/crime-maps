@@ -5,6 +5,7 @@ import {
   ROUTE_SIGN_UP,
   ROUTE_SIGN_IN,
   ROUTE_CHECK_AUTH,
+  ROUTE_LOGOUT,
 } from '../../api/auth';
 import {
   SIGN_UP_REQUEST,
@@ -15,7 +16,7 @@ import {
   SIGN_IN_FAIL,
   CHECK_USER_AUTH,
 } from '../actions/auth';
-import { LOGIN_USER, LOGOUT_USER_SAGA } from '../actions/user';
+import { LOGIN_USER, LOGOUT_USER_REQUEST } from '../actions/user';
 import { changeSystemField } from '../AC/system';
 import { changeField } from '../AC/forms';
 import { loginUser, setUser, logoutUser, logout } from '../AC/user';
@@ -126,9 +127,14 @@ function* login() {
   yield put(setUser({ name, email, id }));
 }
 
-function* logoutSaga() {
-  axios.defaults.headers.common['Authorization'] = '';
-  yield put(logoutUser());
+function* logoutRequest() {
+  try {
+    yield call(axios.get, ROUTE_LOGOUT);
+    axios.defaults.headers.common['Authorization'] = '';
+    yield put(logoutUser());
+  } catch(e) {
+    console.error(e.message);
+  }
 }
 
 function* checkUserAuth() {
@@ -159,6 +165,6 @@ export default function* () {
   yield takeEvery(SIGN_IN_SUCCESS, signInSuccessSaga);
   yield takeEvery(SIGN_IN_FAIL, signInFailSaga);
   yield takeEvery(LOGIN_USER, login);
-  yield takeEvery(LOGOUT_USER_SAGA, logoutSaga);
+  yield takeEvery(LOGOUT_USER_REQUEST, logoutRequest);
   yield takeEvery(CHECK_USER_AUTH, checkUserAuth);
 };
