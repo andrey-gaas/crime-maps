@@ -57,9 +57,11 @@ function Auth(props) {
             <Typography variant="subtitle1">{name}</Typography>
             <div className={classes.userButtons}>
               <Tooltip title="Настройки">
-                <IconButton size="small">
-                  <SettingsIcon />
-                </IconButton>
+                <Link to="/settings">
+                  <IconButton size="small">
+                    <SettingsIcon />
+                  </IconButton>
+                </Link>
               </Tooltip>
               <Tooltip title="Выход">
                 <IconButton size="small" onClick={logout}>

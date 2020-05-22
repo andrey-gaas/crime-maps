@@ -8,6 +8,7 @@ import cookie from 'js-cookie';
 import Main from '../Main';
 import SignIn from '../SignIn';
 import SignUp from '../SignUp';
+import Settings from '../Settings';
 import { setLocation, setLocationError } from '../../store/AC/geodata';
 import { checkUserAuth } from '../../store/AC/auth';
 
@@ -29,6 +30,7 @@ function App(props) {
         <Route exact path="/" component={Main} />
         <Route path="/sign-in" component={SignIn} />
         <Route path="/sign-up" component={SignUp} />
+        <Route path="/settings" component={Settings} />
       </Switch>
     </Fragment>
   );
