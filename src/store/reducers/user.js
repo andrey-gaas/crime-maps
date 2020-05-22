@@ -4,7 +4,7 @@ import { SET_USER, LOGOUT_USER } from '../actions/user';
 const token = cookie.get('token');
 const name = cookie.get('user-name');
 const email = cookie.get('user-email');
-const id = cookie.get('user-id');
+const id = +cookie.get('user-id');
 
 const initialState = {
   isAuth: !!token || false ,
