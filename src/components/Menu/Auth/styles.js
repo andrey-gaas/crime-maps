@@ -1,5 +1,5 @@
 import { makeStyles } from '@material-ui/core/styles';
-import { ORANGE, BLUE_GRADIENT } from '../../../constants/styles';
+import { ORANGE } from '../../../constants/styles';
 
 export default makeStyles(theme => ({
   root: {
@@ -17,14 +17,17 @@ export default makeStyles(theme => ({
   },
   userContainer: {
     display: 'flex',
+    alignItems: 'center',
     padding: theme.spacing(1),
-    backgroundImage: BLUE_GRADIENT,
-    color: '#fff',
+    borderTop: `1px solid #ccc`,
+  },
+  avatar: {
+    marginRight: theme.spacing(1),
+    width: theme.spacing(4),
+    height: theme.spacing(4),
+    backgroundColor: ORANGE,
   },
   userButtons: {
     marginLeft: 'auto',
-  },
-  icon: {
-    color: '#fff',
   },
 }));

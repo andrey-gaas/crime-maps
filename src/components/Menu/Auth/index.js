@@ -7,6 +7,7 @@ import {
   Typography,
   Tooltip,
   IconButton,
+  Avatar,
 } from '@material-ui/core';
 import {
   AccountCircle as AccountCircleIcon,
@@ -19,7 +20,8 @@ function Auth(props) {
   const {
     isAuth,
     name,
-    id,
+    // id,
+    avatar,
   } = props;
   const classes = useStyles();
 
@@ -42,16 +44,23 @@ function Auth(props) {
       {
         isAuth &&
           <div className={classes.userContainer}>
+            <Avatar
+              alt={name}
+              src={avatar ? avatar : null}
+              className={classes.avatar}
+            >
+              {name[0]}
+            </Avatar>
             <Typography variant="subtitle1">{name}</Typography>
             <div className={classes.userButtons}>
               <Tooltip title="Настройки">
                 <IconButton size="small">
-                  <SettingsIcon className={classes.icon} />
+                  <SettingsIcon />
                 </IconButton>
               </Tooltip>
               <Tooltip title="Выход">
                 <IconButton size="small">
-                  <ExitToAppIcon className={classes.icon} />
+                  <ExitToAppIcon />
                 </IconButton>
               </Tooltip>
             </div>
