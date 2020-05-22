@@ -21,7 +21,7 @@ function Header(props) {
   const classes = useStyles();
   
   return (
-    <AppBar position="fixed">
+    <AppBar position="static">
       <Toolbar>
         <Container className={classes.container}>
           {

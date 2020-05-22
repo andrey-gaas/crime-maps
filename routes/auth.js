@@ -46,11 +46,13 @@ router.post('/sign-up', async (req, res) => {
       config.get('jwt'),
       { expiresIn: 60 * 60 },
     );
+
+    const cookieAge = { expires: new Date(Date.now() + 900000) };
     
-    res.cookie('user-name', name, { maxAge: 31556926000 });
-    res.cookie('user-email', email, { maxAge: 31556926000 });
-    res.cookie('user-id', id, { maxAge: 31556926000 });
-    res.cookie('token', `Bearer ${token}`, { maxAge: 31556926000 });
+    res.cookie('user-name', name, cookieAge);
+    res.cookie('user-email', email, cookieAge);
+    res.cookie('user-id', id, cookieAge);
+    res.cookie('token', `Bearer ${token}`, cookieAge);
     res.status(201).send('OK');
   } catch (e) {
     console.log(e.message);
@@ -78,10 +80,12 @@ router.post('/sign-in', async (req, res) => {
           { expiresIn: 60 * 60 },
         );
 
-        res.cookie('user-name', candidate.name, { maxAge: 31556926000 });
-        res.cookie('user-email', candidate.email, { maxAge: 31556926000 });
-        res.cookie('user-id', candidate.id, { maxAge: 31556926000 });
-        res.cookie('token', `Bearer ${token}`, { maxAge: 31556926000 });
+        const cookieAge = { expires: new Date(Date.now() + 900000) };
+
+        res.cookie('user-name', candidate.name, cookieAge);
+        res.cookie('user-email', candidate.email, cookieAge);
+        res.cookie('user-id', candidate.id, cookieAge);
+        res.cookie('token', `Bearer ${token}`, cookieAge);
         res.send('OK');
       } else {
         res.send('password: wrong');
