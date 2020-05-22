@@ -47,7 +47,7 @@ router.post('/sign-up', async (req, res) => {
       { expiresIn: 60 * 60 },
     );
 
-    const cookieAge = { expires: new Date(Date.now() + 900000) };
+    const cookieAge = { expires: new Date(Date.now() + 31536000000) };
     
     res.cookie('user-name', name, cookieAge);
     res.cookie('user-email', email, cookieAge);
@@ -80,7 +80,7 @@ router.post('/sign-in', async (req, res) => {
           { expiresIn: 60 * 60 },
         );
 
-        const cookieAge = { expires: new Date(Date.now() + 900000) };
+        const cookieAge = { expires: new Date(Date.now() + 31536000000) };
 
         res.cookie('user-name', candidate.name, cookieAge);
         res.cookie('user-email', candidate.email, cookieAge);
