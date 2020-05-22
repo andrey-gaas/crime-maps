@@ -56,8 +56,8 @@ function SignIn(props) {
   };
 
   return (
+    isAuth ? <Redirect to="/" /> :
     <div className={classes.root}>
-      { isAuth && <Redirect to="/" /> }
       <div className={classes.logoContainer}>
         <Typography variant="h5">Crime Maps</Typography>
         <img src={logo} alt="" className={classes.logo} />
