@@ -2,6 +2,7 @@ import { select, put } from 'redux-saga/effects';
 import { changeField } from '../../AC/forms';
 import { requestSettingsAccountData } from '../../AC/settings';
 import { NAME_TEMPLATE } from '../../../constants/forms';
+import { ROUTE_SETTINGS_NAME } from '../../../api/settings';
 
 function* validate() {
   const { name, currentName } = yield select(({ forms, user }) => ({
@@ -19,7 +20,7 @@ function* validate() {
   if (error) {
     yield put(changeField('settingsNameError', error));
   } else {
-    yield put(requestSettingsAccountData('Name', name));
+    yield put(requestSettingsAccountData('Name', name, ROUTE_SETTINGS_NAME));
   }
 }
 

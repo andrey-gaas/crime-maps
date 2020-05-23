@@ -2,6 +2,7 @@ import { select, put } from 'redux-saga/effects';
 import { changeField } from '../../AC/forms';
 import { requestSettingsAccountData } from '../../AC/settings';
 import { PASSWORD_TEMPLATE } from '../../../constants/forms';
+import { ROUTE_SETTINGS_PASSWORD } from '../../../api/settings';
 
 function* validate() {
   const { oldPassword, newPassword } = yield select(({ forms }) => ({
@@ -26,7 +27,7 @@ function* validate() {
     yield put(changeField('settingsOldPasswordError', oldPasswordError));
     yield put(changeField('settingsNewPasswordError', newPasswordError));
   } else {
-    yield put(requestSettingsAccountData('Password', { newPassword, oldPassword }));
+    yield put(requestSettingsAccountData('Password', { newPassword, oldPassword }, ROUTE_SETTINGS_PASSWORD));
   }
 }
 

@@ -1,14 +1,14 @@
 import { put, call } from 'redux-saga/effects';
 import axios from 'axios';
 import { changeField } from '../../AC/forms';
-import { ROUTE_SETTINGS_ACCOUNT } from '../../../api/settings';
 
-function* request({ field, value }) {
+function* request({ field, value, path }) {
   const disabled = `settings${field}ButtonDisabled`;
   const requestBody = { [field.toLowerCase()]: value };
   yield put(changeField(disabled, true));
   try {
-    const result = yield call(axios.post, ROUTE_SETTINGS_ACCOUNT, requestBody);
+    const result = yield call(axios.post, path, requestBody);
+    console.log(result);
   } catch(e) {
     console.error(e.message);
   } finally {

@@ -1,4 +1,5 @@
 import cookie from 'js-cookie';
+import axios from 'axios';
 import { SET_USER, LOGOUT_USER } from '../actions/user';
 
 const token = cookie.get('token');
@@ -12,6 +13,10 @@ const initialState = {
   email:  email || null,
   id:     id || null
 };
+
+if (token) {
+  axios.defaults.headers.common['Authorization'] = token;
+}
 
 export default function(state = initialState, action) {
   switch(action.type) {
