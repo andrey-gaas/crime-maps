@@ -36,6 +36,7 @@ export default makeStyles(theme => ({
       }
     },
     button: {
+      alignSelf: 'flex-start',
       marginLeft: 'auto',
     },
   },
