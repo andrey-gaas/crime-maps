@@ -26,7 +26,7 @@ function* validate() {
     yield put(changeField('settingsOldPasswordError', oldPasswordError));
     yield put(changeField('settingsNewPasswordError', newPasswordError));
   } else {
-    yield put(requestSettingsAccountData('Password'));
+    yield put(requestSettingsAccountData('Password', { newPassword, oldPassword }));
   }
 }
 

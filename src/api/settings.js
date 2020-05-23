@@ -1,1 +1,1 @@
-export const ROUTE_NAME = '/api/settings/account';
+export const ROUTE_SETTINGS_ACCOUNT = '/api/settings/account';

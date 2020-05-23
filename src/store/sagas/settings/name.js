@@ -19,7 +19,7 @@ function* validate() {
   if (error) {
     yield put(changeField('settingsNameError', error));
   } else {
-    yield put(requestSettingsAccountData('Name'));
+    yield put(requestSettingsAccountData('Name', name));
   }
 }
 
