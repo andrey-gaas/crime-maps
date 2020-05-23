@@ -1,7 +1,7 @@
 import { select, put } from 'redux-saga/effects';
 import emailValidator from 'email-validator';
 import { changeField } from '../../AC/forms';
-import { requestSettingsAccountData } from '../../AC/settings';
+import { request } from '../../AC/settings';
 import { ROUTE_SETTINGS_EMAIL } from '../../../api/settings';
 
 
@@ -20,7 +20,7 @@ function* validate() {
   if (error) {
     yield put(changeField('settingsEmailError', error));
   } else {
-    yield put(requestSettingsAccountData('Email', email, ROUTE_SETTINGS_EMAIL));
+    yield put(request('Email', email, ROUTE_SETTINGS_EMAIL));
   }
 }
 

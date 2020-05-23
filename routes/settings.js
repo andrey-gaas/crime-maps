@@ -20,7 +20,7 @@ router.post('/account/name', passport.authenticate('jwt', { session: false }), a
   try {
     await User.findOneAndUpdate({ id }, { name });
     res.cookie('user-name', name, cookieAge);
-    res.send('OK');
+    res.json({ status: 'OK', message: 'Новое имя сохранено!' });
   } catch(e) {
     res.status(500).send('server error');
   }

@@ -11,6 +11,7 @@ import {
   ExpansionPanelDetails,
   TextField,
   Button,
+  Snackbar,
 } from '@material-ui/core';
 import { ExpandMore as ExpandMoreIcon } from '@material-ui/icons';
 import useStyles from './styles';
@@ -41,6 +42,7 @@ function Settings(props) {
     validateName,
     validateEmail,
     validatePassword,
+    snackbar,
   } = props;
   const classes = useStyles();
 
@@ -154,6 +156,15 @@ function Settings(props) {
           </ExpansionPanelDetails>
         </ExpansionPanel>
       </Container>
+
+      <Snackbar
+        open={!!snackbar}
+        message={snackbar}
+        anchorOrigin={{
+          vertical: 'bottom',
+          horizontal: 'left',
+        }}
+      />
     </Fragment>
   );
 }
@@ -168,6 +179,7 @@ Settings.propTypes = {
   oldPasswordError:         PropTypes.string,
   newPassword:              PropTypes.string,
   newPasswordError:         PropTypes.string,
+  snackbar:                 PropTypes.string,
   isDisabledNameButton:     PropTypes.bool,
   isDisabledEmailButton:    PropTypes.bool,
   isDisabledPasswordButton: PropTypes.bool,
@@ -186,13 +198,15 @@ Settings.defaultProps = {
   oldPasswordError:         '',
   newPassword:              '',
   newPasswordError:         '',
+  snackbar:                 '',
   isDisabledNameButton:     false,
   isDisabledEmailButton:    false,
   isDisabledPasswordButton: false,
 };
 
-const mapStateToProps = ({ forms, user }) => ({
+const mapStateToProps = ({ forms, user, system }) => ({
   isAuth:                   user.isAuth,
+  snackbar:                 system.settingSnackbar,
   name:                     forms.settingsName,
   nameError:                forms.settingsNameError,
   email:                    forms.settingsEmail,
