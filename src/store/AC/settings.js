@@ -1,16 +1,17 @@
 import {
   VALIDATE_NEW_NAME,
+  REQUEST_NEW_NAME,
+  SUCCESS_NEW_NAME,
+  FAIL_NEW_NAME,
+
   VALIDATE_NEW_EMAIL,
   VALIDATE_NEW_PASSWORD,
-  REQUEST_SETTINGS_ACCOUNT_DATA,
-  SETTINGS_ACCOUNT_SUCCESS,
-  SETTINGS_ACCOUNT_FAIL,
 } from '../actions/settings';
 
 export const validateNewName = () => ({ type: VALIDATE_NEW_NAME });
+export const requestNewName = name => ({ type: REQUEST_NEW_NAME, name });
+export const successNewName = name => ({ type: SUCCESS_NEW_NAME, name });
+export const failNewName = message => ({ type: FAIL_NEW_NAME, message });
+
 export const validateNewEmail = () => ({ type: VALIDATE_NEW_EMAIL });
 export const validateNewPassword = () => ({ type: VALIDATE_NEW_PASSWORD });
-
-export const request = (field, value, path) => ({ type: REQUEST_SETTINGS_ACCOUNT_DATA, field, value, path });
-export const success = (field, message, value) => ({ type: SETTINGS_ACCOUNT_SUCCESS, field, message, value });
-export const fail = (field, text) => ({ type: SETTINGS_ACCOUNT_FAIL, field, text });
