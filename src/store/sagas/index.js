@@ -4,6 +4,7 @@ import incidents from './incidents';
 import auth from './auth';
 import settingsName from './settings/name';
 import settingsEmail from './settings/email';
+import settingsPassword from './settings/password';
 
 function* rootSaga() {
   yield all([
@@ -12,6 +13,7 @@ function* rootSaga() {
     auth(),
     settingsName(),
     settingsEmail(),
+    settingsPassword(),
   ]);
 }
 

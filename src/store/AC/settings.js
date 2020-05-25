@@ -10,6 +10,9 @@ import {
   FAIL_NEW_EMAIL,
 
   VALIDATE_NEW_PASSWORD,
+  REQUEST_NEW_PASSWORD,
+  SUCCESS_NEW_PASSWORD,
+  FAIL_NEW_PASSWORD,
 } from '../actions/settings';
 
 export const validateNewName = () => ({ type: VALIDATE_NEW_NAME });
@@ -23,3 +26,6 @@ export const successNewEmail = email => ({ type: SUCCESS_NEW_EMAIL, email });
 export const failNewEmail = message => ({ type: FAIL_NEW_EMAIL, message });
 
 export const validateNewPassword = () => ({ type: VALIDATE_NEW_PASSWORD });
+export const requestNewPassword = (oldPassword, newPassword) => ({ type: REQUEST_NEW_PASSWORD, oldPassword, newPassword });
+export const successNewPassword = () => ({ type: SUCCESS_NEW_PASSWORD });
+export const failNewPassword = data => ({ type: FAIL_NEW_PASSWORD, data });

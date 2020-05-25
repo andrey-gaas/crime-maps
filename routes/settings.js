@@ -2,6 +2,7 @@ const { Router } = require('express');
 const passport = require('passport');
 const jwt = require('jsonwebtoken');
 const config = require('config');
+const bcrypt = require('bcryptjs');
 const emailValidator = require('email-validator');
 const User = require('../models/User');
 
@@ -66,6 +67,42 @@ router.post('/account/email', passport.authenticate('jwt', { session: false }), 
   } catch(e) {
     res.status(500).send('server error');
   }
+});
+
+router.post('/account/password', passport.authenticate('jwt', { session: false }), async (req, res) => {
+  const { oldPassword, newPassword } = req.body;
+  const id = req.cookies['user-id'];
+
+  if (!oldPassword)
+    return res.json({ field: 'oldPassword', message: 'Введите корректный пароль.' });
+  if (oldPassword.length < 6 || oldPassword.length > 16 || !oldPassword.match(/^\s*([0-9a-zA-Z]*)\s*$/))
+    return res.json({ field: 'oldPassword', message: 'Введите корректный пароль.' });
+  if (!newPassword)
+    return res.json({ field: 'newPassword', message: 'Введите новый пароль.' });
+  if (oldPassword === newPassword)
+    return res.json({ field: 'newPassword', message: 'Придумайте новый пароль' });
+  if (oldPassword.length < 6 || oldPassword.length > 16 || !oldPassword.match(/^\s*([0-9a-zA-Z]*)\s*$/))
+    return res.json({ field: 'newPassword', message: 'Пароль должен содержать от 6 до 16 символов латинского алфавита или цифр.' });
+
+  try {
+    const user = await User.findOne({ id });
+    const isOldPasswordMatch = bcrypt.compareSync(oldPassword, user.password);
+
+    if (isOldPasswordMatch) {
+      const salt = bcrypt.genSaltSync(10);
+      const password = bcrypt.hashSync(newPassword, salt);
+
+      await User.updateOne({ id }, { password });
+
+      res.send('OK');
+    } else {
+      res.send({ field: 'oldPassword', message: 'Вы ввели неверный пароль.' });
+    }
+  } catch (e) {
+    console.log(e.message);
+    res.json({ field: 'oldPassword', message: 'Произошла неизвестная ошибка. Перезагрузите страницу и попробуйте еще раз.' })
+  }
+
 });
 
 module.exports = router;

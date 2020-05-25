@@ -111,8 +111,8 @@ function* signInSuccessSaga() {
 function* signInFailSaga({ data }) {
   if (data === 'email: invalid')         yield put(changeField('signInEmailError', 'Введите корректный E-Mail.'));
   else if (data === 'email: not found')  yield put(changeField('signInEmailError', 'Пользователь не найден.'));
-  else if (data === 'password: invalid') yield put(changeField('signInEmailError', 'Введите корректный пароль.'));
-  else if (data === 'password: wrong')   yield put(changeField('signInEmailError', 'Пароль не верный.'));
+  else if (data === 'password: invalid') yield put(changeField('signInPasswordError', 'Введите корректный пароль.'));
+  else if (data === 'password: wrong')   yield put(changeField('signInPasswordError', 'Пароль неверный.'));
   yield put(changeField('signInButtonDisabled', false));
   yield delay(3000);
   yield put(changeSystemField('signInSnackbar', ''));
