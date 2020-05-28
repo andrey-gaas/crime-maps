@@ -18,6 +18,7 @@ import {
 } from '@material-ui/icons';
 import useStyles from './styles';
 import { logout } from '../../../store/AC/user';
+import { ROLE_MODERATOR } from '../../../constants/user';
 
 function Auth(props) {
   const {
@@ -26,6 +27,7 @@ function Auth(props) {
     id,
     avatar,
     logout,
+    role,
   } = props;
   const classes = useStyles();
 
@@ -66,6 +68,16 @@ function Auth(props) {
             </Avatar>
             <Typography variant="subtitle1">{name}</Typography>
             <div className={classes.userButtons}>
+              {
+                role <= ROLE_MODERATOR &&
+                <Tooltip title="Личный кабинет">
+                  <Link to="/cabinet">
+                    <IconButton size="small">
+                      <AccountCircleIcon />
+                    </IconButton>
+                  </Link>
+                </Tooltip>
+              }
               <Tooltip title="Настройки">
                 <Link to="/settings">
                   <IconButton size="small">
@@ -88,15 +100,17 @@ function Auth(props) {
 Auth.propTypes = {
   isAuth: PropTypes.bool.isRequired,
   name:   PropTypes.string,
-  id:     PropTypes.number,
   avatar: PropTypes.string,
+  id:     PropTypes.number,
+  role:   PropTypes.number,
   logout: PropTypes.func.isRequired,
 };
 
 Auth.defaultProps = {
-  name: null,
-  id: null,
+  name:   null,
+  id:     null,
   avatar: null,
+  role:   null,
 };
 
 const mapStateToProps = ({ user }) => ({
@@ -104,6 +118,7 @@ const mapStateToProps = ({ user }) => ({
   name:   user.name,
   id:     user.id,
   avatar: user.avatar,
+  role:   user.role,
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators({
