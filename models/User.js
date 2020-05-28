@@ -20,6 +20,14 @@ const schema = new Schema({
     type: String,
     required: true,
   },
+  role: {
+    type: Number,
+    required: true,
+  },
+  isBanned: {
+    type: Boolean,
+    required: true,
+  },
 }, {
   timestamps: {
     createdAt: 'createdAt',

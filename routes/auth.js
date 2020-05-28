@@ -5,6 +5,7 @@ const jwt = require('jsonwebtoken');
 const config = require('config');
 const passport = require('passport');
 const User = require('../models/User');
+const { ROLE_USER } = require('../constants/users');
 
 const router = Router();
 
@@ -37,6 +38,8 @@ router.post('/sign-up', async (req, res) => {
       name,
       email,
       password: bcrypt.hashSync(password, salt),
+      role: ROLE_USER,
+      isBanned: false,
     });
 
     await user.save();
