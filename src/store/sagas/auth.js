@@ -41,7 +41,7 @@ function* signUpRequestSaga() {
     const result = yield call(axios.post, ROUTE_SIGN_UP, { name: name.trim(), email: email.trim(), password });
 
     if (result.status === 201) {
-      yield put(signUpSuccess());
+      yield put(signUpSuccess(result.data));
     } else {
       yield put(signUpFail(result.data));
     }
@@ -55,12 +55,12 @@ function* signUpRequestSaga() {
   }
 }
 
-function* signUpSuccessSaga() {
+function* signUpSuccessSaga({ data }) {
   yield put(changeSystemField('signUpSnackbar', ''));
   yield put(changeField('signUpName', ''));
   yield put(changeField('signUpEmail', ''));
   yield put(changeField('signUpPassword', ''));
-  yield put(loginUser());
+  yield put(loginUser(data));
 }
 
 function* signUpFailSaga({ data }) {

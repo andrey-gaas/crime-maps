@@ -52,11 +52,14 @@ router.post('/sign-up', async (req, res) => {
 
     const cookieAge = { expires: new Date(Date.now() + 31536000000) };
     
-    res.cookie('user-name', name, cookieAge);
-    res.cookie('user-email', email, cookieAge);
-    res.cookie('user-id', id, cookieAge);
     res.cookie('token', `Bearer ${token}`, cookieAge);
-    res.status(201).send('OK');
+    res.status(201).send({
+      id,
+      name,
+      email,
+      role: ROLE_USER,
+      isBanned: false,
+    });
   } catch (e) {
     console.log(e.message);
     res.status(500).send('server error');
