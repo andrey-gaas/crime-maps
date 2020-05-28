@@ -3,15 +3,9 @@ import axios from 'axios';
 import { SET_USER, LOGOUT_USER, SET_USER_FIELD } from '../actions/user';
 
 const token = cookie.get('token');
-const name = cookie.get('user-name');
-const email = cookie.get('user-email');
-const id = +cookie.get('user-id');
 
 const initialState = {
-  isAuth: !!token || false ,
-  name:   name || null,
-  email:  email || null,
-  id:     id === undefined ? null : id,
+  isAuth: !!token,
 };
 
 if (token) {

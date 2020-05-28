@@ -21,6 +21,12 @@ export default makeStyles(theme => ({
     padding: theme.spacing(1),
     borderTop: `1px solid #ccc`,
   },
+  userContainerCheck: {
+    display: 'flex',
+    alignItems: 'center',
+    marginLeft: 'auto',
+    marginRight: 'auto',
+  },
   avatar: {
     marginRight: theme.spacing(1),
     width: theme.spacing(4),
@@ -29,5 +35,16 @@ export default makeStyles(theme => ({
   },
   userButtons: {
     marginLeft: 'auto',
+  },
+  rotate: {
+    animation: '$rotate 1s infinite',
+  },
+  '@keyframes rotate': {
+    '0%': {
+      transform: 'rotate(0deg)',
+    },
+    '100%': {
+      transform: 'rotate(-360deg)',
+    },
   },
 }));

@@ -140,17 +140,14 @@ function* logoutRequest() {
 function* checkUserAuth() {
   try {
     const token = cookie.get('token');
-    const name = cookie.get('user-name');
-    const email = cookie.get('user-email');
-    const id = +cookie.get('user-id');
 
-    if (!token || !name || !email || id === undefined) {
+    if (!token) {
       throw new Error();
     }
 
     axios.defaults.headers.common['Authorization'] = token;
     const result = yield call(axios.get, ROUTE_CHECK_AUTH);
-    if (result.data === 'OK') yield put(setUser({ name, email, id }));
+    if (result.data) yield put(setUser(result.data));
     else throw new Error();
   } catch(e) {
     yield put(logout());

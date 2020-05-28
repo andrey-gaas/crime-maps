@@ -102,8 +102,30 @@ router.post('/sign-in', async (req, res) => {
   }
 });
 
-router.get('/check', passport.authenticate('jwt', { session: false }), (req, res) => {
-  res.send('OK');
+router.get('/check', passport.authenticate('jwt', { session: false }), async (req, res) => {
+  const token = req.cookies.token.split(' ')[1];
+  let id;
+  try {
+    id = jwt.verify(token, config.get('jwt')).id;
+  } catch(e) {
+    res.status(401).send('Invalid token');
+  }
+  
+  try {
+    const user = await User.findOne({ id });
+
+    const response = {
+      id: user.id,
+      name: user.name,
+      email: user.email,
+      role: user.role,
+      isBanned: user.isBanned,
+    };
+
+    res.send(response);
+  } catch(e) {
+    res.status(500).send('server error');
+  }
 });
 
 router.get('/logout', (req, res) => {

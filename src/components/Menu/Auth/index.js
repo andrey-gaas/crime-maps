@@ -14,6 +14,7 @@ import {
   AccountCircle as AccountCircleIcon,
   Settings as SettingsIcon,
   ExitToApp as ExitToAppIcon,
+  Loop as LoopIcon,
 } from '@material-ui/icons';
 import useStyles from './styles';
 import { logout } from '../../../store/AC/user';
@@ -22,7 +23,7 @@ function Auth(props) {
   const {
     isAuth,
     name,
-    // id,
+    id,
     avatar,
     logout,
   } = props;
@@ -45,7 +46,16 @@ function Auth(props) {
           </Link>
       }
       {
-        isAuth &&
+        isAuth && id === null ?
+          <div className={classes.userContainer}>
+            <div className={classes.userContainerCheck}>
+              Проверка данных
+              <LoopIcon className={classes.rotate} />
+            </div>
+          </div> : null
+      }
+      {
+        isAuth && id !== null ?
           <div className={classes.userContainer}>
             <Avatar
               alt={name}
@@ -69,7 +79,7 @@ function Auth(props) {
                 </IconButton>
               </Tooltip>
             </div>
-          </div>
+          </div> : null
       }
     </div>
   );
