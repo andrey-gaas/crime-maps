@@ -4,17 +4,25 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { CssBaseline } from '@material-ui/core';
 import { Switch, Route } from 'react-router-dom';
+import cookie from 'js-cookie';
 import Main from '../Main';
 import SignIn from '../SignIn';
 import SignUp from '../SignUp';
 import Settings from '../Settings';
 import { setLocation, setLocationError } from '../../store/AC/geodata';
+import { checkUserAuth } from '../../store/AC/auth';
 
 function App(props) {
   const {
     setLocation,
     setLocationError,
+    checkUserAuth,
   } = props;
+
+  const token = cookie.get('token');
+  if (token) {
+    checkUserAuth();
+  }
   
   navigator.geolocation.getCurrentPosition(setLocation, setLocationError);
   
@@ -34,11 +42,13 @@ function App(props) {
 App.propTypes = {
   setLocation:      PropTypes.func.isRequired,
   setLocationError: PropTypes.func.isRequired,
+  checkUserAuth:    PropTypes.func.isRequired,
 };
 
 const mapDispatchToProps = dispatch => bindActionCreators({
   setLocation,
   setLocationError,
+  checkUserAuth,
 }, dispatch);
 
 export default connect(null, mapDispatchToProps)(App);
