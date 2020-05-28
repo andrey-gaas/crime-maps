@@ -86,8 +86,8 @@ function* signInRequestSaga() {
 
     const { data } = yield call(axios.post, ROUTE_SIGN_IN, { email: email.trim(), password });
 
-    if (data === 'OK') {
-      yield put(signInSuccess());
+    if (data) {
+      yield put(signInSuccess(data));
     } else {
       yield put(changeSystemField('signInSnackbar', 'Вход не выполнен. Попробуйте еще раз.'));
       yield put(signInFail(data));
@@ -100,12 +100,12 @@ function* signInRequestSaga() {
   }
 }
 
-function* signInSuccessSaga() {
+function* signInSuccessSaga({ data }) {
   yield put(changeField('signInButtonDisabled', false));
   yield put(changeSystemField('signInSnackbar', ''));
   yield put(changeField('signInEmail', ''));
   yield put(changeField('signInPassword', ''));
-  yield put(loginUser());
+  yield put(loginUser(data));
 }
 
 function* signInFailSaga({ data }) {
@@ -118,13 +118,17 @@ function* signInFailSaga({ data }) {
   yield put(changeSystemField('signInSnackbar', ''));
 }
 
-function* login() {
+function* login({ user }) {
+  const {
+    email,
+    id,
+    isBanned,
+    name,
+    role,
+  } = user;
   const token = cookie.get('token');
-  const name = cookie.get('user-name');
-  const email = cookie.get('user-email');
-  const id = +cookie.get('user-id');
   axios.defaults.headers.common['Authorization'] = token;
-  yield put(setUser({ name, email, id }));
+  yield put(setUser({ name, email, id, isBanned, role }));
 }
 
 function* logoutRequest() {

@@ -83,13 +83,16 @@ router.post('/sign-in', async (req, res) => {
           { expiresIn: 60 * 60 },
         );
 
-        const cookieAge = { expires: new Date(Date.now() + 31536000000) };
+        res.cookie('token', `Bearer ${token}`, { expires: new Date(Date.now() + 31536000000) });
 
-        res.cookie('user-name', candidate.name, cookieAge);
-        res.cookie('user-email', candidate.email, cookieAge);
-        res.cookie('user-id', candidate.id, cookieAge);
-        res.cookie('token', `Bearer ${token}`, cookieAge);
-        res.send('OK');
+        const response = {
+          id: candidate.id,
+          name: candidate.name,
+          email: candidate.email,
+          role: candidate.role,
+          isBanned: candidate.isBanned,
+        };
+        res.send(response);
       } else {
         res.send('password: wrong');
       }
@@ -130,9 +133,6 @@ router.get('/check', passport.authenticate('jwt', { session: false }), async (re
 
 router.get('/logout', (req, res) => {
   res.clearCookie('token');
-  res.clearCookie('user-name');
-  res.clearCookie('user-email');
-  res.clearCookie('user-id');
   res.send('ok');
 });
 
