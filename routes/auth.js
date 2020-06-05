@@ -3,9 +3,9 @@ const emailValidator = require('email-validator');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const config = require('config');
-const passport = require('passport');
 const User = require('../models/User');
 const { ROLE_USER } = require('../constants/users');
+const auth = require('../middleware/auth');
 
 const router = Router();
 
@@ -47,12 +47,11 @@ router.post('/sign-up', async (req, res) => {
     const token = jwt.sign(
       { email, id },
       config.get('jwt'),
-      { expiresIn: 60 * 60 },
     );
 
-    const cookieAge = { expires: new Date(Date.now() + 31536000000) };
+    const cookieConfig = { expires: new Date(Date.now() + 31536000000) };
     
-    res.cookie('token', `Bearer ${token}`, cookieAge);
+    res.cookie('token', `Bearer ${token}`, cookieConfig);
     res.status(201).send({
       id,
       name,
@@ -83,7 +82,6 @@ router.post('/sign-in', async (req, res) => {
         const token = jwt.sign(
           { email: candidate.email, id: candidate.id },
           config.get('jwt'),
-          { expiresIn: 60 * 60 },
         );
 
         res.cookie('token', `Bearer ${token}`, { expires: new Date(Date.now() + 31536000000) });
@@ -108,7 +106,7 @@ router.post('/sign-in', async (req, res) => {
   }
 });
 
-router.get('/check', passport.authenticate('jwt', { session: false }), async (req, res) => {
+router.get('/check', auth, async (req, res) => {
   const token = req.cookies.token.split(' ')[1];
   let id;
   try {

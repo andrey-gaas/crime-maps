@@ -11,7 +11,6 @@ const PORT = process.env.PORT || config.get('port');
 app.use(express.json({ exptended: true }));
 app.use(cookieParser());
 app.use(passport.initialize());
-require('./middleware/passport')(passport);
 
 /* Routes */
 app.use('/api/cities', require('./routes/cities'));
