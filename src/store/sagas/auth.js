@@ -86,7 +86,7 @@ function* signInRequestSaga() {
 
     const { data } = yield call(axios.post, ROUTE_SIGN_IN, { email: email.trim(), password });
 
-    if (data) {
+    if (data instanceof Object) {
       yield put(signInSuccess(data));
     } else {
       yield put(changeSystemField('signInSnackbar', 'Вход не выполнен. Попробуйте еще раз.'));
