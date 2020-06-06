@@ -5,7 +5,6 @@ import {
   AppBar,
   Toolbar,
   Typography,
-  Container,
   IconButton,
 } from '@material-ui/core';
 import {
@@ -23,15 +22,13 @@ function Header(props) {
   return (
     <AppBar position="static">
       <Toolbar>
-        <Container className={classes.container}>
-          {
-            goBack &&
-              <IconButton onClick={goBack} color="inherit" className={classes.backIcon}>
-                <ArrowBackIcon />
-              </IconButton>
-          }
-          <Typography variant="h6">{title}</Typography>
-        </Container>
+        {
+          goBack &&
+            <IconButton onClick={goBack} color="inherit" className={classes.backIcon}>
+              <ArrowBackIcon />
+            </IconButton>
+        }
+        <Typography variant="h6">{title}</Typography>
       </Toolbar>
     </AppBar>
   );
