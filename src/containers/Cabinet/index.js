@@ -3,7 +3,11 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import {
   List,
+  IconButton,
 } from '@material-ui/core';
+import {
+  Menu as MenuIcon,
+} from '@material-ui/icons';
 import Header from '../../components/Header';
 import Menu from '../../components/ResponsiveMenu';
 import useStyles from './styles';
@@ -23,13 +27,24 @@ function Cabinet(props) {
   const [isOpen, setOpen] = useState(false);
   
   const {
-    history,
     role,
   } = props;
 
   return (
     <div className={classes.root}>
-      <Header title="Личный кабинет" goBack={history.goBack} className={classes.appBar} />
+      <Header
+        title="Личный кабинет"
+        className={classes.appBar}
+        leftContent={
+          <IconButton
+            className={classes.mobileMenuButton}
+            color="inherit"
+            onClick={() => setOpen(true)}
+          >
+            <MenuIcon />
+          </IconButton>
+        }
+      />
       <Menu
         isOpenMobile={isOpen}
         onClose={() => setOpen(false)}
@@ -46,7 +61,6 @@ function Cabinet(props) {
 }
 
 Cabinet.propTypes = {
-  history: PropTypes.object.isRequired,
   role:    PropTypes.number,
 };
 

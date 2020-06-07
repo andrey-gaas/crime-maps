@@ -17,6 +17,7 @@ function Header(props) {
     title,
     goBack,
     className,
+    leftContent,
   } = props;
   const classes = useStyles();
   
@@ -29,6 +30,7 @@ function Header(props) {
               <ArrowBackIcon />
             </IconButton>
         }
+        {leftContent && leftContent}
         <Typography variant="h6">{title}</Typography>
       </Toolbar>
     </AppBar>
@@ -36,15 +38,17 @@ function Header(props) {
 }
 
 Header.propTypes = {
-  title: PropTypes.string,
-  goBack: PropTypes.func,
-  className: PropTypes.string,
+  title:       PropTypes.string,
+  goBack:      PropTypes.func,
+  className:   PropTypes.string,
+  leftContent: PropTypes.node,
 };
 
 Header.defaultProps = {
-  title: 'Crime Maps',
-  goBack: null,
-  className: '',
+  title:       'Crime Maps',
+  goBack:      null,
+  className:   '',
+  leftContent: null,
 };
 
 export default connect()(Header);
