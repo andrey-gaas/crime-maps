@@ -16,11 +16,12 @@ function Header(props) {
   const {
     title,
     goBack,
+    className,
   } = props;
   const classes = useStyles();
   
   return (
-    <AppBar position="static">
+    <AppBar position="static" className={className}>
       <Toolbar>
         {
           goBack &&
@@ -37,11 +38,13 @@ function Header(props) {
 Header.propTypes = {
   title: PropTypes.string,
   goBack: PropTypes.func,
+  className: PropTypes.string,
 };
 
 Header.defaultProps = {
   title: 'Crime Maps',
   goBack: null,
+  className: '',
 };
 
 export default connect()(Header);
