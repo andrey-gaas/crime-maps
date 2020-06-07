@@ -16,6 +16,7 @@ import {
   LocationCity as LocationCityIcom,
   People as PeopleIcon,
   List as ListIcon,
+  Map as MapIcon,
 } from '@material-ui/icons';
 import useStyles from './styles';
 
@@ -23,6 +24,14 @@ export function UserMenu () {
   const classes = useStyles();
   return (
     <Fragment>
+      <Link to="/" className={classes.linkMenu}>
+        <ListItem button>
+          <ListItemIcon>
+            <MapIcon />
+          </ListItemIcon>
+          <ListItemText>Карта</ListItemText>
+        </ListItem>
+      </Link>
       <Link to="/cabinet" className={classes.linkMenu}>
         <ListItem button>
           <ListItemIcon>
@@ -56,6 +65,14 @@ export function ModeratorMenu() {
   const classes = useStyles();
   return (
     <Fragment>
+      <Link to="/" className={classes.linkMenu}>
+        <ListItem button>
+          <ListItemIcon>
+            <MapIcon />
+          </ListItemIcon>
+          <ListItemText>Карта</ListItemText>
+        </ListItem>
+      </Link>
       <Link to="/cabinet" className={classes.linkMenu}>
         <ListItem button>
           <ListItemIcon>
@@ -124,6 +141,14 @@ export function AdminMenu () {
   const classes = useStyles();
   return (
     <Fragment>
+      <Link to="/" className={classes.linkMenu}>
+        <ListItem button>
+          <ListItemIcon>
+            <MapIcon />
+          </ListItemIcon>
+          <ListItemText>Карта</ListItemText>
+        </ListItem>
+      </Link>
       <Link to="/cabinet" className={classes.linkMenu}>
         <ListItem button>
           <ListItemIcon>
