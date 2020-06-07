@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import {
+} from '@material-ui/core';
 import Header from '../../components/Header';
 import useStyles from './styles';
 
-function Person(props) {
+function Cabinet(props) {
   const classes = useStyles();
   
   const {
@@ -12,12 +14,14 @@ function Person(props) {
   } = props;
 
   return (
-    <Header title="Личный кабинет" goBack={history.goBack} />
+    <Fragment>
+      <Header title="Личный кабинет" goBack={history.goBack} />
+    </Fragment>
   );
 }
 
-Person.propTypes = {
+Cabinet.propTypes = {
   history: PropTypes.object.isRequired,
 };
 
-export default connect()(Person);
+export default connect()(Cabinet);

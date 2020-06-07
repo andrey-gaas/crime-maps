@@ -71,7 +71,7 @@ function Auth(props) {
               {
                 role <= ROLE_MODERATOR &&
                 <Tooltip title="Личный кабинет">
-                  <Link to="/me">
+                  <Link to="/cabinet">
                     <IconButton size="small">
                       <AccountCircleIcon />
                     </IconButton>

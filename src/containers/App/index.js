@@ -9,7 +9,7 @@ import Main from '../Main';
 import SignIn from '../SignIn';
 import SignUp from '../SignUp';
 import Settings from '../Settings';
-import Person from '../Person';
+import Cabinet from '../Cabinet';
 import { setLocation, setLocationError } from '../../store/AC/geodata';
 import { checkUserAuth } from '../../store/AC/auth';
 
@@ -35,7 +35,7 @@ function App(props) {
         <Route path="/sign-in" component={SignIn} />
         <Route path="/sign-up" component={SignUp} />
         <Route path="/settings" component={Settings} />
-        <Route path="/me" component={Person} />
+        <Route path="/cabinet" component={Cabinet} />
       </Switch>
     </Fragment>
   );
