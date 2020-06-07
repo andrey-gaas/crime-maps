@@ -12,13 +12,11 @@ import {
 } from '@material-ui/core';
 import {
   AccountCircle as AccountCircleIcon,
-  Settings as SettingsIcon,
   ExitToApp as ExitToAppIcon,
   Loop as LoopIcon,
 } from '@material-ui/icons';
 import useStyles from './styles';
 import { logout } from '../../../store/AC/user';
-import { ROLE_MODERATOR } from '../../../constants/user';
 
 function Auth(props) {
   const {
@@ -27,7 +25,6 @@ function Auth(props) {
     id,
     avatar,
     logout,
-    role,
   } = props;
   const classes = useStyles();
 
@@ -68,20 +65,10 @@ function Auth(props) {
             </Avatar>
             <Typography variant="subtitle1">{name}</Typography>
             <div className={classes.userButtons}>
-              {
-                role <= ROLE_MODERATOR &&
-                <Tooltip title="Личный кабинет">
-                  <Link to="/cabinet">
-                    <IconButton size="small">
-                      <AccountCircleIcon />
-                    </IconButton>
-                  </Link>
-                </Tooltip>
-              }
-              <Tooltip title="Настройки">
-                <Link to="/settings">
+              <Tooltip title="Личный кабинет">
+                <Link to="/cabinet">
                   <IconButton size="small">
-                    <SettingsIcon />
+                    <AccountCircleIcon />
                   </IconButton>
                 </Link>
               </Tooltip>
@@ -102,7 +89,6 @@ Auth.propTypes = {
   name:   PropTypes.string,
   avatar: PropTypes.string,
   id:     PropTypes.number,
-  role:   PropTypes.number,
   logout: PropTypes.func.isRequired,
 };
 
@@ -110,7 +96,6 @@ Auth.defaultProps = {
   name:   null,
   id:     null,
   avatar: null,
-  role:   null,
 };
 
 const mapStateToProps = ({ user }) => ({
@@ -118,7 +103,6 @@ const mapStateToProps = ({ user }) => ({
   name:   user.name,
   id:     user.id,
   avatar: user.avatar,
-  role:   user.role,
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators({
