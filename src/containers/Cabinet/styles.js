@@ -7,4 +7,8 @@ export default makeStyles(theme => ({
   appBar: {
     zIndex: theme.zIndex.drawer + 1,
   },
+  linkMenu: {
+    color: theme.palette.text.primary,
+    textDecoration: 'none',
+  },
 }));

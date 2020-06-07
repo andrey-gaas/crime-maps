@@ -2,10 +2,21 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import {
+  List,
 } from '@material-ui/core';
 import Header from '../../components/Header';
 import Menu from '../../components/ResponsiveMenu';
 import useStyles from './styles';
+import {
+  ROLE_ADMIN,
+  ROLE_MODERATOR,
+  ROLE_USER,
+} from '../../constants/user';
+import {
+  UserMenu,
+  ModeratorMenu,
+  AdminMenu,
+} from './getMenu';
 
 function Cabinet(props) {
   const classes = useStyles();
@@ -13,6 +24,7 @@ function Cabinet(props) {
   
   const {
     history,
+    role,
   } = props;
 
   return (
@@ -23,7 +35,11 @@ function Cabinet(props) {
         onClose={() => setOpen(false)}
         toolbar
       >
-        123
+        <List component="nav" aria-label="user menu actions">
+          {role === ROLE_ADMIN && <AdminMenu />}
+          {role === ROLE_MODERATOR && <ModeratorMenu />}
+          {role === ROLE_USER && <UserMenu />}
+        </List>
       </Menu>
     </div>
   );
@@ -31,6 +47,15 @@ function Cabinet(props) {
 
 Cabinet.propTypes = {
   history: PropTypes.object.isRequired,
+  role:    PropTypes.number,
 };
 
-export default connect()(Cabinet);
+Cabinet.defaultProps = {
+  role: ROLE_USER,
+};
+
+const mapStateToProps = ({ user }) => ({
+  role: user.role,
+}); 
+
+export default connect(mapStateToProps)(Cabinet);
