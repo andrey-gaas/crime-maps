@@ -11,6 +11,7 @@ function Menu(props) {
     isOpenMobile,
     onClose,
     children,
+    toolbar,
   } = props;
   const classes = useStyles();
 
@@ -38,7 +39,8 @@ function Menu(props) {
           }}
           variant="permanent"
           open
-          >
+        >
+          {toolbar && <div className={classes.toolbar} />}
           {children}
         </Drawer>
       </Hidden>
@@ -50,6 +52,11 @@ Menu.propTypes = {
   isOpenMobile: PropTypes.bool.isRequired,
   onClose:      PropTypes.func.isRequired,
   children:     PropTypes.node.isRequired,
+  toolbar:      PropTypes.bool,
+};
+
+Menu.defaultProps = {
+  toolbar: false,
 };
 
 export default Menu;

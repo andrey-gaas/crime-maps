@@ -21,6 +21,7 @@ function Cabinet(props) {
       <Menu
         isOpenMobile={isOpen}
         onClose={() => setOpen(false)}
+        toolbar
       >
         123
       </Menu>
