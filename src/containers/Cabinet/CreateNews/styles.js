@@ -17,6 +17,22 @@ export default makeStyles(theme => ({
     flexDirection: 'column',
     marginTop: theme.spacing(2),
   },
+  button: {
+    marginTop: theme.spacing(2),
+  },
+  dialogTitle: {
+    position: 'relative',
+  },
+  closeButton: {
+    position: 'absolute',
+    right: theme.spacing(1),
+    top: theme.spacing(1),
+    bottom: theme.spacing(1),
+  },
+  dialogContent: {
+    padding: 0,
+    height: 400,
+  },
 
   [theme.breakpoints.up('md')]: {
     dateContainer: {

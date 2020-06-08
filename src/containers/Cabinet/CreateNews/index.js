@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -12,13 +12,21 @@ import {
   InputLabel,
   Select,
   MenuItem,
+  Button,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogActions,
+  IconButton,
 } from '@material-ui/core';
+import { Close as CloseIcon } from '@material-ui/icons';
 import {
   KeyboardDatePicker,
   KeyboardTimePicker,
   MuiPickersUtilsProvider,
 } from '@material-ui/pickers';
 import DateFnsUtils from '@date-io/date-fns';
+import Map from '../../../components/Map';
 import useStyles from './styles';
 import { incidents } from '../../../constants/incidents';
 import { changeField } from '../../../store/AC/forms';
@@ -46,6 +54,7 @@ function CreateNews(props) {
     changeField,
   } = props;
   const classes = useStyles();
+  const [isOpen, setOpen] = useState(false);
 
   const handleChange = ({ target }) => changeField(target.name, target.value);
 
@@ -146,7 +155,37 @@ function CreateNews(props) {
           </MuiPickersUtilsProvider>
         </div>
 
+        <Button
+          color="secondary"
+          variant="contained"
+          fullWidth
+          className={classes.button}
+          onClick={() => setOpen(true)}
+        >
+          Указать место
+        </Button>
+
       </Paper>
+
+      <Dialog
+        open={isOpen}
+        onClose={() => setOpen(false)}
+        maxWidth="sm"
+        fullWidth
+      >
+        <DialogTitle className={classes.dialogTitle}>
+          <Typography>Укажите место</Typography>
+          <IconButton onClick={() => setOpen(false)} className={classes.closeButton}>
+            <CloseIcon />
+          </IconButton>
+        </DialogTitle>
+        <DialogContent className={classes.dialogContent}>
+          <Map />
+        </DialogContent>
+        <DialogActions>
+          <Button variant="contained" color="secondary">Подтвердить</Button>
+        </DialogActions>
+      </Dialog>
     </Container>
   );
 }
