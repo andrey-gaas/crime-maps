@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { Switch, Route } from 'react-router-dom';
 import {
   List,
   IconButton,
+  Toolbar,
 } from '@material-ui/core';
 import {
   Menu as MenuIcon,
@@ -21,6 +23,7 @@ import {
   ModeratorMenu,
   AdminMenu,
 } from './getMenu';
+import Profile from './Profile';
 
 function Cabinet(props) {
   const classes = useStyles();
@@ -44,6 +47,7 @@ function Cabinet(props) {
             <MenuIcon />
           </IconButton>
         }
+        position="fixed"
       />
       <Menu
         isOpenMobile={isOpen}
@@ -56,12 +60,19 @@ function Cabinet(props) {
           {role === ROLE_USER && <UserMenu />}
         </List>
       </Menu>
+      <main className={classes.content}>
+        <Toolbar />
+        
+        <Switch>
+          <Route path="/cabinet/" exact component={Profile} />
+        </Switch>
+      </main>
     </div>
   );
 }
 
 Cabinet.propTypes = {
-  role:    PropTypes.number,
+  role: PropTypes.number,
 };
 
 Cabinet.defaultProps = {

@@ -11,6 +11,11 @@ export default makeStyles(theme => ({
     color: theme.palette.text.primary,
     textDecoration: 'none',
   },
+  content: {
+    flexGrow: 1,
+    padding: theme.spacing(3),
+  },
+
   [theme.breakpoints.up('md')]: {
     mobileMenuButton: {
       display: 'none',

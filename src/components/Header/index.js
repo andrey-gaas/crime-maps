@@ -18,11 +18,12 @@ function Header(props) {
     goBack,
     className,
     leftContent,
+    position,
   } = props;
   const classes = useStyles();
   
   return (
-    <AppBar position="static" className={className}>
+    <AppBar position={position} className={className} >
       <Toolbar>
         {
           goBack &&
@@ -42,6 +43,7 @@ Header.propTypes = {
   goBack:      PropTypes.func,
   className:   PropTypes.string,
   leftContent: PropTypes.node,
+  position:    PropTypes.string,
 };
 
 Header.defaultProps = {
@@ -49,6 +51,7 @@ Header.defaultProps = {
   goBack:      null,
   className:   '',
   leftContent: null,
+  position:    'static',
 };
 
 export default connect()(Header);
