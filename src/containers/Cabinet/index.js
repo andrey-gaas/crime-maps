@@ -24,6 +24,7 @@ import {
   AdminMenu,
 } from './getMenu';
 import Profile from './Profile';
+import CreateNews from './CreateNews';
 
 function Cabinet(props) {
   const classes = useStyles();
@@ -64,7 +65,8 @@ function Cabinet(props) {
         <Toolbar />
         
         <Switch>
-          <Route path="/cabinet/" exact component={Profile} />
+          <Route path="/cabinet" exact component={Profile} />
+          <Route path="/cabinet/create-news" component={CreateNews} />
         </Switch>
       </main>
     </div>
