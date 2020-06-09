@@ -1,6 +1,7 @@
 import React, { Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import {
+  List,
   ListItem,
   ListItemText,
   ListItemIcon,
@@ -23,7 +24,7 @@ import useStyles from './styles';
 export function UserMenu () {
   const classes = useStyles();
   return (
-    <Fragment>
+    <List>
       <Link to="/" className={classes.linkMenu}>
         <ListItem button>
           <ListItemIcon>
@@ -57,14 +58,14 @@ export function UserMenu () {
           <ListItemText>Настройки</ListItemText>
         </ListItem>
       </Link>
-    </Fragment>
+    </List>
   );
 };
 
 export function ModeratorMenu() {
   const classes = useStyles();
   return (
-    <Fragment>
+    <List>
       <Link to="/" className={classes.linkMenu}>
         <ListItem button>
           <ListItemIcon>
@@ -132,7 +133,7 @@ export function ModeratorMenu() {
           <ListItemText>Настройки</ListItemText>
         </ListItem>
       </Link>
-    </Fragment>
+    </List>
   );
 };
 
@@ -140,7 +141,7 @@ export function ModeratorMenu() {
 export function AdminMenu () {
   const classes = useStyles();
   return (
-    <Fragment>
+    <List>
       <Link to="/" className={classes.linkMenu}>
         <ListItem button>
           <ListItemIcon>
@@ -216,6 +217,6 @@ export function AdminMenu () {
           <ListItemText>Настройки</ListItemText>
         </ListItem>
       </Link>
-    </Fragment>
+    </List>
   );
 };

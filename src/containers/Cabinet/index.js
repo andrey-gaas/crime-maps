@@ -1,18 +1,50 @@
-import React from 'react';
+import React, { Fragment, useState } from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import { Switch, Route } from 'react-router-dom';
+import Menu from '../../components/ResponsiveMenu';
+import { UserMenu, ModeratorMenu, AdminMenu } from './getMenu';
+import { ROLE_ADMIN, ROLE_MODERATOR, ROLE_USER } from '../../constants/user';
+
 import Profile from './Profile';
 import CreateNews from './CreateNews';
 
-function Person() {
+function Cabinet(props) {
+  const { role } = props;
+  const [isOpen, setOpen] = useState(false);
+
   return (
-    <Switch>
-      <Route path="/cabinet" exact component={Profile} />
-      <Route path="/cabinet/create-news" component={CreateNews} />
-    </Switch>
+    <Fragment>
+      <Menu
+        isOpenMobile={isOpen}
+        onClose={() => setOpen(false)}
+        toolbar
+      >
+        {role === ROLE_ADMIN && <AdminMenu />}
+        {role === ROLE_MODERATOR && <ModeratorMenu />}
+        {role === ROLE_USER && <UserMenu />}
+      </Menu>
+      <Switch>
+        <Route path="/cabinet" exact component={Profile} />
+        <Route path="/cabinet/create-news" component={CreateNews} />
+      </Switch>
+    </Fragment>
   );
 }
 
-export default Person;
+Cabinet.propTypes = {
+  role: PropTypes.number,
+};
+
+Cabinet.defaultProps = {
+  role: ROLE_USER,
+};
+
+const mapStateToProps = ({ user }) => ({
+  role: user.role,
+}); 
+
+export default connect(mapStateToProps)(Cabinet);
 
 /* import React, { useState } from 'react';
 import PropTypes from 'prop-types';
