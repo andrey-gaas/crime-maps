@@ -1,57 +1,37 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import {
-  AppBar,
-  Toolbar,
-  Typography,
-  IconButton,
-} from '@material-ui/core';
-import {
-  ArrowBack as ArrowBackIcon,
-} from '@material-ui/icons';
+import { AppBar, Toolbar } from '@material-ui/core';
 import useStyles from './styles';
+import logo from '../../images/logo_dark.svg';
 
 function Header(props) {
-  const {
-    title,
-    goBack,
-    className,
-    leftContent,
-    position,
-  } = props;
   const classes = useStyles();
+  const { children } = props;
   
   return (
-    <AppBar position={position} className={className} >
+    <AppBar
+      color="default"
+      className={classes.root}
+    >
+      <div className={classes.logoContainer}>
+        <Toolbar>
+          <img src={logo} alt="Logo" width="20px" />
+          <span className={classes.title}>Crime Maps</span>
+        </Toolbar>
+      </div>
       <Toolbar>
-        {
-          goBack &&
-            <IconButton onClick={goBack} color="inherit" className={classes.backIcon}>
-              <ArrowBackIcon />
-            </IconButton>
-        }
-        {leftContent && leftContent}
-        <Typography variant="h6">{title}</Typography>
+        {children}
       </Toolbar>
     </AppBar>
   );
 }
 
 Header.propTypes = {
-  title:       PropTypes.string,
-  goBack:      PropTypes.func,
-  className:   PropTypes.string,
-  leftContent: PropTypes.node,
-  position:    PropTypes.string,
+  children: PropTypes.node,
 };
 
 Header.defaultProps = {
-  title:       'Crime Maps',
-  goBack:      null,
-  className:   '',
-  leftContent: null,
-  position:    'static',
+  children: null,
 };
 
-export default connect()(Header);
+export default Header;

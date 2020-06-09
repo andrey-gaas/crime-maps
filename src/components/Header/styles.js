@@ -1,13 +1,19 @@
 import { makeStyles } from '@material-ui/core/styles';
+import { WIDTH_PERSON_MENU } from '../../constants/styles';
 
 export default makeStyles(theme => ({
-  container: {
+  root: {
     display: 'flex',
-    alignItems: 'center',
+    flexDirection: 'row',
+    zIndex: theme.zIndex.drawer + 1,
   },
-  backIcon: {
-    marginRight: theme.spacing(1),
-    width: theme.spacing(4),
-    height: theme.spacing(4),
+  logoContainer: {
+    width: WIDTH_PERSON_MENU,
+    backgroundColor: theme.palette.primary.main,
+  },
+  title: {
+    marginLeft: theme.spacing(1),
+    fontSize: 18,
+    color: '#fff',
   },
 }));
