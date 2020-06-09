@@ -1,4 +1,20 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { Switch, Route } from 'react-router-dom';
+import Profile from './Profile';
+import CreateNews from './CreateNews';
+
+function Person() {
+  return (
+    <Switch>
+      <Route path="/cabinet" exact component={Profile} />
+      <Route path="/cabinet/create-news" component={CreateNews} />
+    </Switch>
+  );
+}
+
+export default Person;
+
+/* import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Switch, Route } from 'react-router-dom';
@@ -86,3 +102,4 @@ const mapStateToProps = ({ user }) => ({
 }); 
 
 export default connect(mapStateToProps)(Cabinet);
+ */
