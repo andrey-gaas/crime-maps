@@ -33,6 +33,7 @@ export function UserMenu () {
           <ListItemText>Карта</ListItemText>
         </ListItem>
       </Link>
+      <Divider />
       <Link to="/cabinet" className={classes.linkMenu}>
         <ListItem button>
           <ListItemIcon>
@@ -41,12 +42,12 @@ export function UserMenu () {
           <ListItemText>Моя страница</ListItemText>
         </ListItem>
       </Link>
-      <Link to="/cabinet/create-gossip" className={classes.linkMenu}>
+      <Link to="/cabinet/gossip" className={classes.linkMenu}>
         <ListItem button>
           <ListItemIcon>
-            <AddCircleIcon />
+            <ForumIcon />
           </ListItemIcon>
-          <ListItemText>Создать слух</ListItemText>
+          <ListItemText>Слухи</ListItemText>
         </ListItem>
       </Link>
       <Divider />
@@ -83,28 +84,20 @@ export function ModeratorMenu() {
         </ListItem>
       </Link>
       <Divider />
-      <Link to="/cabinet/create-news" className={classes.linkMenu}>
+      <Link to="/cabinet/news" className={classes.linkMenu}>
         <ListItem button>
           <ListItemIcon>
             <AddBoxIcon />
           </ListItemIcon>
-          <ListItemText>Создать новость</ListItemText>
+          <ListItemText>Новости</ListItemText>
         </ListItem>
       </Link>
-      <Link to="/cabinet/news-history" className={classes.linkMenu}>
-        <ListItem button>
-          <ListItemIcon>
-            <HistoryIcon />
-          </ListItemIcon>
-          <ListItemText>История новостей</ListItemText>
-        </ListItem>
-      </Link>
-      <Link to="/cabinet/moderation-gossip" className={classes.linkMenu}>
+      <Link to="/cabinet/gossip" className={classes.linkMenu}>
         <ListItem button>
           <ListItemIcon>
             <ForumIcon />
           </ListItemIcon>
-          <ListItemText>Модерация слухов</ListItemText>
+          <ListItemText>Слухи</ListItemText>
         </ListItem>
       </Link>
       <Divider />
@@ -125,7 +118,7 @@ export function ModeratorMenu() {
         </ListItem>
       </Link>
       <Divider />
-      <Link to="/settings" className={classes.linkMenu}>
+      <Link to="/cabinet/settings" className={classes.linkMenu}>
         <ListItem button>
           <ListItemIcon>
             <SettingsIcon />
@@ -159,36 +152,20 @@ export function AdminMenu () {
         </ListItem>
       </Link>
       <Divider />
-      <Link to="/cabinet/create-gossip" className={classes.linkMenu}>
-        <ListItem button>
-          <ListItemIcon>
-            <AddCircleIcon />
-          </ListItemIcon>
-          <ListItemText>Создать слух</ListItemText>
-        </ListItem>
-      </Link>
-      <Link to="/cabinet/moderation-gossip" className={classes.linkMenu}>
-        <ListItem button>
-          <ListItemIcon>
-            <ListIcon />
-          </ListItemIcon>
-          <ListItemText>Модерация слухов</ListItemText>
-        </ListItem>
-      </Link>
-      <Link to="/cabinet/create-news" className={classes.linkMenu}>
+      <Link to="/cabinet/news" className={classes.linkMenu}>
         <ListItem button>
           <ListItemIcon>
             <AddBoxIcon />
           </ListItemIcon>
-          <ListItemText>Создать новость</ListItemText>
+          <ListItemText>Новости</ListItemText>
         </ListItem>
       </Link>
-      <Link to="/cabinet/news-history" className={classes.linkMenu}>
+      <Link to="/cabinet/gossip" className={classes.linkMenu}>
         <ListItem button>
           <ListItemIcon>
-            <HistoryIcon />
+            <ForumIcon />
           </ListItemIcon>
-          <ListItemText>История новостей</ListItemText>
+          <ListItemText>Слухи</ListItemText>
         </ListItem>
       </Link>
       <Divider />
