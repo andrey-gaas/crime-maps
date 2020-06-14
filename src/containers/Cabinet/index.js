@@ -18,7 +18,6 @@ function Cabinet(props) {
       <Menu
         isOpenMobile={isOpen}
         onClose={() => setOpen(false)}
-        toolbar
       >
         {role === ROLE_ADMIN && <AdminMenu />}
         {role === ROLE_MODERATOR && <ModeratorMenu />}
