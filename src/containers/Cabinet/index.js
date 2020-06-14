@@ -8,7 +8,7 @@ import { ROLE_ADMIN, ROLE_MODERATOR, ROLE_USER } from '../../constants/user';
 import useStyles from './styles';
 
 import Profile from './Profile';
-import CreateNews from './CreateNews';
+import News from './News';
 
 function Cabinet(props) {
   const { role } = props;
@@ -28,7 +28,7 @@ function Cabinet(props) {
       <div className={classes.content}>
         <Switch>
           <Route path="/cabinet" exact component={Profile} />
-          <Route path="/cabinet/create-news" component={CreateNews} />
+          <Route path="/cabinet/news" component={News} />
         </Switch>
       </div>
     </Fragment>

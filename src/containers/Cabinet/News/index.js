@@ -1,64 +1,85 @@
-import React, { useState } from 'react';
+import React, { useEffect, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import {
-  Container,
-  Paper,
   Typography,
-  Divider,
-  TextField,
-  FormControl,
-  InputLabel,
-  Select,
-  MenuItem,
-  Button,
-  Dialog,
-  DialogTitle,
-  DialogContent,
-  DialogActions,
+  Paper,
   IconButton,
 } from '@material-ui/core';
-import { Close as CloseIcon } from '@material-ui/icons';
 import {
-  KeyboardDatePicker,
-  KeyboardTimePicker,
-  MuiPickersUtilsProvider,
-} from '@material-ui/pickers';
-import DateFnsUtils from '@date-io/date-fns';
-import Map from '../../../components/Map';
+  Add as AddButton,
+  Loop as LoopIcon,
+} from '@material-ui/icons';
+import Header from '../../../components/Header';
 import useStyles from './styles';
-import { incidents } from '../../../constants/incidents';
 import { changeField } from '../../../store/AC/forms';
+import { fetchAllIncidents } from '../../../store/AC/incidents';
 
-/* 
-type,
-title,
-text,
-coords,
-sources,
-media,
-city,
-date,
-*/
-
-function CreateNews(props) {
+function News(props) {
   const {
-    cities,
-    title,
-    text,
-    type,
-    city,
-    date,
-    time,
-    changeField,
+    isLoading,
+    fetchAllIncidents,
+    selectedCityId,
+    news,
   } = props;
   const classes = useStyles();
-  const [isOpen, setOpen] = useState(false);
 
-  const handleChange = ({ target }) => changeField(target.name, target.value);
+  useEffect(() => {
+    if (isLoading) {
+      fetchAllIncidents(selectedCityId);
+    }
+  }, [isLoading, fetchAllIncidents, selectedCityId]);
 
   return (
+    <Fragment>
+      <Header>
+        <Typography variant="subtitle1">Новости</Typography>
+        <IconButton color="primary" className={classes.addButton}>
+          <AddButton />
+        </IconButton>
+      </Header>
+      <Paper className={classes.paper}>
+        {
+          isLoading &&
+            <Typography variant="h6" color="textSecondary" className={classes.loadingText}>
+              Загрузка списка новостей
+              <LoopIcon className={classes.rotate} />
+            </Typography>
+        }
+        {
+          !isLoading && news.lenght === 0 && 
+            <Typography variant="h6" color="textSecondary" className={classes.loadingText}>
+              Список новостей пуст
+            </Typography>
+        }
+      </Paper>
+    </Fragment>
+  );
+}
+
+News.propTypes = {
+  isLoading:         PropTypes.bool.isRequired,
+  news:              PropTypes.array.isRequired,
+  selectedCityId:    PropTypes.number.isRequired,
+  fetchAllIncidents: PropTypes.func.isRequired,
+};
+
+const mapStateToProps = ({ incidents, cities }) => ({
+  isLoading:      incidents.isLoading,
+  news:           incidents.data,
+  selectedCityId: cities.selectedCity, 
+});
+
+const mapDispatchToProps = dispatch => bindActionCreators({
+  changeField,
+  fetchAllIncidents,
+}, dispatch);
+
+export default connect(mapStateToProps, mapDispatchToProps)(News);
+
+/* 
+return (
     <Container maxWidth="sm" className={classes.root}>
       <Paper className={classes.paper}>
         <Typography variant="h6">Создание новости</Typography>
@@ -188,41 +209,4 @@ function CreateNews(props) {
       </Dialog>
     </Container>
   );
-}
-
-CreateNews.propTypes = {
-  cities:      PropTypes.array,
-  changeField: PropTypes.func.isRequired,
-  title:       PropTypes.string,
-  text:        PropTypes.string,
-  type:        PropTypes.any,
-  city:        PropTypes.any,
-  date:        PropTypes.number,
-  time:        PropTypes.number,
-};
-
-CreateNews.defaultProps = {
-  cities: [],
-  title:  '',
-  text:   '',
-  type:   '',
-  city:   '',
-  date:   Date.now(),
-  time:   Date.now(),
-};
-
-const mapStateToProps = ({ cities, forms }) => ({
-  cities: cities.data,
-  title:  forms.createNewsTitle,
-  text:   forms.createNewsText,
-  type:   forms.createNewsType,
-  city:   forms.createNewsCity,
-  date:   forms.createNewsDate,
-  time:   forms.createNewsTime,
-});
-
-const mapDispatchToProps = dispatch => bindActionCreators({
-  changeField,
-}, dispatch);
-
-export default connect(mapStateToProps, mapDispatchToProps)(CreateNews);
+*/
