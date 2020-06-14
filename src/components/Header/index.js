@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { AppBar, Toolbar } from '@material-ui/core';
 import useStyles from './styles';
-import logo from '../../images/logo_dark.svg';
 
 function Header(props) {
   const classes = useStyles();
@@ -12,13 +11,8 @@ function Header(props) {
     <AppBar
       color="default"
       className={classes.root}
+      position="static"
     >
-      <div className={classes.logoContainer}>
-        <Toolbar>
-          <img src={logo} alt="Logo" width="20px" />
-          <span className={classes.title}>Crime Maps</span>
-        </Toolbar>
-      </div>
       <Toolbar>
         {children}
       </Toolbar>

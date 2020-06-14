@@ -1,18 +1,31 @@
 import { makeStyles } from '@material-ui/core/styles';
 
 export default makeStyles(theme => ({
-  root: {
-    padding: theme.spacing(1),
-  },
-  profileTitle: {
-    marginBottom: theme.spacing(3),
-  },
-  row: {
+  paper: {
     display: 'flex',
-    marginTop: theme.spacing(1),
-    marginBottom: theme.spacing(1),
+    flexDirection: 'column',
+    alignItems: 'center',
+    margin: theme.spacing(1),
   },
-  label: {
-    marginRight: theme.spacing(1),
+  avatar: {
+    marginTop: theme.spacing(1),
+    width: theme.spacing(16),
+    height: theme.spacing(16),
+  },
+  name: {
+    marginTop: theme.spacing(1),
+    fontSize: '2rem',
+  },
+  email: {
+    marginBottom: theme.spacing(1),
+    color: '#888',
+  },
+  [theme.breakpoints.up('md')]: {
+    paper: {
+      marginTop: theme.spacing(3),
+      marginLeft: 'auto',
+      marginRight: 'auto',
+      width: theme.breakpoints.values.sm,
+    },
   },
 }));

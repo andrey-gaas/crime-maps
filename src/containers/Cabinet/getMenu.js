@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import {
   List,
@@ -9,14 +9,11 @@ import {
 } from '@material-ui/core';
 import {
   Home as HomeIcon,
-  AddCircle as AddCircleIcon,
   AddBox as AddBoxIcon,
   Settings as SettingsIcon,
   Forum as ForumIcon,
-  History as HistoryIcon,
   LocationCity as LocationCityIcom,
   People as PeopleIcon,
-  List as ListIcon,
   Map as MapIcon,
 } from '@material-ui/icons';
 import useStyles from './styles';
@@ -51,7 +48,7 @@ export function UserMenu () {
         </ListItem>
       </Link>
       <Divider />
-      <Link to="/settings" className={classes.linkMenu}>
+      <Link to="/cabinet/settings" className={classes.linkMenu}>
         <ListItem button>
           <ListItemIcon>
             <SettingsIcon />
@@ -186,7 +183,7 @@ export function AdminMenu () {
         </ListItem>
       </Link>
       <Divider />
-      <Link to="/settings" className={classes.linkMenu}>
+      <Link to="/cabinet/settings" className={classes.linkMenu}>
         <ListItem button>
           <ListItemIcon>
             <SettingsIcon />

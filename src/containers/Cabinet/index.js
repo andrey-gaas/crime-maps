@@ -5,6 +5,7 @@ import { Switch, Route } from 'react-router-dom';
 import Menu from '../../components/ResponsiveMenu';
 import { UserMenu, ModeratorMenu, AdminMenu } from './getMenu';
 import { ROLE_ADMIN, ROLE_MODERATOR, ROLE_USER } from '../../constants/user';
+import useStyles from './styles';
 
 import Profile from './Profile';
 import CreateNews from './CreateNews';
@@ -12,6 +13,7 @@ import CreateNews from './CreateNews';
 function Cabinet(props) {
   const { role } = props;
   const [isOpen, setOpen] = useState(false);
+  const classes = useStyles();
 
   return (
     <Fragment>
@@ -23,10 +25,12 @@ function Cabinet(props) {
         {role === ROLE_MODERATOR && <ModeratorMenu />}
         {role === ROLE_USER && <UserMenu />}
       </Menu>
-      <Switch>
-        <Route path="/cabinet" exact component={Profile} />
-        <Route path="/cabinet/create-news" component={CreateNews} />
-      </Switch>
+      <div className={classes.content}>
+        <Switch>
+          <Route path="/cabinet" exact component={Profile} />
+          <Route path="/cabinet/create-news" component={CreateNews} />
+        </Switch>
+      </div>
     </Fragment>
   );
 }
