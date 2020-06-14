@@ -2,9 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {
   Drawer,
+  Divider,
   Hidden,
+  Toolbar,
+  Typography,
 } from '@material-ui/core';
 import useStyles from './styles';
+import logo from '../../images/logo_dark.svg';
 
 function Menu(props) {
   const {
@@ -28,6 +32,21 @@ function Menu(props) {
             paper: classes.drawerPaper,
           }}
         >
+          <Toolbar>
+            <img
+              alt="Logo"
+              src={logo}
+              className={classes.logo}
+            />
+            <div className={classes.logoTextContainer}>
+              <Typography className={classes.logoText}>
+                CRIME
+              </Typography>
+              <Typography className={classes.logoText}>
+                MAPS
+              </Typography>
+            </div>
+          </Toolbar>
           {children}
         </Drawer>
       </Hidden>
@@ -39,6 +58,22 @@ function Menu(props) {
           variant="permanent"
           open
         >
+          <Toolbar>
+            <img
+              alt="Logo"
+              src={logo}
+              className={classes.logo}
+            />
+            <div className={classes.logoTextContainer}>
+              <Typography className={classes.logoText}>
+                CRIME
+              </Typography>
+              <Typography className={classes.logoText}>
+                MAPS
+              </Typography>
+            </div>
+          </Toolbar>
+          <Divider />
           {children}
         </Drawer>
       </Hidden>

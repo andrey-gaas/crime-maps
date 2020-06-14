@@ -1,15 +1,24 @@
 import { makeStyles } from '@material-ui/core/styles';
-
-const drawerWidth = 250;
+import { WIDTH_PERSON_MENU } from '../../constants/styles';
 
 export default makeStyles(theme => ({
   drawer: {
     [theme.breakpoints.up('sm')]: {
-      width: drawerWidth,
+      width: WIDTH_PERSON_MENU,
     },
   },
   drawerPaper: {
-    width: drawerWidth,
+    width: WIDTH_PERSON_MENU,
   },
-  toolbar: theme.mixins.toolbar,
+  logo: {
+    width: 25,
+  },
+  logoTextContainer: {
+    marginLeft: theme.spacing(3),
+    display: 'flex',
+    flexDirection: 'column',
+  },
+  logoText: {
+    fontWeight: 'bold',
+  },
 }));
