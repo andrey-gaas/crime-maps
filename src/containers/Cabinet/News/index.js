@@ -16,6 +16,8 @@ import useStyles from './styles';
 import { changeField } from '../../../store/AC/forms';
 import { fetchAllIncidents } from '../../../store/AC/incidents';
 
+import List from './List';
+
 function News(props) {
   const {
     isLoading,
@@ -53,6 +55,7 @@ function News(props) {
               Список новостей пуст
             </Typography>
         }
+        { !isLoading && news.length > 0 && <List news={news} />}
       </Paper>
     </Fragment>
   );
