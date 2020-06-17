@@ -14,7 +14,18 @@ import {
 import { Close as CloseIcon } from '@material-ui/icons';
 import useStyles from './styles';
 
+import Info from './Info';
+
 const steps = ['Информация', 'Медиафайлы', 'Местоположение', 'Готово'];
+
+function getContent(activeStep) {
+  switch(activeStep) {
+    case 0:
+      return <Info />;
+    default:
+      return null;
+  }
+}
 
 function CreateNews(props) {
   const { isOpen, onClose } = props;
@@ -50,7 +61,7 @@ function CreateNews(props) {
           }
         </Stepper>
         <div>
-          Content
+          {getContent(activeStep)}
         </div>
       </DialogContent>
 

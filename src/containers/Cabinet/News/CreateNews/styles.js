@@ -14,4 +14,13 @@ export default makeStyles(theme => ({
     justifyContent: 'space-between',
     width: '100%',
   },
+
+  /* Info */
+  textField: {
+    marginTop: theme.spacing(2),
+  },
+  dateContainer: {
+    display: 'flex',
+    justifyContent: 'space-between',
+  },
 }));
