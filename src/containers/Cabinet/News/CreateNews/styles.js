@@ -40,4 +40,26 @@ export default makeStyles(theme => ({
     marginTop: theme.spacing(1),
     height: 400,
   },
+
+  /* Source */
+  sourceForm: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    marginTop: theme.spacing(1),
+  },
+  sourceName: {
+    flexGrow: 3,
+  },
+  sourceLink: {
+    marginLeft: theme.spacing(3),
+    flexGrow: 3,
+  },
+  sourceButton: {
+    marginLeft: theme.spacing(3),
+    flexGrow: 1,
+  },
+  sourceChip: {
+    marginLeft: theme.spacing(1),
+    marginTop: theme.spacing(1),
+  },
 }));
