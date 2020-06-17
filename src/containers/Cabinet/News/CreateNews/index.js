@@ -16,6 +16,7 @@ import useStyles from './styles';
 
 import Info from './Info';
 import Media from './Media';
+import Position from './Position';
 
 const steps = ['Информация', 'Медиафайлы', 'Местоположение', 'Источники', 'Готово'];
 
@@ -23,8 +24,10 @@ function getContent(activeStep) {
   switch(activeStep) {
     case 0:
       return <Info />;
-      case 1:
-        return <Media />;
+    case 1:
+      return <Media />;
+    case 2:
+      return <Position />;
     default:
       return null;
   }
@@ -33,7 +36,7 @@ function getContent(activeStep) {
 function CreateNews(props) {
   const { isOpen, onClose } = props;
   const classes = useStyles();
-  const [activeStep, setActiveStep] = useState(0);
+  const [activeStep, setActiveStep] = useState(2);
 
   const done = () => {
     onClose();

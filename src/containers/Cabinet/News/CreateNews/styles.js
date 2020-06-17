@@ -23,4 +23,21 @@ export default makeStyles(theme => ({
     display: 'flex',
     justifyContent: 'space-between',
   },
+
+  /* Position */
+  positionSearch: {
+    display: 'flex',
+    justifyContent: 'space-between',
+  },
+  streetField: {
+    flexGrow: 3,
+  },
+  homeField: {
+    marginLeft: theme.spacing(1),
+    flexGrow: 1,
+  },
+  mapContainer: {
+    marginTop: theme.spacing(1),
+    height: 400,
+  },
 }));
