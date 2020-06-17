@@ -15,13 +15,16 @@ import { Close as CloseIcon } from '@material-ui/icons';
 import useStyles from './styles';
 
 import Info from './Info';
+import Media from './Media';
 
-const steps = ['Информация', 'Медиафайлы', 'Местоположение', 'Готово'];
+const steps = ['Информация', 'Медиафайлы', 'Местоположение', 'Источники', 'Готово'];
 
 function getContent(activeStep) {
   switch(activeStep) {
     case 0:
       return <Info />;
+      case 1:
+        return <Media />;
     default:
       return null;
   }
@@ -34,13 +37,14 @@ function CreateNews(props) {
 
   const done = () => {
     onClose();
-    setActiveStep();
+    setActiveStep(0);
   };
 
   return (
     <Dialog
       open={isOpen}
       onClose={onClose}
+      maxWidth="md"
       fullWidth
     >
       <DialogTitle className={classes.titleContainer}>
