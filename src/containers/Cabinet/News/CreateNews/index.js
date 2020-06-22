@@ -39,7 +39,7 @@ function getContent(activeStep) {
 function CreateNews(props) {
   const { isOpen, onClose } = props;
   const classes = useStyles();
-  const [activeStep, setActiveStep] = useState(3);
+  const [activeStep, setActiveStep] = useState(2);
 
   const done = () => {
     onClose();

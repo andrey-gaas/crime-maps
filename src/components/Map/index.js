@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Map as LeafletMap, TileLayer, Marker } from 'react-leaflet';
-import ReactLeafletSearch from "react-leaflet-search";
 import { changeCoordinates, changeZoom } from '../../store/AC/map';
 import { openIncident } from '../../store/AC/incident';
 import { MAX_ZOOM, MIN_ZOOM } from '../../constants/map';
@@ -66,7 +65,6 @@ function Map(props) {
               />
           )
         }
-        <ReactLeafletSearch position="topleft" providerOptions={{}} />
       </LeafletMap>
   );
 }
