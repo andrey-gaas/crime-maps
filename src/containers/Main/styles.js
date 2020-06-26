@@ -11,6 +11,17 @@ export default makeStyles(theme => ({
     right: theme.spacing(1),
     zIndex: 1000,
   },
+  zoomButtonsContainer: {
+    display: 'flex',
+    flexDirection: 'column',
+    position: 'absolute',
+    top: theme.spacing(1),
+    right: theme.spacing(1),
+    zIndex: 1000,
+  },
+  buttonZoomOut: {
+    marginTop: theme.spacing(1),
+  },
 
   [theme.breakpoints.up('md')]: {
     buttonUserPosition: {

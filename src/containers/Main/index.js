@@ -1,4 +1,4 @@
-import React, { useEffect, useContext } from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import { connect, batch } from 'react-redux';
 import {
@@ -13,9 +13,13 @@ import {
 } from '@material-ui/icons';
 import Context from '../../Context';
 import useStyles from './styles';
+import { MAX_ZOOM, MIN_ZOOM } from '../../constants/map';
 
 function Main(props) {
-  const { geodata } = props;
+  const {
+    geodata,
+    zoom,
+  } = props;
   const classes = useStyles();
   const {
     changeCoordinates,
@@ -29,6 +33,16 @@ function Main(props) {
     changeZoom(16);
   });
 
+  const zoomIn = () => {
+    if (zoom === MAX_ZOOM) return;
+    incrementZoom();
+  };
+
+  const zoomOut = () => {
+    if (zoom === MIN_ZOOM) return;
+    decrementZoom();
+  };
+
   return (
     <div className={classes.root}>
       <Fab
@@ -40,16 +54,28 @@ function Main(props) {
       >
         <NearMeIcon />
       </Fab>
+      <div className={classes.zoomButtonsContainer}>
+        <ButtonGroup orientation="vertical">
+          <Button variant="contained" onClick={zoomIn}>
+            <ZoomInIcon />
+          </Button>
+          <Button variant="contained" onClick={zoomOut}>
+            <ZoomOutIcon />
+          </Button>
+        </ButtonGroup>
+      </div>
     </div>
   );
 }
 
 Main.propTypes = {
   geodata: PropTypes.object,
+  zoom:    PropTypes.number.isRequired,
 };
 
 const mapStateToProps = ({ map }) => ({
   geodata: map.geodata,
+  zoom:    map.zoom,
 });
 
 export default connect(mapStateToProps)(Main);
