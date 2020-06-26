@@ -8,6 +8,7 @@ import {
 import cn from 'classnames';
 import makeStyles from './styles';
 import LogoDark from '../../images/logo_dark.svg';
+import Geolocation from '../Geolocation';
 
 function DesctopMenu(props) {
   const {
@@ -34,6 +35,11 @@ function DesctopMenu(props) {
               placeholder="Поиск по Crime Maps..."
             />
           </div>
+          
+          <Geolocation
+            titleCity={selectedCity.title}
+            city={selectedCity.name}
+          />
         </div>
       </div>
     </Drawer>
