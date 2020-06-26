@@ -12,6 +12,7 @@ import {
   ZoomOut as ZoomOutIcon,
 } from '@material-ui/icons';
 import Context from '../../Context';
+import DesctopMenu from '../../components/DesctopMenu';
 import useStyles from './styles';
 import { MAX_ZOOM, MIN_ZOOM } from '../../constants/map';
 
@@ -45,6 +46,7 @@ function Main(props) {
 
   return (
     <div className={classes.root}>
+      <DesctopMenu />
       <Fab
         color="primary"
         size="large"
