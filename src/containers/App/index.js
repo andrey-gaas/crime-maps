@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { CssBaseline } from '@material-ui/core';
 import { Switch, Route } from 'react-router-dom';
-import { setLocation, setLocationError } from '../../store/AC/geodata';
+import { setLocation, setLocationError } from '../../store/AC/map';
 
 import Main from '../Main';
 

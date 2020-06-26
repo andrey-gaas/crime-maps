@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
-import geodata from './geodata';
+import map from './map';
 
 export default combineReducers({
-  geodata,
+  map,
 });
