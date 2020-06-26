@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useContext } from 'react';
 import PropTypes from 'prop-types';
 import { connect, batch } from 'react-redux';
 import {
@@ -11,11 +11,23 @@ import {
   ZoomIn as ZoomInIcon,
   ZoomOut as ZoomOutIcon,
 } from '@material-ui/icons';
+import Context from '../../Context';
 import useStyles from './styles';
 
 function Main(props) {
   const { geodata } = props;
   const classes = useStyles();
+  const {
+    changeCoordinates,
+    changeZoom,
+    incrementZoom,
+    decrementZoom,
+  } = useContext(Context);
+
+  const viewMe = () => batch(() => {
+    changeCoordinates(geodata.coords.latitude, geodata.coords.longitude);
+    changeZoom(16);
+  });
 
   return (
     <div className={classes.root}>
@@ -24,6 +36,7 @@ function Main(props) {
         size="large"
         className={classes.buttonUserPosition}
         disabled={geodata === null}
+        onClick={viewMe}
       >
         <NearMeIcon />
       </Fab>
