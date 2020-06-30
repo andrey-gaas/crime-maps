@@ -12,6 +12,7 @@ import {
   changeZoom,
   incrementZoom,
   decrementZoom,
+  changeNewsTypes,
 } from '../../store/AC/map';
 
 import Main from '../Main';
@@ -24,6 +25,7 @@ function App(props) {
     changeZoom,
     incrementZoom,
     decrementZoom,
+    changeNewsTypes,
   } = props;
 
   const contextValue = {
@@ -31,6 +33,7 @@ function App(props) {
     changeZoom,
     incrementZoom,
     decrementZoom,
+    changeNewsTypes,
   };
 
   navigator.geolocation.getCurrentPosition(setLocation, setLocationError);
@@ -52,6 +55,7 @@ App.propTypes = {
   changeZoom:        PropTypes.func.isRequired,
   incrementZoom:     PropTypes.func.isRequired,
   decrementZoom:     PropTypes.func.isRequired,
+  changeNewsTypes:   PropTypes.func.isRequired,
 };
 
 const mapDispatchToProps = dispatch => bindActionCreators({
@@ -61,6 +65,7 @@ const mapDispatchToProps = dispatch => bindActionCreators({
   changeZoom,
   incrementZoom,
   decrementZoom,
+  changeNewsTypes,
 }, dispatch);
 
 export default connect(null, mapDispatchToProps)(App);

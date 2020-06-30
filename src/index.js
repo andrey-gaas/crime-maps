@@ -6,15 +6,15 @@ import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles'
 import App from './containers/App';
 import store from './store';
 import './styles.css';
-import { ORANGE, BLUE } from './constants/styles';
+import { PRIMARY_COLOR, SECONDARY_COLOR } from './constants/styles';
 
 const theme = createMuiTheme({
   palette: {
     primary: {
-      main: ORANGE,
+      main: PRIMARY_COLOR,
     },
     secondary: {
-      main: BLUE,
+      main: SECONDARY_COLOR,
     },
   },
 });

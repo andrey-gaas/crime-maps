@@ -9,6 +9,7 @@ import cn from 'classnames';
 import makeStyles from './styles';
 import LogoDark from '../../images/logo_dark.svg';
 import Geolocation from '../Geolocation';
+import NewsTypes from '../NewsTypes';
 
 function DesctopMenu(props) {
   const {
@@ -42,6 +43,8 @@ function DesctopMenu(props) {
           />
         </div>
       </div>
+
+      <NewsTypes />
     </Drawer>
   )
 }
