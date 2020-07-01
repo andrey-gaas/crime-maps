@@ -1,10 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import {
   Drawer,
   InputBase,
+  Divider,
 } from '@material-ui/core';
+import { Reorder as ReorderIcon } from '@material-ui/icons';
 import cn from 'classnames';
 import makeStyles from './styles';
 import LogoDark from '../../images/logo_dark.svg';
@@ -45,6 +48,14 @@ function DesctopMenu(props) {
       </div>
 
       <NewsTypes />
+
+      <div className={classes.subscriptionsContainer}>
+        <Divider />
+        <Link to="/subscriptions" className={classes.subscriptionsLink}>
+          <ReorderIcon className={classes.subscriptionsIcon} /> Подписки
+        </Link>
+        <Divider />
+      </div>
     </Drawer>
   )
 }
