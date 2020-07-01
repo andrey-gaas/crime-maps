@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { Drawer, Divider } from '@material-ui/core';
 import { Reorder as ReorderIcon } from '@material-ui/icons';
@@ -8,6 +9,7 @@ import NewsTypes from '../NewsTypes';
 import Navigation from '../Navigation';
 
 function DesctopMenu(props) {
+  const { location } = props;
   const classes = makeStyles();
 
   return (
@@ -29,9 +31,13 @@ function DesctopMenu(props) {
         </Link>
         <Divider />
       </div>
-      <Navigation />
+      <Navigation location={location.pathname} />
     </Drawer>
   )
 }
+
+DesctopMenu.propTypes = {
+  location: PropTypes.object.isRequired,
+};
 
 export default DesctopMenu;

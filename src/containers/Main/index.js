@@ -20,6 +20,7 @@ function Main(props) {
   const {
     geodata,
     zoom,
+    location,
   } = props;
   const classes = useStyles();
   const {
@@ -46,7 +47,7 @@ function Main(props) {
 
   return (
     <div className={classes.root}>
-      <DesctopMenu />
+      <DesctopMenu location={location} />
       <Fab
         color="primary"
         size="large"
@@ -71,8 +72,9 @@ function Main(props) {
 }
 
 Main.propTypes = {
-  geodata: PropTypes.object,
-  zoom:    PropTypes.number.isRequired,
+  geodata:  PropTypes.object,
+  zoom:     PropTypes.number.isRequired,
+  location: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = ({ map }) => ({

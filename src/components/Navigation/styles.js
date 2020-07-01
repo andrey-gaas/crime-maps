@@ -1,4 +1,5 @@
 import { makeStyles } from '@material-ui/core/styles';
+import { PRIMARY_COLOR } from '../../constants/styles';
 
 export default makeStyles(theme => ({
   root: {
@@ -12,5 +13,8 @@ export default makeStyles(theme => ({
   },
   button: {
     minWidth: 0,
+  },
+  active: {
+    color: PRIMARY_COLOR,
   },
 }));

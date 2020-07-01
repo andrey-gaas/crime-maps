@@ -42,7 +42,7 @@ function App(props) {
     <Context.Provider value={contextValue}>
       <CssBaseline />
       <Switch>
-        <Route exact path="/" component={Main} />
+        <Route path="/map" component={Main} />
       </Switch>
     </Context.Provider>
   );
