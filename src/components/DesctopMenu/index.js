@@ -5,8 +5,9 @@ import { Reorder as ReorderIcon } from '@material-ui/icons';
 import makeStyles from './styles';
 import Header from '../HeaderMenu';
 import NewsTypes from '../NewsTypes';
+import Navigation from '../Navigation';
 
-function DesctopMenu() {
+function DesctopMenu(props) {
   const classes = makeStyles();
 
   return (
@@ -28,6 +29,7 @@ function DesctopMenu() {
         </Link>
         <Divider />
       </div>
+      <Navigation />
     </Drawer>
   )
 }
