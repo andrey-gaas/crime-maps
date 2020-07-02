@@ -34,5 +34,13 @@ export default makeStyles(theme => ({
       fontSize: theme.typography.h4.fontSize,
       color: PRIMARY_COLOR,
     },
+    authLink: {
+      marginTop: 'auto',
+      textDecoration: 'none',
+      borderTop: `1px solid ${PRIMARY_COLOR}`,
+    },
+    authButton: {
+      color: PRIMARY_COLOR,
+    },
   },
 }));
