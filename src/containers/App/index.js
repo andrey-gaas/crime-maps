@@ -15,6 +15,7 @@ import {
   changeNewsTypes,
 } from '../../store/AC/map';
 import { changeSystemField } from '../../store/AC/system';
+import { changeField } from '../../store/AC/forms';
 
 import Main from '../Main';
 import SignIn from '../SignIn';
@@ -29,6 +30,7 @@ function App(props) {
     decrementZoom,
     changeNewsTypes,
     changeSystemField,
+    changeField,
   } = props;
 
   const contextValue = {
@@ -38,6 +40,7 @@ function App(props) {
     decrementZoom,
     changeNewsTypes,
     changeSystemField,
+    changeField,
   };
 
   navigator.geolocation.getCurrentPosition(setLocation, setLocationError);
@@ -62,6 +65,7 @@ App.propTypes = {
   decrementZoom:     PropTypes.func.isRequired,
   changeNewsTypes:   PropTypes.func.isRequired,
   changeSystemField: PropTypes.func.isRequired,
+  changeField:       PropTypes.func.isRequired,
 };
 
 const mapDispatchToProps = dispatch => bindActionCreators({
@@ -73,6 +77,7 @@ const mapDispatchToProps = dispatch => bindActionCreators({
   decrementZoom,
   changeNewsTypes,
   changeSystemField,
+  changeField,
 }, dispatch);
 
 export default connect(null, mapDispatchToProps)(App);
