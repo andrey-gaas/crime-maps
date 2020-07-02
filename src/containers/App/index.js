@@ -16,6 +16,7 @@ import {
 } from '../../store/AC/map';
 
 import Main from '../Main';
+import SignIn from '../SignIn';
 
 function App(props) {
   const {
@@ -43,6 +44,7 @@ function App(props) {
       <CssBaseline />
       <Switch>
         <Route path="/map" component={Main} />
+        <Route path="/sign-in" component={SignIn} />
       </Switch>
     </Context.Provider>
   );
