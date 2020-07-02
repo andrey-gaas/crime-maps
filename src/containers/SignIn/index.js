@@ -1,7 +1,7 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useContext } from 'react';
 import PropTypes from 'prop-types';
 import { Link, Redirect } from 'react-router-dom';
-import { connect } from 'react-redux';
+import { connect, batch } from 'react-redux';
 import {
   Paper,
   Typography,
@@ -9,12 +9,31 @@ import {
   Button,
   Snackbar,
 } from '@material-ui/core';
+import Context from '../../Context';
 import logo from '../../images/logo_dark.svg';
 import useStyles from './styles';
 
 function SignIn(props) {
-  const { isAuth } = props;
+  const {
+    isAuth,
+    snackbar,
+    email,
+    emailError,
+    password,
+    passwordError,
+    isDisabled,
+  } = props;
+  const { changeField } = useContext(Context);
   const classes = useStyles();
+
+  const handleChange = ({ target }) => batch(() => {
+    changeField(target.name, target.value);
+    changeField(target.name + 'Error', '');
+  });
+  
+  const handleClick = () => {
+    alert('LOGIN');
+  };
 
   return (
     <Fragment>
@@ -34,21 +53,21 @@ function SignIn(props) {
           <div className={classes.form}>
             <TextField
               name="signInEmail"
-              /* value={email}
+              value={email}
               error={!!emailError}
               helperText={emailError}
-              onChange={handleChange} */
+              onChange={handleChange}
               className={classes.textField}
               label="E-Mail"
             />
 
             <TextField
               name="signInPassword"
-              /* value={password}
+              value={password}
               error={!!passwordError}
-              helperText={passwordError} */
+              helperText={passwordError}
               type="password"
-              /* onChange={handleChange} */
+              onChange={handleChange}
               className={classes.textField}
               label="Пароль"
             />
@@ -59,8 +78,8 @@ function SignIn(props) {
               size="large"
               className={classes.button}
               fullWidth
-              /* onClick={handleClick}
-              disabled={isDisabled} */
+              onClick={handleClick}
+              disabled={isDisabled}
             >
               Войти
             </Button>
@@ -88,25 +107,46 @@ function SignIn(props) {
           </Link>
         </div>
 
-        {/* <Snackbar
+        <Snackbar
           open={!!snackbar}
           message={snackbar}
           anchorOrigin={{
             vertical: 'bottom',
             horizontal: 'left',
           }}
-        /> */}
+        />
       </div>
     </Fragment>
   );
 }
 
 SignIn.propTypes = {
-  isAuth: PropTypes.bool.isRequired,
+  snackbar:      PropTypes.string,
+  email:         PropTypes.string,
+  emailError:    PropTypes.string,
+  password:      PropTypes.string,
+  passwordError: PropTypes.string,
+  isDisabled:    PropTypes.bool,
+  isAuth:        PropTypes.bool.isRequired,
 };
 
-const mapStateToProps = ({ user }) => ({
-  isAuth:   user.isAuth,
+SignIn.defaultProps = {
+  snackbar:      '',
+  email:         '',
+  emailError:    '',
+  password:      '',
+  passwordError: '',
+  isDisabled:    false,
+};
+
+const mapStateToProps = ({ user, forms, system }) => ({
+  isAuth:        user.isAuth,
+  email:         forms.signInEmail,
+  emailError:    forms.signInEmailError,
+  password:      forms.signInPassword,
+  passwordError: forms.signInPasswordError,
+  isDisabled:    forms.signInButtonDisabled,
+  snackbar:      system.signInSnackbar,
 });
 
 export default connect(mapStateToProps)(SignIn);
