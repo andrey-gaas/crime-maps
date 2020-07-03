@@ -12,20 +12,25 @@ const router = Router();
 router.post('/sign-up', async (req, res) => {
   try {
     const { name, email, password } = req.body;
+    let error = '';
 
-    if (!name || name.length < 6 || name.length > 16) return res.send('name: lenght');
-    if (!name.match(/^\s*([0-9a-zA-Zа-яА-Я]*)\s*$/)) return res.send('name: invalid');
-    if (!emailValidator.validate(email)) return res.send('email: invalid');
-    if (!password || password.length < 6 || password.length > 16) return res.send('password: length');
-    if (!password.match(/^\s*([0-9a-zA-Z]*)\s*$/)) return res.send('password: invalid');
+    if (!name || name.length < 4 || name.length > 16) error = 'Имя должно содержать от 4 до 16 символов.';
+    else if (!name.match(/^\s*([0-9a-zA-Zа-яА-Я]*)\s*$/)) error = 'Допустимы только латинские и кириллические символы, а так же числа.';
+    else if (!emailValidator.validate(email)) error = 'Введите корректный E-Mail.';
+    else if (!password || password.length < 6 || password.length > 16) error = 'Пароль должен содержать от 6 до 16 символов.';
+    else if (!password.match(/^\s*([0-9a-zA-Z]*)\s*$/)) error = 'Допустимы только латинские символы и числа.';
+
+    if (error) {
+      return res.status(400).send(error);
+    }
 
     const candidate = await User.findOne({
       $or: [ { email }, { name } ],
     });
 
     if (candidate) {
-      if (candidate.name === name) return res.send('name: busy');
-      else return res.send('email: busy');
+      if (candidate.name === name) return res.status(400).send('Имя занято.');
+      else return res.status(400).send('E-Mail занят.');
     }
 
     const lastUser = await User.find({}).limit(1).sort({ $natural: -1 });
@@ -61,7 +66,7 @@ router.post('/sign-up', async (req, res) => {
     });
   } catch (e) {
     console.log(e.message);
-    res.status(500).send('server error');
+    res.status(500).send('Ошибка сервера. Перезагрузите страницу и попробуйте еще раз.');
   }
 });
 
@@ -71,8 +76,8 @@ router.post('/sign-in', async (req, res) => {
     let error = '';
 
     if (!emailValidator.validate(email)) error = 'Введите корректный E-Mail';
-    if (!password || password.length < 6 || password.length > 16) error = 'Введите корректный пароль.';
-    if (!password.match(/^\s*([0-9a-zA-Z]*)\s*$/)) error = 'Введите корректный пароль.';
+    else if (!password || password.length < 6 || password.length > 16) error = 'Введите корректный пароль.';
+    else if (!password.match(/^\s*([0-9a-zA-Z]*)\s*$/)) error = 'Введите корректный пароль.';
 
     if (error) return res.status(400).send(error);
 
