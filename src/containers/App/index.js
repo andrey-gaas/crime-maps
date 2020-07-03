@@ -16,10 +16,11 @@ import {
 } from '../../store/AC/map';
 import { changeSystemField } from '../../store/AC/system';
 import { changeField } from '../../store/AC/forms';
-import { validateSignIn } from '../../store/AC/user';
+import { validateSignIn, signUpValidate } from '../../store/AC/user';
 
 import Main from '../Main';
 import SignIn from '../SignIn';
+import SignUp from '../SignUp';
 
 function App(props) {
   const {
@@ -33,6 +34,7 @@ function App(props) {
     changeSystemField,
     changeField,
     validateSignIn,
+    signUpValidate,
   } = props;
 
   const contextValue = {
@@ -44,6 +46,7 @@ function App(props) {
     changeSystemField,
     changeField,
     validateSignIn,
+    signUpValidate,
   };
 
   navigator.geolocation.getCurrentPosition(setLocation, setLocationError);
@@ -54,6 +57,7 @@ function App(props) {
       <Switch>
         <Route path="/map" component={Main} />
         <Route path="/sign-in" component={SignIn} />
+        <Route path="/sign-up" component={SignUp} />
       </Switch>
     </Context.Provider>
   );
@@ -70,6 +74,7 @@ App.propTypes = {
   changeSystemField: PropTypes.func.isRequired,
   changeField:       PropTypes.func.isRequired,
   validateSignIn:    PropTypes.func.isRequired,
+  signUpValidate:    PropTypes.func.isRequired,
 };
 
 const mapDispatchToProps = dispatch => bindActionCreators({
@@ -83,6 +88,7 @@ const mapDispatchToProps = dispatch => bindActionCreators({
   changeSystemField,
   changeField,
   validateSignIn,
+  signUpValidate,
 }, dispatch);
 
 export default connect(null, mapDispatchToProps)(App);

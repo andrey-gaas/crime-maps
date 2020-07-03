@@ -1,24 +1,24 @@
 {
   "files": {
     "main.css": "/static/css/main.331cf375.chunk.css",
-    "main.js": "/static/js/main.e9a21fe0.chunk.js",
-    "main.js.map": "/static/js/main.e9a21fe0.chunk.js.map",
+    "main.js": "/static/js/main.5340e6c5.chunk.js",
+    "main.js.map": "/static/js/main.5340e6c5.chunk.js.map",
     "runtime-main.js": "/static/js/runtime-main.ab553200.js",
     "runtime-main.js.map": "/static/js/runtime-main.ab553200.js.map",
-    "static/js/2.beb7ebc5.chunk.js": "/static/js/2.beb7ebc5.chunk.js",
-    "static/js/2.beb7ebc5.chunk.js.map": "/static/js/2.beb7ebc5.chunk.js.map",
+    "static/js/2.eb01972a.chunk.js": "/static/js/2.eb01972a.chunk.js",
+    "static/js/2.eb01972a.chunk.js.map": "/static/js/2.eb01972a.chunk.js.map",
     "index.html": "/index.html",
-    "precache-manifest.6ae05a0dcf6354c857b97c06f600895b.js": "/precache-manifest.6ae05a0dcf6354c857b97c06f600895b.js",
+    "precache-manifest.8d81a76cc849ffb1bc5aa421cd461d36.js": "/precache-manifest.8d81a76cc849ffb1bc5aa421cd461d36.js",
     "service-worker.js": "/service-worker.js",
     "static/css/main.331cf375.chunk.css.map": "/static/css/main.331cf375.chunk.css.map",
-    "static/js/2.beb7ebc5.chunk.js.LICENSE.txt": "/static/js/2.beb7ebc5.chunk.js.LICENSE.txt",
+    "static/js/2.eb01972a.chunk.js.LICENSE.txt": "/static/js/2.eb01972a.chunk.js.LICENSE.txt",
     "static/media/accident.svg": "/static/media/accident.af983432.svg",
     "static/media/animal.svg": "/static/media/animal.78439bea.svg",
     "static/media/bad_services.svg": "/static/media/bad_services.0beafc4d.svg",
-    "static/media/car_theft.svg": "/static/media/car_theft.06303f44.svg",
+    "static/media/car_theft.svg": "/static/media/car_theft.b572941a.svg",
     "static/media/death.svg": "/static/media/death.0e042142.svg",
     "static/media/disaster.svg": "/static/media/disaster.e2168d84.svg",
-    "static/media/dtp.svg": "/static/media/dtp.8aaadaad.svg",
+    "static/media/dtp.svg": "/static/media/dtp.430d3fe4.svg",
     "static/media/fire.svg": "/static/media/fire.547e02c8.svg",
     "static/media/krasnoyarsk.svg": "/static/media/krasnoyarsk.0bba5569.svg",
     "static/media/krasnoyarsk.jpg": "/static/media/krasnoyarsk.aaf9cd5c.jpg",
@@ -32,8 +32,8 @@
   },
   "entrypoints": [
     "static/js/runtime-main.ab553200.js",
-    "static/js/2.beb7ebc5.chunk.js",
+    "static/js/2.eb01972a.chunk.js",
     "static/css/main.331cf375.chunk.css",
-    "static/js/main.e9a21fe0.chunk.js"
+    "static/js/main.5340e6c5.chunk.js"
   ]
 }
