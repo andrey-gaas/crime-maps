@@ -6,7 +6,7 @@ function* request({ email, password }) {
   const requestBody = { email, password };
 
   try {
-    const response = yield call(UserApi.signInRequest, requestBody);
+    const response = yield call(UserApi.signIn, requestBody);
 
     if (response.status === 200) yield put(signInSuccess(response.data));
     else yield put(signInFail(response.data));

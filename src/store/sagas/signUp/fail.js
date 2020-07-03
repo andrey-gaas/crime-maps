@@ -1,0 +1,12 @@
+import { put, delay } from 'redux-saga/effects';
+import { changeSystemField } from '../../AC/system';
+import { changeField } from '../../AC/forms';
+
+function* fail({ message }) {
+  yield put(changeField('signUpButtonDisabled', false));
+  yield put(changeSystemField('signUpSnackbar', message));
+  yield delay(4000);
+  yield put(changeSystemField('signUpSnackbar', ''));
+}
+
+export default fail;
