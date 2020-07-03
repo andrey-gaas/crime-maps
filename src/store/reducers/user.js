@@ -1,4 +1,5 @@
 import cookie from 'js-cookie';
+import { SET_USER_DATA } from '../actions/user';
 
 const token = cookie.get('token');
 
@@ -7,5 +8,10 @@ const initialState = {
 };
 
 export default function(state = initialState, action) {
-  return state;
+  switch (action.type) {
+    case SET_USER_DATA:
+      return { ...state, ...action.data, isAuth: true };
+    default:
+      return state;
+  }
 };

@@ -1,15 +1,17 @@
-import { call } from 'redux-saga/effects';
-import axios from 'axios';
+import { call, put } from 'redux-saga/effects';
+import { signInSuccess, signInFail } from '../../AC/user';
 import UserApi from '../../../api/user';
 
 function* request({ email, password }) {
   const requestBody = { email, password };
 
   try {
-    const result = yield call(UserApi.signInRequest, requestBody);
-    console.log(result);
+    const response = yield call(UserApi.signInRequest, requestBody);
+
+    if (response.status === 200) yield put(signInSuccess(response.data));
+    else yield put(signInFail(response.data));
   } catch(e) {
-    console.log(e);
+    console.error(e);
   }
 }
 
