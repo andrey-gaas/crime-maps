@@ -23,7 +23,7 @@ function SignIn(props) {
     passwordError,
     isDisabled,
   } = props;
-  const { changeField } = useContext(Context);
+  const { changeField, validateSignIn } = useContext(Context);
   const classes = useStyles();
 
   const handleChange = ({ target }) => batch(() => {
@@ -31,10 +31,6 @@ function SignIn(props) {
     changeField(target.name + 'Error', '');
   });
   
-  const handleClick = () => {
-    alert('LOGIN');
-  };
-
   return (
     <Fragment>
       { isAuth && <Redirect to="/map" /> }
@@ -78,7 +74,7 @@ function SignIn(props) {
               size="large"
               className={classes.button}
               fullWidth
-              onClick={handleClick}
+              onClick={validateSignIn}
               disabled={isDisabled}
             >
               Войти
