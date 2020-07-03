@@ -15,6 +15,8 @@ function* validation() {
   
   if (emailError || passwordError) yield cancel();
 
+  yield put(changeField('signInButtonDisabled', true));
+
   if (!emailValidator.validate(email)) {
     yield put(changeField('signInEmailError', 'Введите корректный E-Mail.'));
     isInvalid = true;

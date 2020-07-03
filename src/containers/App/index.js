@@ -16,7 +16,7 @@ import {
 } from '../../store/AC/map';
 import { changeSystemField } from '../../store/AC/system';
 import { changeField } from '../../store/AC/forms';
-import { validateSignIn, signUpValidate } from '../../store/AC/user';
+import { signInValidate, signUpValidate } from '../../store/AC/user';
 
 import Main from '../Main';
 import SignIn from '../SignIn';
@@ -33,7 +33,7 @@ function App(props) {
     changeNewsTypes,
     changeSystemField,
     changeField,
-    validateSignIn,
+    signInValidate,
     signUpValidate,
   } = props;
 
@@ -45,7 +45,7 @@ function App(props) {
     changeNewsTypes,
     changeSystemField,
     changeField,
-    validateSignIn,
+    signInValidate,
     signUpValidate,
   };
 
@@ -73,7 +73,7 @@ App.propTypes = {
   changeNewsTypes:   PropTypes.func.isRequired,
   changeSystemField: PropTypes.func.isRequired,
   changeField:       PropTypes.func.isRequired,
-  validateSignIn:    PropTypes.func.isRequired,
+  signInValidate:    PropTypes.func.isRequired,
   signUpValidate:    PropTypes.func.isRequired,
 };
 
@@ -87,7 +87,7 @@ const mapDispatchToProps = dispatch => bindActionCreators({
   changeNewsTypes,
   changeSystemField,
   changeField,
-  validateSignIn,
+  signInValidate,
   signUpValidate,
 }, dispatch);
 

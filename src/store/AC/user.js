@@ -1,6 +1,6 @@
 import * as types from '../actions/user';
 
-export const validateSignIn = () => ({ type: types.SIGN_IN_VALIDATE });
+export const signInValidate = () => ({ type: types.SIGN_IN_VALIDATE });
 export const signInRequest = (email, password) => ({ type: types.SIGN_IN_REQUEST, email, password });
 export const signInSuccess = data => ({ type: types.SIGN_IN_SUCCESS, data });
 export const signInFail = message => ({ type: types.SIGN_IN_FAIL, message });
