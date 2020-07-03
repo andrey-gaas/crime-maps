@@ -4,7 +4,7 @@ class UserApi {
   static signInRequest(requestBody) {
     return axios.post('/api/auth/sign-in', requestBody)
       .then(response => response)
-      .catch(error => error);
+      .catch(({ response }) => ({ ...response }));
   }
 }
 

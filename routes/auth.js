@@ -68,10 +68,13 @@ router.post('/sign-up', async (req, res) => {
 router.post('/sign-in', async (req, res) => {
   try {
     const { email, password } = req.body;
+    let error = '';
 
-    if (!emailValidator.validate(email)) return res.send('email: invalid');
-    if (!password || password.length < 6 || password.length > 16) return res.send('password: invalid');
-    if (!password.match(/^\s*([0-9a-zA-Z]*)\s*$/)) return res.send('password: invalid');
+    if (!emailValidator.validate(email)) error = 'Введите корректный E-Mail';
+    if (!password || password.length < 6 || password.length > 16) error = 'Введите корректный пароль.';
+    if (!password.match(/^\s*([0-9a-zA-Z]*)\s*$/)) error = 'Введите корректный пароль.';
+
+    if (error) return res.status(400).send(error);
 
     const candidate = await User.findOne({ email });
 
@@ -95,14 +98,14 @@ router.post('/sign-in', async (req, res) => {
         };
         res.send(response);
       } else {
-        res.send('password: wrong');
+        res.status(400).send('Введены неверные данные.');
       }
 
     } else {
-      res.send('email: not found');
+      res.status(404).send('Пользователь не найден.');
     }
   } catch(e) {
-    res.status(500).send('server error');
+    res.status(500).send('Ошибка сервера. Попробуйте еще раз.');
   }
 });
 
