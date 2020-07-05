@@ -18,6 +18,7 @@ import { changeSystemField } from '../../store/AC/system';
 import { changeField } from '../../store/AC/forms';
 import { signInValidate, signUpValidate } from '../../store/AC/user';
 
+import Index from '../Index';
 import Main from '../Main';
 import SignIn from '../SignIn';
 import SignUp from '../SignUp';
@@ -55,9 +56,10 @@ function App(props) {
     <Context.Provider value={contextValue}>
       <CssBaseline />
       <Switch>
+        <Route path="/" exact component={Index} />
         <Route path="/map" component={Main} />
-        <Route path="/sign-in" component={SignIn} />
-        <Route path="/sign-up" component={SignUp} />
+        <Route path="/sign-in" exact component={SignIn} />
+        <Route path="/sign-up" exact component={SignUp} />
       </Switch>
     </Context.Provider>
   );
