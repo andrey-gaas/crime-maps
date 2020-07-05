@@ -32,7 +32,7 @@ function DesctopMenu(props) {
         isAuth &&
         <div className={classes.subscriptionsContainer}>
           <Divider />
-          <Link to="/subscriptions" className={classes.subscriptionsLink}>
+          <Link to="/map/subscriptions" className={classes.subscriptionsLink}>
             <ReorderIcon className={classes.subscriptionsIcon} /> Подписки
           </Link>
           <Divider />
