@@ -13,6 +13,7 @@ import {
 } from '@material-ui/icons';
 import Context from '../../Context';
 import DesctopMenu from '../../components/DesctopMenu';
+import Map from '../../components/Map';
 import useStyles from './styles';
 import { MAX_ZOOM, MIN_ZOOM } from '../../constants/map';
 
@@ -67,6 +68,7 @@ function Main(props) {
           </Button>
         </ButtonGroup>
       </div>
+      <Map />
     </div>
   );
 }
