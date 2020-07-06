@@ -5,6 +5,7 @@ import {
   Fab,
   ButtonGroup,
   Button,
+  Snackbar,
 } from '@material-ui/core';
 import {
   NearMe as NearMeIcon,
@@ -22,6 +23,7 @@ function Main(props) {
     geodata,
     zoom,
     location,
+    snackbar,
   } = props;
   const classes = useStyles();
   const {
@@ -31,6 +33,8 @@ function Main(props) {
     decrementZoom,
     fetchNews,
   } = useContext(Context);
+
+  console.log(snackbar);
 
   const viewMe = () => batch(() => {
     changeCoordinates(geodata.coords.latitude, geodata.coords.longitude);
@@ -74,6 +78,15 @@ function Main(props) {
         </ButtonGroup>
       </div>
       <Map />
+
+      <Snackbar
+        open={!!snackbar}
+        message={snackbar}
+        anchorOrigin={{
+          vertical: 'top',
+          horizontal: 'center',
+        }}
+      />
     </div>
   );
 }
@@ -82,11 +95,17 @@ Main.propTypes = {
   geodata:  PropTypes.object,
   zoom:     PropTypes.number.isRequired,
   location: PropTypes.object.isRequired,
+  snackbar: PropTypes.string,
 };
 
-const mapStateToProps = ({ map }) => ({
-  geodata: map.geodata,
-  zoom:    map.zoom,
+Main.defaultProps = {
+  snackbar: '',
+};
+
+const mapStateToProps = ({ map, system }) => ({
+  geodata:  map.geodata,
+  zoom:     map.zoom,
+  snackbar: system.newsFetchSnackbar,
 });
 
 export default connect(mapStateToProps)(Main);
