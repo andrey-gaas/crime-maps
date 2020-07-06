@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect, batch } from 'react-redux';
 import {
@@ -29,6 +29,7 @@ function Main(props) {
     changeZoom,
     incrementZoom,
     decrementZoom,
+    fetchNews,
   } = useContext(Context);
 
   const viewMe = () => batch(() => {
@@ -45,6 +46,10 @@ function Main(props) {
     if (zoom === MIN_ZOOM) return;
     decrementZoom();
   };
+
+  useEffect(() => {
+    fetchNews();
+  }, [fetchNews]);
 
   return (
     <div className={classes.root}>
