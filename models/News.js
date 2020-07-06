@@ -44,4 +44,4 @@ const schema = new Schema({
   }
 });
 
-module.exports = model('Incedent', schema);
+module.exports = model('News', schema);

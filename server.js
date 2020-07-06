@@ -14,7 +14,7 @@ app.use(passport.initialize());
 
 /* Routes */
 app.use('/api/cities', require('./routes/cities'));
-app.use('/api/incidents', require('./routes/incidents'));
+app.use('/api/news', require('./routes/news'));
 app.use('/api/auth', require('./routes/auth'));
 app.use('/api/settings', require('./routes/settings'));
 

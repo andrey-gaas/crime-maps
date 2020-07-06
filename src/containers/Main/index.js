@@ -34,8 +34,6 @@ function Main(props) {
     fetchNews,
   } = useContext(Context);
 
-  console.log(snackbar);
-
   const viewMe = () => batch(() => {
     changeCoordinates(geodata.coords.latitude, geodata.coords.longitude);
     changeZoom(16);

@@ -2,7 +2,7 @@ import axios from 'axios';
 
 class NewsApi {
   static fetch(city) {
-    return axios.get(`/api/news/${city}`)
+    return axios.get(`/api/news/city/${city}`)
       .then(response => response)
       .catch(({ response }) => ({ ...response }));
   }
