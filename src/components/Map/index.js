@@ -12,6 +12,7 @@ function Map(props) {
     lng,
     zoom,
     geodata,
+    news,
   } = props;
 
   const {
@@ -52,6 +53,17 @@ function Map(props) {
             
           </Marker>
       }
+      {
+        news.map(
+          item =>
+            <Marker
+              key={item.id}
+              position={item.coords}
+              icon={getPin(item.type)}
+              onClick={() => console.log(item)}
+            />
+        )
+      }
     </LeafletMap>
   );
 }
@@ -61,13 +73,15 @@ Map.propTypes = {
   lng:     PropTypes.number.isRequired,
   zoom:    PropTypes.number.isRequired,
   geodata: PropTypes.object,
+  news:    PropTypes.array.isRequired,
 };
 
-const mapStateToProps = ({ map }) => ({
+const mapStateToProps = ({ map, news }) => ({
   lat:     map.lat,
   lng:     map.lng,
   zoom:    map.zoom,
   geodata: map.geodata,
+  news,
 });
 
 export default connect(mapStateToProps)(Map);
