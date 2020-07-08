@@ -13,7 +13,14 @@ function Map(props) {
     zoom,
     geodata,
     news,
+    showTypes,
   } = props;
+
+  const visibleNews = [];
+
+  showTypes.forEach(({ type }) => news.forEach(item => {
+    if (type === item.type) visibleNews.push(item);
+  }));
 
   const {
     changeZoom,
@@ -54,7 +61,7 @@ function Map(props) {
           </Marker>
       }
       {
-        news.map(
+        visibleNews.map(
           item =>
             <Marker
               key={item.id}
@@ -69,18 +76,20 @@ function Map(props) {
 }
 
 Map.propTypes = {
-  lat:     PropTypes.number.isRequired,
-  lng:     PropTypes.number.isRequired,
-  zoom:    PropTypes.number.isRequired,
-  geodata: PropTypes.object,
-  news:    PropTypes.array.isRequired,
+  lat:       PropTypes.number.isRequired,
+  lng:       PropTypes.number.isRequired,
+  zoom:      PropTypes.number.isRequired,
+  geodata:   PropTypes.object,
+  news:      PropTypes.array.isRequired,
+  showTypes: PropTypes.array.isRequired,
 };
 
 const mapStateToProps = ({ map, news }) => ({
-  lat:     map.lat,
-  lng:     map.lng,
-  zoom:    map.zoom,
-  geodata: map.geodata,
+  lat:       map.lat,
+  lng:       map.lng,
+  zoom:      map.zoom,
+  geodata:   map.geodata,
+  showTypes: map.showTypes,
   news,
 });
 
