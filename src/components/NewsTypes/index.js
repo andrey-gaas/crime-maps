@@ -13,20 +13,37 @@ function NewsTypes(props) {
 
   const { changeNewsTypes } = useContext(Context);
 
+  const activeTypes = JSON.parse(localStorage.getItem('activeTypes')) || types;
+
   function isActive(currentType) {
-    return !!types.find(({ type }) => type === currentType);
+    return !!activeTypes.find(({ type }) => type === currentType);
   }
+
+  const handleClick = type => {
+    const selectedElement = activeTypes.find(activeType => activeType.type === type.type);
+    let newActiveTypes;
+
+    if (selectedElement) {
+      newActiveTypes = activeTypes.filter(({ type }) => type !== selectedElement.type);
+    } else {
+      newActiveTypes = [...activeTypes, type];
+    }
+
+    localStorage.setItem('activeTypes', JSON.stringify(newActiveTypes));
+    
+    changeNewsTypes(type.type);
+  };
 
   return (
     <div className={classes.root}>
       {
         newsTypes.map(
-          ({ type, name }) =>
-            <button className={classes.button} key={name} onClick={() => changeNewsTypes(type)}>
-              <div className={cn(classes.imageContainer, { [classes.active]: isActive(type) })}>
-                <img alt={name} src={getSrcIcon(type)} width="100%" />
+          type =>
+            <button className={classes.button} key={type.name} onClick={() => handleClick(type)}>
+              <div className={cn(classes.imageContainer, { [classes.active]: isActive(type.type) })}>
+                <img alt={type.name} src={getSrcIcon(type.type)} width="100%" />
               </div>
-              <span className={classes.label}>{name}</span>
+              <span className={classes.label}>{type.name}</span>
             </button>
         )
       }
