@@ -91,7 +91,7 @@ function Main(props) {
         }}
       />
 
-      { newsId && <News newsId={newsId} /> }
+      { newsId && <News newsId={newsId} redirect={history.push} /> }
     </div>
   );
 }

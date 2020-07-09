@@ -35,8 +35,8 @@ function getDate(timestamp) {
 }
 
 function News(props) {
-  const { news, newsId } = props;
-  const { fetchNews } = useContext(Context);
+  const { news, newsId, redirect } = props;
+  const { fetchNews, setActiveNews } = useContext(Context);
 
   const classes = useStyles();
   const date = news instanceof Object ? getDate(news.date) : null;
@@ -49,20 +49,26 @@ function News(props) {
     }
   }, [fetchNews, news, newsId]);
 
+  const close = () => {
+    redirect('/map');
+    setActiveNews(null);
+  };
+
   return (
     <Dialog
       open
-      onClose={null}
+      onClose={close}
       maxWidth="md"
       fullWidth
       fullScreen={fullScreen}
+      className={classes.root}
     >
       {
         news && !news.error && 
           <Fragment>
             <DialogTitle className={classes.titleContainer}>
               {news.title}
-              <IconButton onClick={null} className={classes.closeButton}>
+              <IconButton onClick={close} className={classes.closeButton}>
                 <CloseIcon />
               </IconButton>
             </DialogTitle>
@@ -85,6 +91,9 @@ function News(props) {
       {
         news && news.error &&
           <DialogContent className={classes.container}>
+            <IconButton onClick={close} className={classes.closeButton}>
+              <CloseIcon />
+            </IconButton>
             <Typography variant="h6">
               {news.error}
             </Typography>
@@ -93,6 +102,9 @@ function News(props) {
       {
         !news &&
           <DialogContent className={classes.container}>
+            <IconButton onClick={close} className={classes.closeButton}>
+              <CloseIcon />
+            </IconButton>
             <Typography variant="h6">
               Загрузка
             </Typography>
@@ -103,8 +115,9 @@ function News(props) {
 };
 
 News.propTypes = {
-  news:   PropTypes.any,
-  newsId: PropTypes.string.isRequired,
+  news:     PropTypes.any,
+  newsId:   PropTypes.string.isRequired,
+  redirect: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = ({ news }) => ({
