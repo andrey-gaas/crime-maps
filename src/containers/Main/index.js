@@ -15,6 +15,7 @@ import {
 import Context from '../../Context';
 import DesctopMenu from '../../components/DesctopMenu';
 import Map from '../../components/Map';
+import News from '../../components/News';
 import useStyles from './styles';
 import { MAX_ZOOM, MIN_ZOOM } from '../../constants/map';
 
@@ -24,14 +25,18 @@ function Main(props) {
     zoom,
     location,
     snackbar,
+    history,
   } = props;
+
+  const newsId = props.match.params.newsId || null;
+
   const classes = useStyles();
   const {
     changeCoordinates,
     changeZoom,
     incrementZoom,
     decrementZoom,
-    fetchNews,
+    fetchAllNews,
   } = useContext(Context);
 
   const viewMe = () => batch(() => {
@@ -50,8 +55,8 @@ function Main(props) {
   };
 
   useEffect(() => {
-    fetchNews();
-  }, [fetchNews]);
+    fetchAllNews();
+  }, [fetchAllNews]);
 
   return (
     <div className={classes.root}>
@@ -75,7 +80,7 @@ function Main(props) {
           </Button>
         </ButtonGroup>
       </div>
-      <Map />
+      <Map redirect={history.push} />
 
       <Snackbar
         open={!!snackbar}
@@ -85,6 +90,8 @@ function Main(props) {
           horizontal: 'center',
         }}
       />
+
+      { newsId && <News newsId={newsId} /> }
     </div>
   );
 }

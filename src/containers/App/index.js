@@ -17,7 +17,7 @@ import {
 import { changeSystemField } from '../../store/AC/system';
 import { changeField } from '../../store/AC/forms';
 import { signInValidate, signUpValidate } from '../../store/AC/user';
-import { fetchNews } from '../../store/AC/news';
+import { fetchAllNews, fetchNews, setActiveNews } from '../../store/AC/news';
 
 import Index from '../Index';
 import Main from '../Main';
@@ -37,7 +37,9 @@ function App(props) {
     changeField,
     signInValidate,
     signUpValidate,
+    fetchAllNews,
     fetchNews,
+    setActiveNews,
   } = props;
 
   const contextValue = {
@@ -50,7 +52,9 @@ function App(props) {
     changeField,
     signInValidate,
     signUpValidate,
+    fetchAllNews,
     fetchNews,
+    setActiveNews,
   };
 
   navigator.geolocation.getCurrentPosition(setLocation, setLocationError);
@@ -60,7 +64,8 @@ function App(props) {
       <CssBaseline />
       <Switch>
         <Route path="/" exact component={Index} />
-        <Route path="/map" component={Main} />
+        <Route path="/map" exact component={Main} />
+        <Route path="/map/news/:newsId" exact component={Main} />
         <Route path="/sign-in" exact component={SignIn} />
         <Route path="/sign-up" exact component={SignUp} />
       </Switch>
@@ -80,7 +85,9 @@ App.propTypes = {
   changeField:       PropTypes.func.isRequired,
   signInValidate:    PropTypes.func.isRequired,
   signUpValidate:    PropTypes.func.isRequired,
+  fetchAllNews:      PropTypes.func.isRequired,
   fetchNews:         PropTypes.func.isRequired,
+  setActiveNews:     PropTypes.func.isRequired,
 };
 
 const mapDispatchToProps = dispatch => bindActionCreators({
@@ -95,7 +102,9 @@ const mapDispatchToProps = dispatch => bindActionCreators({
   changeField,
   signInValidate,
   signUpValidate,
+  fetchAllNews,
   fetchNews,
+  setActiveNews,
 }, dispatch);
 
 export default connect(null, mapDispatchToProps)(App);

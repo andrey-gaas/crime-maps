@@ -25,7 +25,7 @@ router.get('/:id', async (req, res) => {
       return res.status(404).send('Новость не найдена.');
     }
 
-    res.send(news);
+    res.send(news[0]);
   } catch(e) {
     res.status(500).send({ error: 'Неизвестная ошибка. Перезагрузите страницу.' });
   }

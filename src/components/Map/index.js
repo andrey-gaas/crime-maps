@@ -14,6 +14,7 @@ function Map(props) {
     geodata,
     news,
     showTypes,
+    redirect,
   } = props;
 
   const visibleNews = [];
@@ -25,11 +26,17 @@ function Map(props) {
   const {
     changeZoom,
     changeCoordinates,
+    setActiveNews,
   } = useContext(Context);
 
   const handleDrag = ({ target }) => {
     const { lat, lng } = target.getCenter();
     changeCoordinates(lat, lng);
+  };
+
+  const handleClick = async item => {
+    await setActiveNews(item);
+    redirect(`/map/news/${item.id}`)
   };
 
   return (
@@ -67,7 +74,7 @@ function Map(props) {
               key={item.id}
               position={item.coords}
               icon={getPin(item.type)}
-              onClick={() => console.log(item)}
+              onClick={() => handleClick(item)}
             />
         )
       }
@@ -82,6 +89,7 @@ Map.propTypes = {
   geodata:   PropTypes.object,
   news:      PropTypes.array.isRequired,
   showTypes: PropTypes.array.isRequired,
+  redirect:  PropTypes.func.isRequired,
 };
 
 const mapStateToProps = ({ map, news }) => ({
@@ -90,7 +98,7 @@ const mapStateToProps = ({ map, news }) => ({
   zoom:      map.zoom,
   geodata:   map.geodata,
   showTypes: map.showTypes,
-  news,
+  news:      news.allNews,
 });
 
 export default connect(mapStateToProps)(Map);

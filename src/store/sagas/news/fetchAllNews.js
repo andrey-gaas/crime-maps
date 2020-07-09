@@ -1,9 +1,9 @@
 import { select, call, put, delay } from 'redux-saga/effects';
 import { changeSystemField } from '../../AC/system';
-import { setNews } from '../../AC/news';
+import { setAllNews } from '../../AC/news';
 import NewsApi from '../../../api/news';
 
-function* fetch() {
+function* fetchAllNews() {
   yield put(changeSystemField('newsFetchSnackbar', 'Загрузка новостей...'));
 
   const { cityId, cities } = yield select(({ cities }) => ({
@@ -14,8 +14,8 @@ function* fetch() {
   const city = cities.find(({ id }) => cityId === id);
   
   try {
-    const response = yield call(NewsApi.fetch, city.title);
-    if (response.status === 200) yield put(setNews(response.data));
+    const response = yield call(NewsApi.fetchAll, city.title);
+    if (response.status === 200) yield put(setAllNews(response.data));
     else {
       yield put(changeSystemField('newsFetchSnackbar', 'Ошибка загрузки новостей.'));
       yield delay(3000);
@@ -29,4 +29,4 @@ function* fetch() {
   }
 }
 
-export default fetch;
+export default fetchAllNews;
