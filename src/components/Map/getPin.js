@@ -11,6 +11,7 @@ import dtpIcon from '../../images/pins/dtp.svg';
 import lostManIcon from '../../images/pins/lost_man.svg';
 import protestIcon from '../../images/pins/protest.svg';
 import theftIcon from '../../images/pins/theft.svg';
+import disasterIcon from '../../images/pins/disaster.svg';
 import {
   CAR_THEFT,
   FIRE,
@@ -23,6 +24,7 @@ import {
   LOST_MAN,
   PROTEST,
   THEFT,
+  DISASTER,
 } from '../../constants/news';
 
 export default function getIcon(type) {
@@ -50,13 +52,15 @@ export default function getIcon(type) {
       iconUrl = protestIcon; break;
     case THEFT:
       iconUrl = theftIcon; break;
+    case DISASTER:
+      iconUrl = disasterIcon; break;
     default:
       iconUrl = userIcon;
   }
 
   return new L.Icon({
     iconUrl,
-    iconSize: new L.Point(30, 60),
-    iconAnchor: [15, 60]
+    iconSize: new L.Point(36, 60),
+    iconAnchor: [18, 60]
   });
 };
