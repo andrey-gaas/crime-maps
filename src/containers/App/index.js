@@ -64,8 +64,7 @@ function App(props) {
       <CssBaseline />
       <Switch>
         <Route path="/" exact component={Index} />
-        <Route path="/map" exact component={Main} />
-        <Route path="/map/news/:newsId" exact component={Main} />
+        <Route path="/map" component={Main} />
         <Route path="/sign-in" exact component={SignIn} />
         <Route path="/sign-up" exact component={SignUp} />
       </Switch>

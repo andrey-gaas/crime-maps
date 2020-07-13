@@ -1,5 +1,6 @@
 import React, { useContext, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import { Switch, Route } from 'react-router-dom';
 import { connect, batch } from 'react-redux';
 import {
   Fab,
@@ -27,8 +28,6 @@ function Main(props) {
     snackbar,
     history,
   } = props;
-
-  const newsId = props.match.params.newsId || null;
 
   const classes = useStyles();
   const {
@@ -91,7 +90,7 @@ function Main(props) {
         }}
       />
 
-      { newsId && <News newsId={newsId} redirect={history.push} /> }
+      <Route path="/map/news/:newsId" render={({ match }) => <News newsId={match.params.newsId} redirect={history.push} />} />
     </div>
   );
 }
