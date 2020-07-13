@@ -114,7 +114,7 @@ router.post('/sign-in', async (req, res) => {
   }
 });
 
-router.get('/check', auth, async (req, res) => {
+router.get('/user', auth, async (req, res) => {
   const token = req.cookies.token.split(' ')[1];
   let id;
   try {

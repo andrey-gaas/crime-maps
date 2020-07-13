@@ -11,3 +11,7 @@ export const signUpSuccess = data => ({ type: types.SIGN_UP_SUCCESS, data });
 export const signUpFail = message => ({ type: types.SIGN_UP_FAIL, message });
 
 export const setUserData = data => ({ type: types.SET_USER_DATA, data });
+export const logout = () => ({ type: types.LOGOUT_USER });
+
+export const fetchUserData = () => ({ type: types.FETCH_USER_DATA });
+export const fetchUserDataSuccess = data => ({ type: types.FETCH_USER_DATA_SUCCESS, data });

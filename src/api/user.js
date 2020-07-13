@@ -12,6 +12,12 @@ class UserApi {
       .then(response => response)
       .catch(({ response }) => ({ ...response}));
   }
+
+  static fetchUserData() {
+    return axios.get('/api/auth/user')
+      .then(response => response)
+      .catch(({ response }) => ({ ...response}));
+  }
 }
 
 export default UserApi;

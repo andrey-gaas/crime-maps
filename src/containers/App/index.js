@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -16,7 +16,7 @@ import {
 } from '../../store/AC/map';
 import { changeSystemField } from '../../store/AC/system';
 import { changeField } from '../../store/AC/forms';
-import { signInValidate, signUpValidate } from '../../store/AC/user';
+import { signInValidate, signUpValidate, fetchUserData } from '../../store/AC/user';
 import { fetchAllNews, fetchNews, setActiveNews } from '../../store/AC/news';
 
 import Index from '../Index';
@@ -27,6 +27,8 @@ import Cabinet from '../Cabinet';
 
 function App(props) {
   const {
+    isAuth,
+    fetchUserData,
     setLocation,
     setLocationError,
     changeCoordinates,
@@ -60,6 +62,12 @@ function App(props) {
 
   navigator.geolocation.getCurrentPosition(setLocation, setLocationError);
 
+  useEffect(() => {
+    if (isAuth) {
+      fetchUserData();
+    }
+  }, [isAuth, fetchUserData]);
+
   return (
     <Context.Provider value={contextValue}>
       <CssBaseline />
@@ -75,6 +83,7 @@ function App(props) {
 }
 
 App.propTypes = {
+  isAuth:            PropTypes.bool.isRequired,
   setLocation:       PropTypes.func.isRequired,
   setLocationError:  PropTypes.func.isRequired,
   changeCoordinates: PropTypes.func.isRequired,
@@ -91,7 +100,10 @@ App.propTypes = {
   setActiveNews:     PropTypes.func.isRequired,
 };
 
+const mapStateToProps = ({ user }) => ({ isAuth: user.isAuth });
+
 const mapDispatchToProps = dispatch => bindActionCreators({
+  fetchUserData,
   setLocation,
   setLocationError,
   changeCoordinates,
@@ -108,4 +120,4 @@ const mapDispatchToProps = dispatch => bindActionCreators({
   setActiveNews,
 }, dispatch);
 
-export default connect(null, mapDispatchToProps)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(App);

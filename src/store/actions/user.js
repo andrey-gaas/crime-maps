@@ -9,3 +9,8 @@ export const SIGN_UP_SUCCESS = 'SIGN_UP_SUCCESS';
 export const SIGN_UP_FAIL = 'SIGN_UP_FAIL';
 
 export const SET_USER_DATA = 'SET_USER_DATA';
+export const LOGOUT_USER = 'LOGOUT_USER';
+
+export const FETCH_USER_DATA = 'FETCH_USER_DATA';
+export const FETCH_USER_DATA_SUCCESS = 'FETCH_USER_DATA_SUCCESS';
+export const FETCH_USER_DATA_FAIL = 'FETCH_USER_DATA_FAIL';
