@@ -21,6 +21,8 @@ export default makeStyles(theme => ({
     color: '#888',
   },
   loading: {
+    display: 'flex',
+    alignItems: 'center',
     marginTop: theme.spacing(1),
     fontSize: '1.5rem',
     color: '#888',

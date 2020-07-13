@@ -8,6 +8,7 @@ import {
   Avatar,
 } from '@material-ui/core';
 import Header from '../../../components/Header';
+import Loader from '../../../components/Loader';
 import useStyles from './styles';
 import avatar from '../../../images/default_avatar.png';
 
@@ -35,7 +36,10 @@ function Profile(props) {
               <Typography className={classes.name}>{name}</Typography>
               <Typography className={classes.email}>{email}</Typography>
             </Fragment> :
-            <Typography className={classes.loading}>Загрузка данных</Typography>
+            <Typography className={classes.loading}>
+              Загрузка данных
+              <Loader />
+            </Typography>
         }
       </Paper>
     </Fragment>
