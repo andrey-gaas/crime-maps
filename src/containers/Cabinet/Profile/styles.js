@@ -20,6 +20,11 @@ export default makeStyles(theme => ({
     marginBottom: theme.spacing(1),
     color: '#888',
   },
+  loading: {
+    marginTop: theme.spacing(1),
+    fontSize: '1.5rem',
+    color: '#888',
+  },
   [theme.breakpoints.up('md')]: {
     paper: {
       marginTop: theme.spacing(3),

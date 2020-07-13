@@ -19,6 +19,8 @@ function Profile(props) {
     isAuth,
   } = props;
 
+  const isLoaded = name && email;
+
   return (
     !isAuth ? <Redirect to="/map" /> :
     <Fragment>
@@ -27,8 +29,14 @@ function Profile(props) {
       </Header>
       <Paper className={classes.paper}>
         <Avatar alt="Avatar" src={avatar} className={classes.avatar} />
-        <Typography className={classes.name}>{name}</Typography>
-        <Typography className={classes.email}>{email}</Typography>
+        {
+          isLoaded ?
+            <Fragment>
+              <Typography className={classes.name}>{name}</Typography>
+              <Typography className={classes.email}>{email}</Typography>
+            </Fragment> :
+            <Typography className={classes.loading}>Загрузка данных</Typography>
+        }
       </Paper>
     </Fragment>
   );
