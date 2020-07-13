@@ -1,10 +1,9 @@
 import React, { Fragment, useState } from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
 import { Switch, Route } from 'react-router-dom';
-import Header from '../../components/Header';
 import Menu from '../../components/ResponsiveMenu';
 import useStyles from './styles';
+
+import Profile from './Profile';
 
 function Cabinet(props) {
   const [isOpen, setOpen] = useState(false);
@@ -19,10 +18,12 @@ function Cabinet(props) {
         Menu
       </Menu>
       <div className={classes.content}>
-        <h1>CONTENT</h1>
+        <Switch>
+          <Route exact path="/cabinet" component={Profile} />
+        </Switch>
       </div>
     </Fragment>
   );
 }
 
-export default connect()(Cabinet);
+export default Cabinet;
