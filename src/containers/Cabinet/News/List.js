@@ -29,8 +29,6 @@ function ListNews(props) {
     setPage(0);
   };
 
-  list.reverse();
-
   return (
     <Table size="small">
       <TableHead>

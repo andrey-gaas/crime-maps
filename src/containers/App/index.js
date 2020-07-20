@@ -65,7 +65,7 @@ App.propTypes = {
   fetchAllNews:        PropTypes.func.isRequired,
   fetchNews:           PropTypes.func.isRequired,
   setActiveNews:       PropTypes.func.isRequired,
-  fetchNewsForCabinet: PropTypes.func.isRequired,
+  fetchCabinetNews:    PropTypes.func.isRequired,
   fetchCities:         PropTypes.func.isRequired,
 };
 
@@ -87,7 +87,7 @@ const mapDispatchToProps = dispatch => bindActionCreators({
   fetchAllNews:        newsAC.fetchAllNews,
   fetchNews:           newsAC.fetchNews,
   setActiveNews:       newsAC.setActiveNews,
-  fetchNewsForCabinet: newsAC.fetchNewsForCabinet,
+  fetchCabinetNews:    newsAC.fetchCabinetNews,
   fetchCities:         citiesAC.fetchCities,
 }, dispatch);
 

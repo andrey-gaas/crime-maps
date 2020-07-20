@@ -98,7 +98,7 @@ const mapStateToProps = ({ map, news }) => ({
   zoom:      map.zoom,
   geodata:   map.geodata,
   showTypes: map.showTypes,
-  news:      news.allNews,
+  news:      news.news,
 });
 
 export default connect(mapStateToProps)(Map);

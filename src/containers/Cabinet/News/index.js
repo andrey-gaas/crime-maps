@@ -21,19 +21,15 @@ function News(props) {
   const [selectedCity, changeSelectedCity] = useState(selectedCityId);
 
   const classes = useStyles();
-  const { fetchNewsForCabinet, fetchCities, fetchAllNews } = useContext(Context);
+  const { fetchCabinetNews, fetchCities } = useContext(Context);
 
   useEffect(() => {
-    fetchNewsForCabinet();
-  }, [fetchNewsForCabinet]);
+    fetchCabinetNews(selectedCity);
+  }, [fetchCabinetNews, selectedCity]);
 
   useEffect(() => {
     if (isCityLoading) fetchCities();
   }, [isCityLoading, fetchCities]);
-
-  useEffect(() => {
-    fetchAllNews();
-  }, [fetchAllNews]);
 
   return (
     <Fragment>
@@ -83,7 +79,7 @@ News.defaultProps = {
 };
 
 const mapStateToProps = ({ news, system, cities }) => ({
-  news:           news.allNews,
+  news:           news.cabinetNews,
   isCityLoading:  system.cabinetNewsLoading,
   cities:         cities.data,
   citiesLoading:  cities.loading,
