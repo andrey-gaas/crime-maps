@@ -10,6 +10,7 @@ import Loader from '../../components/Loader';
 import useStyles from './styles';
 
 import Profile from './Profile';
+import News from './News';
 
 function Cabinet(props) {
   const { role } = props;
@@ -30,6 +31,7 @@ function Cabinet(props) {
       <div className={classes.content}>
         <Switch>
           <Route exact path="/cabinet" component={Profile} />
+          <Route path="/cabinet/news" component={News} />
         </Switch>
       </div>
     </Fragment>

@@ -17,7 +17,7 @@ import {
 import { changeSystemField } from '../../store/AC/system';
 import { changeField } from '../../store/AC/forms';
 import { signInValidate, signUpValidate, fetchUserData } from '../../store/AC/user';
-import { fetchAllNews, fetchNews, setActiveNews } from '../../store/AC/news';
+import { fetchAllNews, fetchNews, setActiveNews, fetchNewsForCabinet } from '../../store/AC/news';
 
 import Index from '../Index';
 import Main from '../Main';
@@ -43,6 +43,7 @@ function App(props) {
     fetchAllNews,
     fetchNews,
     setActiveNews,
+    fetchNewsForCabinet,
   } = props;
 
   const contextValue = {
@@ -58,6 +59,7 @@ function App(props) {
     fetchAllNews,
     fetchNews,
     setActiveNews,
+    fetchNewsForCabinet,
   };
 
   navigator.geolocation.getCurrentPosition(setLocation, setLocationError);
@@ -83,21 +85,22 @@ function App(props) {
 }
 
 App.propTypes = {
-  isAuth:            PropTypes.bool.isRequired,
-  setLocation:       PropTypes.func.isRequired,
-  setLocationError:  PropTypes.func.isRequired,
-  changeCoordinates: PropTypes.func.isRequired,
-  changeZoom:        PropTypes.func.isRequired,
-  incrementZoom:     PropTypes.func.isRequired,
-  decrementZoom:     PropTypes.func.isRequired,
-  changeNewsTypes:   PropTypes.func.isRequired,
-  changeSystemField: PropTypes.func.isRequired,
-  changeField:       PropTypes.func.isRequired,
-  signInValidate:    PropTypes.func.isRequired,
-  signUpValidate:    PropTypes.func.isRequired,
-  fetchAllNews:      PropTypes.func.isRequired,
-  fetchNews:         PropTypes.func.isRequired,
-  setActiveNews:     PropTypes.func.isRequired,
+  isAuth:              PropTypes.bool.isRequired,
+  setLocation:         PropTypes.func.isRequired,
+  setLocationError:    PropTypes.func.isRequired,
+  changeCoordinates:   PropTypes.func.isRequired,
+  changeZoom:          PropTypes.func.isRequired,
+  incrementZoom:       PropTypes.func.isRequired,
+  decrementZoom:       PropTypes.func.isRequired,
+  changeNewsTypes:     PropTypes.func.isRequired,
+  changeSystemField:   PropTypes.func.isRequired,
+  changeField:         PropTypes.func.isRequired,
+  signInValidate:      PropTypes.func.isRequired,
+  signUpValidate:      PropTypes.func.isRequired,
+  fetchAllNews:        PropTypes.func.isRequired,
+  fetchNews:           PropTypes.func.isRequired,
+  setActiveNews:       PropTypes.func.isRequired,
+  fetchNewsForCabinet: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = ({ user }) => ({ isAuth: user.isAuth });
@@ -118,6 +121,7 @@ const mapDispatchToProps = dispatch => bindActionCreators({
   fetchAllNews,
   fetchNews,
   setActiveNews,
+  fetchNewsForCabinet,
 }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
