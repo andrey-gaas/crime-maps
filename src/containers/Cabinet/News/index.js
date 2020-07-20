@@ -1,4 +1,4 @@
-import React, { Fragment, useContext, useEffect } from 'react';
+import React, { Fragment, useContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Typography, Button, Paper } from '@material-ui/core';
@@ -16,6 +16,9 @@ function News(props) {
     citiesLoading,
     selectedCityId,
   } = props;
+
+  const [selectedCity, changeSelectedCity] = useState(selectedCityId);
+
   const classes = useStyles();
   const { fetchNewsForCabinet, fetchCities } = useContext(Context);
 
@@ -41,7 +44,9 @@ function News(props) {
             <Select
               isLoading={citiesLoading}
               cities={cities}
-              selectedCityId={selectedCityId}
+              value={selectedCity}
+              onChange={changeSelectedCity}
+              defaultValue={selectedCityId}
             />
           </div>
         </div>

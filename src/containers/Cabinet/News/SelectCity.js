@@ -9,27 +9,36 @@ import {
 } from '@material-ui/core';
 
 function SelectCity(props) {
-  const { cities, isLoading, selectedCityId } = props;
+  const { cities, isLoading, value, onChange, defaultValue } = props;
+  const handleChange = e => onChange(e.target.value);
 
   return !isLoading ?
-    <FormControl>
-      <InputLabel id="demo-simple-select-outlined-label">Город</InputLabel>
+    <FormControl variant="outlined">
+      <InputLabel id="cabinet-city-select">Город</InputLabel>
       <Select
-        labelId="demo-simple-select-outlined-label"
-        label="Age"
+        labelId="cabinet-city-select"
+        label="Город"
+        defaultValue={defaultValue}
+        value={value}
+        onChange={handleChange}
       >
-        <MenuItem value={1}>1</MenuItem>
-        <MenuItem value={2}>2</MenuItem>
-        <MenuItem value={3}>3</MenuItem>
+        {
+          cities.map(
+            city =>
+              <MenuItem key={city.id} value={city.id}>{city.name}</MenuItem>
+          )
+        }
       </Select>
     </FormControl> :
     <Typography variant="subtitle1">Загрузка списка городов...</Typography>
 }
 
 SelectCity.propTypes = {
-  cities:         PropTypes.array.isRequired,
-  isLoading:      PropTypes.bool.isRequired,
-  selectedCityId: PropTypes.number.isRequired,
+  cities:       PropTypes.array.isRequired,
+  isLoading:    PropTypes.bool.isRequired,
+  onChange:     PropTypes.func.isRequired,
+  value:        PropTypes.number.isRequired,
+  defaultValue: PropTypes.number.isRequired,
 };
 
 export default SelectCity;

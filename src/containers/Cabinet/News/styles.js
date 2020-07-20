@@ -11,7 +11,6 @@ export default makeStyles(theme => ({
   header: {
     display: 'flex',
     justifyContent: 'space-between',
-    alignItems: 'center',
   },
   selectContainer: {
     '& > div': {
