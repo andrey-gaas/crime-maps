@@ -1,17 +1,18 @@
 import React, { Fragment, useContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Typography, Button, Paper } from '@material-ui/core';
+import { Typography, Button, Paper, Divider } from '@material-ui/core';
 import Context from '../../../Context';
 import Header from '../../../components/Header';
 import Loader from '../../../components/Loader';
 import Select from './SelectCity';
+import List from './List';
 import useStyles from './styles';
 
 function News(props) {
   const {
-    /* news, */
-    isLoading,
+    news,
+    isCityLoading,
     cities,
     citiesLoading,
     selectedCityId,
@@ -20,15 +21,19 @@ function News(props) {
   const [selectedCity, changeSelectedCity] = useState(selectedCityId);
 
   const classes = useStyles();
-  const { fetchNewsForCabinet, fetchCities } = useContext(Context);
+  const { fetchNewsForCabinet, fetchCities, fetchAllNews } = useContext(Context);
 
   useEffect(() => {
     fetchNewsForCabinet();
   }, [fetchNewsForCabinet]);
 
   useEffect(() => {
-    if (isLoading) fetchCities();
-  }, [isLoading, fetchCities]);
+    if (isCityLoading) fetchCities();
+  }, [isCityLoading, fetchCities]);
+
+  useEffect(() => {
+    fetchAllNews();
+  }, [fetchAllNews]);
 
   return (
     <Fragment>
@@ -50,13 +55,16 @@ function News(props) {
             />
           </div>
         </div>
+        <Divider />
         {
-          isLoading &&
-          <Typography variant="h6" className={classes.loadingText}>
-            Загрузка списка новостей
-            <Loader />
-          </Typography>
+          news.length ?
+            <List list={news} />:
+            <Typography variant="subtitle1" className={classes.loadingText}>
+              Загрузка списка новостей
+              <Loader />
+            </Typography>
         }
+        
       </Paper>
     </Fragment>
   );
@@ -64,19 +72,19 @@ function News(props) {
 
 News.propTypes = {
   news:           PropTypes.array.isRequired,
-  isLoading:      PropTypes.bool,
+  isCityLoading:  PropTypes.bool,
   cities:         PropTypes.array.isRequired,
   citiesLoading:  PropTypes.bool.isRequired,
   selectedCityId: PropTypes.number.isRequired,
 };
 
 News.defaultProps = {
-  isLoading: true,
+  isCityLoading: true,
 };
 
 const mapStateToProps = ({ news, system, cities }) => ({
   news:           news.allNews,
-  isLoading:      system.cabinetNewsLoading,
+  isCityLoading:  system.cabinetNewsLoading,
   cities:         cities.data,
   citiesLoading:  cities.loading,
   selectedCityId: cities.selectedCityId,

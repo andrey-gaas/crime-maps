@@ -6,11 +6,12 @@ export default makeStyles(theme => ({
   },
   newsContainer: {
     margin: theme.spacing(2),
-    padding: theme.spacing(2),
   },
   header: {
     display: 'flex',
     justifyContent: 'space-between',
+    alignItems: 'center',
+    padding: theme.spacing(2),
   },
   selectContainer: {
     '& > div': {
@@ -21,6 +22,7 @@ export default makeStyles(theme => ({
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
+    padding: theme.spacing(3),
     color: '#999',
   },
 }));
