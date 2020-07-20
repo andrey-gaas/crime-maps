@@ -1,8 +1,8 @@
 import {
-  ADD,
+  SET_CITIES,
   MODAL,
-  ERROR,
-  LOADING,
+  SET_CITY_ERROR,
+  SET_CITIES_LOADING,
   CHANGE_SELECTED_CITY,
 } from '../actions/cities';
 
@@ -16,13 +16,13 @@ const initialState = {
 
 function cities(state = initialState, action) {
   switch(action.type) {
-    case ADD:
+    case SET_CITIES:
       return {...state, data: action.cities};
     case MODAL:
       return {...state, isSelectorOpen: action.isOpen};
-    case ERROR:
+    case SET_CITY_ERROR:
       return {...state, error: action.error};
-    case LOADING:
+    case SET_CITIES_LOADING:
       return {...state, loading: action.loading};
     case CHANGE_SELECTED_CITY:
       return {...state, selectedCityId: action.id};

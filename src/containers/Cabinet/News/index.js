@@ -17,11 +17,15 @@ function News(props) {
     selectedCityId,
   } = props;
   const classes = useStyles();
-  const { fetchNewsForCabinet } = useContext(Context);
+  const { fetchNewsForCabinet, fetchCities } = useContext(Context);
 
   useEffect(() => {
     fetchNewsForCabinet();
   }, [fetchNewsForCabinet]);
+
+  useEffect(() => {
+    if (isLoading) fetchCities();
+  }, [isLoading, fetchCities]);
 
   return (
     <Fragment>

@@ -4,6 +4,7 @@ import signUp from './signUp';
 import news from './news';
 import userData from './userData';
 import cabinet from './cabinet';
+import cities from './cities';
 
 function* rootSaga() {
   yield all([
@@ -12,6 +13,7 @@ function* rootSaga() {
     news(),
     userData(),
     cabinet(),
+    cities(),
   ]);
 }
 

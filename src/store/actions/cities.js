@@ -1,7 +1,10 @@
-export const ADD = 'ADD';
-export const FETCH_CITIES = 'FETCH_CITIES';
+export const SET_CITIES = 'SET_CITIES';
 export const MODAL = 'MODAL';
-export const ERROR = 'ERROR';
-export const LOADING = 'LOADING';
+export const SET_CITY_ERROR = 'SET_CITY_ERROR';
+export const SET_CITIES_LOADING = 'SET_CITIES_LOADING';
 export const CHANGE_CITY = 'CHANGE_CITY';
 export const CHANGE_SELECTED_CITY = 'CHANGE_SELECTED_CITY';
+
+export const FETCH_CITIES = 'FETCH_CITIES';
+export const FETCH_CITIES_SUCCESS = 'FETCH_CITIES_SUCCESS';
+export const FETCH_CITIES_FAIL = 'FETCH_CITIES_FAIL';

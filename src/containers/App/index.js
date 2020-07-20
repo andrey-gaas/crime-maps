@@ -10,6 +10,7 @@ import * as systemAC from '../../store/AC/system';
 import * as formsAC from '../../store/AC/forms';
 import * as userAC from '../../store/AC/user';
 import * as newsAC from '../../store/AC/news';
+import * as citiesAC from '../../store/AC/cities';
 
 import Index from '../Index';
 import Main from '../Main';
@@ -65,27 +66,29 @@ App.propTypes = {
   fetchNews:           PropTypes.func.isRequired,
   setActiveNews:       PropTypes.func.isRequired,
   fetchNewsForCabinet: PropTypes.func.isRequired,
+  fetchCities:         PropTypes.func.isRequired,
 };
 
 const mapStateToProps = ({ user }) => ({ isAuth: user.isAuth });
 
 const mapDispatchToProps = dispatch => bindActionCreators({
-  fetchUserData      : userAC.fetchUserData,
-  signInValidate     : userAC.signInValidate,
-  signUpValidate     : userAC.signUpValidate,
-  setLocation        : mapAC.setLocation,
-  setLocationError   : mapAC.setLocationError,
-  changeCoordinates  : mapAC.changeCoordinates,
-  changeZoom         : mapAC.changeZoom,
-  incrementZoom      : mapAC.incrementZoom,
-  decrementZoom      : mapAC.decrementZoom,
-  changeNewsTypes    : mapAC.changeNewsTypes,
-  changeSystemField  : systemAC.changeSystemField,
-  changeField        : formsAC.changeField,
-  fetchAllNews       : newsAC.fetchAllNews,
-  fetchNews          : newsAC.fetchNews,
-  setActiveNews      : newsAC.setActiveNews,
+  fetchUserData:       userAC.fetchUserData,
+  signInValidate:      userAC.signInValidate,
+  signUpValidate:      userAC.signUpValidate,
+  setLocation:         mapAC.setLocation,
+  setLocationError:    mapAC.setLocationError,
+  changeCoordinates:   mapAC.changeCoordinates,
+  changeZoom:          mapAC.changeZoom,
+  incrementZoom:       mapAC.incrementZoom,
+  decrementZoom:       mapAC.decrementZoom,
+  changeNewsTypes:     mapAC.changeNewsTypes,
+  changeSystemField:   systemAC.changeSystemField,
+  changeField:         formsAC.changeField,
+  fetchAllNews:        newsAC.fetchAllNews,
+  fetchNews:           newsAC.fetchNews,
+  setActiveNews:       newsAC.setActiveNews,
   fetchNewsForCabinet: newsAC.fetchNewsForCabinet,
+  fetchCities:         citiesAC.fetchCities,
 }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
