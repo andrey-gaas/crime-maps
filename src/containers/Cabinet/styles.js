@@ -11,4 +11,12 @@ export default makeStyles(theme => ({
       marginLeft: WIDTH_PERSON_MENU,
     },
   },
+  loader: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: theme.spacing(2),
+    fontSize: '1.5em',
+    color: '#888',
+  },
 }));
