@@ -5,19 +5,11 @@ import { bindActionCreators } from 'redux';
 import { CssBaseline } from '@material-ui/core';
 import { Switch, Route } from 'react-router-dom';
 import Context from '../../Context';
-import {
-  setLocation,
-  setLocationError,
-  changeCoordinates,
-  changeZoom,
-  incrementZoom,
-  decrementZoom,
-  changeNewsTypes,
-} from '../../store/AC/map';
-import { changeSystemField } from '../../store/AC/system';
-import { changeField } from '../../store/AC/forms';
-import { signInValidate, signUpValidate, fetchUserData } from '../../store/AC/user';
-import { fetchAllNews, fetchNews, setActiveNews, fetchNewsForCabinet } from '../../store/AC/news';
+import * as mapAC from '../../store/AC/map';
+import * as systemAC from '../../store/AC/system';
+import * as formsAC from '../../store/AC/forms';
+import * as userAC from '../../store/AC/user';
+import * as newsAC from '../../store/AC/news';
 
 import Index from '../Index';
 import Main from '../Main';
@@ -31,36 +23,8 @@ function App(props) {
     fetchUserData,
     setLocation,
     setLocationError,
-    changeCoordinates,
-    changeZoom,
-    incrementZoom,
-    decrementZoom,
-    changeNewsTypes,
-    changeSystemField,
-    changeField,
-    signInValidate,
-    signUpValidate,
-    fetchAllNews,
-    fetchNews,
-    setActiveNews,
-    fetchNewsForCabinet,
+    ...contextValue
   } = props;
-
-  const contextValue = {
-    changeCoordinates,
-    changeZoom,
-    incrementZoom,
-    decrementZoom,
-    changeNewsTypes,
-    changeSystemField,
-    changeField,
-    signInValidate,
-    signUpValidate,
-    fetchAllNews,
-    fetchNews,
-    setActiveNews,
-    fetchNewsForCabinet,
-  };
 
   navigator.geolocation.getCurrentPosition(setLocation, setLocationError);
 
@@ -106,22 +70,22 @@ App.propTypes = {
 const mapStateToProps = ({ user }) => ({ isAuth: user.isAuth });
 
 const mapDispatchToProps = dispatch => bindActionCreators({
-  fetchUserData,
-  setLocation,
-  setLocationError,
-  changeCoordinates,
-  changeZoom,
-  incrementZoom,
-  decrementZoom,
-  changeNewsTypes,
-  changeSystemField,
-  changeField,
-  signInValidate,
-  signUpValidate,
-  fetchAllNews,
-  fetchNews,
-  setActiveNews,
-  fetchNewsForCabinet,
+  fetchUserData      : userAC.fetchUserData,
+  signInValidate     : userAC.signInValidate,
+  signUpValidate     : userAC.signUpValidate,
+  setLocation        : mapAC.setLocation,
+  setLocationError   : mapAC.setLocationError,
+  changeCoordinates  : mapAC.changeCoordinates,
+  changeZoom         : mapAC.changeZoom,
+  incrementZoom      : mapAC.incrementZoom,
+  decrementZoom      : mapAC.decrementZoom,
+  changeNewsTypes    : mapAC.changeNewsTypes,
+  changeSystemField  : systemAC.changeSystemField,
+  changeField        : formsAC.changeField,
+  fetchAllNews       : newsAC.fetchAllNews,
+  fetchNews          : newsAC.fetchNews,
+  setActiveNews      : newsAC.setActiveNews,
+  fetchNewsForCabinet: newsAC.fetchNewsForCabinet,
 }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
