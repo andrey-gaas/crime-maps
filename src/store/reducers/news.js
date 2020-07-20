@@ -2,7 +2,7 @@ import * as actions from '../actions/news';
 
 const initialState = {
   news: [],
-  cabinetNews: [],
+  cabinetNews: null,
   activeNews: null,
 };
 

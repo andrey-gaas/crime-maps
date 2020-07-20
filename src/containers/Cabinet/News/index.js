@@ -53,12 +53,19 @@ function News(props) {
         </div>
         <Divider />
         {
-          news.length ?
-            <List list={news} />:
+          news === null &&
             <Typography variant="subtitle1" className={classes.loadingText}>
               Загрузка списка новостей
               <Loader />
             </Typography>
+        }
+        { news && news.length ? <List list={news} /> : null }
+        {
+          news && !news.length ? 
+            <Typography variant="subtitle1" className={classes.loadingText}>
+              Новостей нет
+            </Typography>
+            : null
         }
         
       </Paper>
@@ -67,7 +74,7 @@ function News(props) {
 }
 
 News.propTypes = {
-  news:           PropTypes.array.isRequired,
+  news:           PropTypes.array,
   isCityLoading:  PropTypes.bool,
   cities:         PropTypes.array.isRequired,
   citiesLoading:  PropTypes.bool.isRequired,
