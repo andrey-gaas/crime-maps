@@ -7,6 +7,7 @@ import Header from '../../../components/Header';
 import Loader from '../../../components/Loader';
 import Select from './SelectCity';
 import List from './List';
+import CreateNews from './CreateNews';
 import useStyles from './styles';
 
 function News(props) {
@@ -19,6 +20,7 @@ function News(props) {
   } = props;
 
   const [selectedCity, changeSelectedCity] = useState(selectedCityId);
+  const [isOpen, setOpen] = useState(true);
 
   const classes = useStyles();
   const { fetchCabinetNews, fetchCities } = useContext(Context);
@@ -36,7 +38,7 @@ function News(props) {
       <Header>
         <Typography variant="subtitle1">Новости</Typography>
         <div className={classes.grow} />
-        <Button variant="contained" color="primary">Создать</Button>
+        <Button variant="contained" color="primary" onClick={() => setOpen(true)}>Создать</Button>
       </Header>
       <Paper className={classes.newsContainer}>
         <div className={classes.header}>
@@ -69,6 +71,8 @@ function News(props) {
         }
         
       </Paper>
+
+      <CreateNews isOpen={isOpen} onClose={() => setOpen(false)} />
     </Fragment>
   );
 }
