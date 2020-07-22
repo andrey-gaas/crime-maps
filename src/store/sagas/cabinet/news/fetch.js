@@ -8,9 +8,9 @@ import {
 function* fetch(props) {
   const { cityId } = props;
   const { cities } = yield select(({ cities }) => ({ cities: cities.data }));
-
   const selectedCity = cities.find(city => city.id === cityId);
 
+  yield put(setCabinetNews(null));
   try {
     const result = yield call(NewsApi.fetchAll, selectedCity.title);
 
