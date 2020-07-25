@@ -62,4 +62,13 @@ export default makeStyles(theme => ({
     marginLeft: theme.spacing(1),
     marginTop: theme.spacing(1),
   },
+
+  /* Source */
+  doneText: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    margin: theme.spacing(2),
+    color: '#777',
+  },
 }));

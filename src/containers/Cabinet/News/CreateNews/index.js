@@ -18,6 +18,7 @@ import Info from './Info';
 import Media from './Media';
 import Position from './Position';
 import Sources from './Sources';
+import Done from './Done';
 
 const steps = ['Информация', 'Медиафайлы', 'Местоположение', 'Источники', 'Готово'];
 
@@ -31,6 +32,8 @@ function getContent(activeStep) {
       return <Position />;
     case 3:
       return <Sources />;
+    case 4:
+      return <Done />;
     default:
       return null;
   }
@@ -38,7 +41,7 @@ function getContent(activeStep) {
 function Create(props) {
   const { isOpen, onClose } = props;
   const classes = useStyles();
-  const [activeStep, setActiveStep] = useState(0);
+  const [activeStep, setActiveStep] = useState(4);
 
   const done = () => {
     onClose();
@@ -76,7 +79,7 @@ function Create(props) {
 
       <DialogActions>
         {
-          activeStep !== steps.length - 1 &&
+          activeStep < 3 &&
           <div className={classes.buttonsContainer}>
             <Button
               variant="contained"
@@ -95,9 +98,29 @@ function Create(props) {
             </Button>
           </div>
         }
+        {
+          activeStep === 3 &&
+          <div className={classes.buttonsContainer}>
+            <Button
+              variant="contained"
+              color="secondary"
+              onClick={() => setActiveStep(activeStep - 1)}
+              disabled={!activeStep}
+            >
+              Назад
+            </Button>
+            <Button
+              variant="contained"
+              color="secondary"
+              onClick={() => setActiveStep(activeStep + 1)}
+            >
+              Создать новость
+            </Button>
+          </div>
+        }
 
         {
-          activeStep === steps.length - 1 &&
+          activeStep === 4 &&
           <Button
             variant="contained"
             color="secondary"
