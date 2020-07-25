@@ -3,18 +3,19 @@ import { changeSystemField } from '../../../../AC/system';
 import { createNewsRequest } from '../../../../AC/news';
 
 function* validation() {
-  const { title, text, city, type, date, time, coords, sources } = yield select(({ forms }) => ({
+  const { title, text, cityId, type, date, time, coords, sources, cities } = yield select(({ forms, cities }) => ({
     title:   forms.createNewsTitle,
     text:    forms.createNewsText,
-    city:    forms.createNewsCity,
+    cityId:  forms.createNewsCity,
     type:    forms.createNewsType,
     date:    forms.createNewsDate,
     time:    forms.createNewsTime,
     coords:  forms.createNewsCoords,
     sources: forms.createNewsSources,
+    cities:  cities.data,
   }));
 
-  if (!title || !text || (!city && city !== 0) || (!type && type !== 0) || !date || !time) {
+  if (!title || !text || (!cityId && cityId !== 0) || (!type && type !== 0) || !date || !time) {
     yield put(changeSystemField('createNewsSnackbar', 'Вернитесь на первый шаг и заполните пустые поля.'));
     yield delay(5000);
     yield put(changeSystemField('createNewsSnackbar', ''));
@@ -23,10 +24,11 @@ function* validation() {
     yield delay(5000);
     yield put(changeSystemField('createNewsSnackbar', ''));
   } else {
+    const city = cities.find(city => city.id === cityId);
     yield put(createNewsRequest({
       title,
       text,
-      city,
+      city: city.title,
       type,
       date,
       time,
