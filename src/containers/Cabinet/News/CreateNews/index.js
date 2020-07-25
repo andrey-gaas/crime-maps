@@ -17,6 +17,7 @@ import useStyles from './styles';
 import Info from './Info';
 import Media from './Media';
 import Position from './Position';
+import Sources from './Sources';
 
 const steps = ['Информация', 'Медиафайлы', 'Местоположение', 'Источники', 'Готово'];
 
@@ -28,8 +29,8 @@ function getContent(activeStep) {
       return <Media />;
     case 2:
       return <Position />;
-    /* case 3:
-      return <Source />; */
+    case 3:
+      return <Sources />;
     default:
       return null;
   }
