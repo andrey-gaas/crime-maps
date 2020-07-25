@@ -12,6 +12,12 @@ class NewsApi {
       .then(response => response)
       .catch(({ response }) => ({ ...response }));
   };
+
+  static create(data) {
+    return axios.post('/api/news/', data)
+      .then(response => response)
+      .catch(({ response }) => ({ ...response }));
+  };
 }
 
 export default NewsApi;

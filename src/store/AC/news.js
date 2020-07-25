@@ -10,3 +10,4 @@ export const fetchCabinetNewsFail = () => ({ type: types.FETCH_CABINET_NEWS_FAIL
 export const setCabinetNews = news => ({ type: types.SET_CABINET_NEWS, news });
 
 export const createNewsValidation = () => ({ type: types.CREATE_NEWS_VALIDATION });
+export const createNewsRequest = data => ({ type: types.CREATE_NEWS_REQUEST, data });

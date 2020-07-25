@@ -74,8 +74,8 @@ router.post('/', async (req, res) => {
 
     await news.save();
     res.send('OK');
-
   } catch(e) {
+    console.log(e.message);
     res.status(500).send('Неизвестная ошибка. Перезагрузите страницу.');
   }
 });
