@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import {
   Dialog,
   DialogTitle,
@@ -12,6 +13,8 @@ import {
   Button,
 } from '@material-ui/core';
 import { Close as CloseIcon } from '@material-ui/icons';
+import Context from '../../../../Context';
+import Loader from '../../../../components/Loader';
 import useStyles from './styles';
 
 import Info from './Info';
@@ -39,9 +42,10 @@ function getContent(activeStep) {
   }
 }
 function Create(props) {
-  const { isOpen, onClose } = props;
+  const { isOpen, onClose, requestStatus } = props;
+  const { createNews } = useContext(Context);
   const classes = useStyles();
-  const [activeStep, setActiveStep] = useState(4);
+  const [activeStep, setActiveStep] = useState(0);
 
   const done = () => {
     onClose();
@@ -105,16 +109,19 @@ function Create(props) {
               variant="contained"
               color="secondary"
               onClick={() => setActiveStep(activeStep - 1)}
-              disabled={!activeStep}
             >
               Назад
             </Button>
             <Button
               variant="contained"
               color="secondary"
-              onClick={() => setActiveStep(activeStep + 1)}
+              onClick={createNews}
+              disabled={requestStatus === 'request'}
             >
-              Создать новость
+              {
+                requestStatus === 'request' ?
+                  <Loader /> : 'Создать новость'
+              }
             </Button>
           </div>
         }
@@ -135,8 +142,17 @@ function Create(props) {
 }
 
 Create.propTypes = {
-  isOpen: PropTypes.bool.isRequired,
-  onClose: PropTypes.func.isRequired,
+  isOpen:        PropTypes.bool.isRequired,
+  onClose:       PropTypes.func.isRequired,
+  requestStatus: PropTypes.string,
 };
 
-export default Create;
+Create.defaultProps = {
+  requestStatus: '',
+};
+
+const mapStateToProps = ({ system }) => ({
+  requestStatus: system.createNewsRequestStatus,
+});
+
+export default connect(mapStateToProps)(Create);
