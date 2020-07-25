@@ -37,10 +37,11 @@ function Info(props) {
     changeField(target.name, target.value);
   };
 
+  // eslint-disable-next-line
   useEffect(() => {
-    changeField('createNewsDate', date);
+    changeField('createNewsDate', date); 
     changeField('createNewsTime', time);
-  }, []);
+  }, [changeField, date, time]);
 
   return (
     <Fragment>
