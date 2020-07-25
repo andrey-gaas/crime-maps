@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import {
@@ -51,6 +51,12 @@ function Create(props) {
     onClose();
     setActiveStep(0);
   };
+
+  useEffect(() => {
+    if (requestStatus === 'success') {
+      setActiveStep(4);
+    }
+  }, [requestStatus]);
 
   return (
     <Dialog

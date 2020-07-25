@@ -1,5 +1,6 @@
 import { put, call } from 'redux-saga/effects';
 import NewsApi from '../../../../../api/news';
+import { createNewsSuccess, createNewsFail } from '../../../../AC/news';
 
 function* request({ data }) {
   const { title, text, city, type, date, time, coords, sources, media } = data;
@@ -22,9 +23,13 @@ function* request({ data }) {
   try {
     const result = yield call(NewsApi.create, requestBody);
 
-    console.log(result);
+    if (result.status === 200) {
+      yield put(createNewsSuccess());
+    } else {
+      yield put(createNewsFail(result.status));
+    }
   } catch(e) {
-
+    console.error(e.message);
   }
 }
 

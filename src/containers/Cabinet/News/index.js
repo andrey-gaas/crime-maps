@@ -20,7 +20,7 @@ function News(props) {
   } = props;
 
   const [selectedCity, changeSelectedCity] = useState(selectedCityId);
-  const [isOpen, setOpen] = useState(true);
+  const [isOpen, setOpen] = useState(false);
 
   const classes = useStyles();
   const { fetchCabinetNews, fetchCities } = useContext(Context);
