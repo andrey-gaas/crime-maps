@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { CssBaseline } from '@material-ui/core';
+import { CssBaseline, Snackbar } from '@material-ui/core';
 import { Switch, Route } from 'react-router-dom';
 import Context from '../../Context';
 import * as mapAC from '../../store/AC/map';
@@ -21,6 +21,7 @@ import Cabinet from '../Cabinet';
 function App(props) {
   const {
     isAuth,
+    snackbar,
     fetchUserData,
     setLocation,
     setLocationError,
@@ -45,11 +46,21 @@ function App(props) {
         <Route path="/sign-up" exact component={SignUp} />
         <Route path="/cabinet" component={Cabinet} />
       </Switch>
+
+      <Snackbar
+        open={!!snackbar}
+        message={snackbar}
+        anchorOrigin={{
+          vertical: 'bottom',
+          horizontal: 'left',
+        }}
+      />
     </Context.Provider>
   );
 }
 
 App.propTypes = {
+  snackbar:            PropTypes.string.isRequired,
   isAuth:              PropTypes.bool.isRequired,
   setLocation:         PropTypes.func.isRequired,
   setLocationError:    PropTypes.func.isRequired,
@@ -70,7 +81,10 @@ App.propTypes = {
   fetchCities:         PropTypes.func.isRequired,
 };
 
-const mapStateToProps = ({ user }) => ({ isAuth: user.isAuth });
+const mapStateToProps = ({ user, system }) => ({
+  isAuth:   user.isAuth,
+  snackbar: system.snackbar
+});
 
 const mapDispatchToProps = dispatch => bindActionCreators({
   fetchUserData:       userAC.fetchUserData,

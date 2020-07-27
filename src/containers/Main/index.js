@@ -6,7 +6,6 @@ import {
   Fab,
   ButtonGroup,
   Button,
-  Snackbar,
 } from '@material-ui/core';
 import {
   NearMe as NearMeIcon,
@@ -25,7 +24,6 @@ function Main(props) {
     geodata,
     zoom,
     location,
-    snackbar,
     history,
   } = props;
 
@@ -81,15 +79,6 @@ function Main(props) {
       </div>
       <Map redirect={history.push} />
 
-      <Snackbar
-        open={!!snackbar}
-        message={snackbar}
-        anchorOrigin={{
-          vertical: 'top',
-          horizontal: 'center',
-        }}
-      />
-
       <Route path="/map/news/:newsId" render={({ match }) => <News newsId={match.params.newsId} redirect={history.push} />} />
     </div>
   );
@@ -99,17 +88,11 @@ Main.propTypes = {
   geodata:  PropTypes.object,
   zoom:     PropTypes.number.isRequired,
   location: PropTypes.object.isRequired,
-  snackbar: PropTypes.string,
-};
-
-Main.defaultProps = {
-  snackbar: '',
 };
 
 const mapStateToProps = ({ map, system }) => ({
   geodata:  map.geodata,
   zoom:     map.zoom,
-  snackbar: system.newsFetchSnackbar,
 });
 
 export default connect(mapStateToProps)(Main);

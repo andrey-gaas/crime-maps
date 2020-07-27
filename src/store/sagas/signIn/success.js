@@ -9,7 +9,7 @@ function* success({ data }) {
   const token = cookie.get('token');
   axios.defaults.headers.common['Authorization'] = token;
   yield put(changeField('signInButtonDisabled', false));
-  yield put(changeSystemField('signInSnackbar', ''));
+  yield put(changeSystemField('snackbar', ''));
   yield put(changeField('signInEmail', ''));
   yield put(changeField('signInPassword', ''));
 

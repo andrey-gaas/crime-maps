@@ -4,9 +4,9 @@ import { setCabinetNews } from '../../../AC/news';
 
 function* fail() {
   yield put(setCabinetNews([]));
-  yield put(changeSystemField('cabinetNewsSnackbar', 'Ошибка при загрузке новостей'));
+  yield put(changeSystemField('snackbar', 'Ошибка при загрузке новостей'));
   yield delay(4000);
-  yield put(changeSystemField('cabinetNewsSnackbar', ''));
+  yield put(changeSystemField('snackbar', ''));
 }
 
 export default fail;

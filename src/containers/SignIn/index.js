@@ -7,7 +7,6 @@ import {
   Typography,
   TextField,
   Button,
-  Snackbar,
 } from '@material-ui/core';
 import Context from '../../Context';
 import logo from '../../images/logo_dark.svg';
@@ -16,7 +15,6 @@ import useStyles from './styles';
 function SignIn(props) {
   const {
     isAuth,
-    snackbar,
     email,
     emailError,
     password,
@@ -100,21 +98,11 @@ function SignIn(props) {
           </Button>
         </Link>
       </div>
-
-      <Snackbar
-        open={!!snackbar}
-        message={snackbar}
-        anchorOrigin={{
-          vertical: 'bottom',
-          horizontal: 'left',
-        }}
-      />
     </div>
   );
 }
 
 SignIn.propTypes = {
-  snackbar:      PropTypes.string,
   email:         PropTypes.string,
   emailError:    PropTypes.string,
   password:      PropTypes.string,
@@ -124,7 +112,6 @@ SignIn.propTypes = {
 };
 
 SignIn.defaultProps = {
-  snackbar:      '',
   email:         '',
   emailError:    '',
   password:      '',
@@ -139,7 +126,6 @@ const mapStateToProps = ({ user, forms, system }) => ({
   password:      forms.signInPassword,
   passwordError: forms.signInPasswordError,
   isDisabled:    forms.signInButtonDisabled,
-  snackbar:      system.signInSnackbar,
 });
 
 export default connect(mapStateToProps)(SignIn);

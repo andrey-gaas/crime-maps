@@ -7,7 +7,6 @@ import {
   Typography,
   TextField,
   Button,
-  Snackbar,
 } from '@material-ui/core';
 import Context from '../../Context';
 import useStyles from './styles';
@@ -15,7 +14,6 @@ import logo from '../../images/logo_dark.svg';
 
 function SignUp(props) {
   const {
-    snackbar,
     isButtonDisabled,
     name,
     nameError,
@@ -111,21 +109,11 @@ function SignUp(props) {
           </Button>
         </Link>
       </div>
-
-      <Snackbar
-        open={!!snackbar}
-        message={snackbar}
-        anchorOrigin={{
-          vertical: 'bottom',
-          horizontal: 'left',
-        }}
-      />
     </div>
   );
 }
 
 SignUp.propTypes = {
-  snackbar:         PropTypes.string,
   name:             PropTypes.string,
   nameError:        PropTypes.string,
   email:            PropTypes.string,
@@ -146,8 +134,7 @@ SignUp.defaultProps = {
   isButtonDisabled: false,
 };
 
-const mapStateToProps = ({ system, forms, user }) => ({
-  snackbar:         system.signUpSnackbar,
+const mapStateToProps = ({ forms, user }) => ({
   name:             forms.signUpName,
   nameError:        forms.signUpNameError,
   email:            forms.signUpEmail,

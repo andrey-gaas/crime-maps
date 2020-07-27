@@ -16,13 +16,13 @@ function* validation() {
   }));
 
   if (!title || !text || (!cityId && cityId !== 0) || (!type && type !== 0) || !date || !time) {
-    yield put(changeSystemField('createNewsSnackbar', 'Вернитесь на первый шаг и заполните пустые поля.'));
+    yield put(changeSystemField('snackbar', 'Вернитесь на первый шаг и заполните пустые поля.'));
     yield delay(5000);
-    yield put(changeSystemField('createNewsSnackbar', ''));
+    yield put(changeSystemField('snackbar', ''));
   } else if (!coords || !coords.length) {
-    yield put(changeSystemField('createNewsSnackbar', 'Вернитесь на третий шаг и укажите место.'));
+    yield put(changeSystemField('snackbar', 'Вернитесь на третий шаг и укажите место.'));
     yield delay(5000);
-    yield put(changeSystemField('createNewsSnackbar', ''));
+    yield put(changeSystemField('snackbar', ''));
   } else {
     const city = cities.find(city => city.id === cityId);
     yield put(createNewsRequest({

@@ -4,9 +4,9 @@ import { changeField } from '../../AC/forms';
 
 function* fail({ message }) {
   yield put(changeField('signUpButtonDisabled', false));
-  yield put(changeSystemField('signUpSnackbar', message));
+  yield put(changeSystemField('snackbar', message));
   yield delay(4000);
-  yield put(changeSystemField('signUpSnackbar', ''));
+  yield put(changeSystemField('snackbar', ''));
 }
 
 export default fail;
