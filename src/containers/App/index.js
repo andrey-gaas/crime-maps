@@ -60,7 +60,7 @@ function App(props) {
 }
 
 App.propTypes = {
-  snackbar:            PropTypes.string.isRequired,
+  snackbar:            PropTypes.string,
   isAuth:              PropTypes.bool.isRequired,
   setLocation:         PropTypes.func.isRequired,
   setLocationError:    PropTypes.func.isRequired,
@@ -79,6 +79,10 @@ App.propTypes = {
   fetchCabinetNews:    PropTypes.func.isRequired,
   createNews:          PropTypes.func.isRequired,
   fetchCities:         PropTypes.func.isRequired,
+};
+
+App.defaultProps = {
+  snackbar: '',
 };
 
 const mapStateToProps = ({ user, system }) => ({
