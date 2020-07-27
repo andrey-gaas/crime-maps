@@ -23,7 +23,7 @@ function News(props) {
   const [isOpen, setOpen] = useState(false);
 
   const classes = useStyles();
-  const { fetchCabinetNews, fetchCities } = useContext(Context);
+  const { fetchCabinetNews, fetchCities, removeNews } = useContext(Context);
 
   useEffect(() => {
     fetchCabinetNews(selectedCity);
@@ -61,7 +61,7 @@ function News(props) {
               <Loader />
             </Typography>
         }
-        { news && news.length ? <List list={news} /> : null }
+        { news && news.length ? <List list={news} onRemove={removeNews} /> : null }
         {
           news && !news.length ? 
             <Typography variant="subtitle1" className={classes.loadingText}>

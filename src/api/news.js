@@ -18,6 +18,12 @@ class NewsApi {
       .then(response => response)
       .catch(({ response }) => ({ ...response }));
   };
+
+  static remove(id) {
+    return axios.delete(`/api/news/${id}`)
+      .then(response => response)
+      .catch(({ response }) => ({ ...response }));
+  }
 }
 
 export default NewsApi;

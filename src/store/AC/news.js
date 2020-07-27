@@ -13,3 +13,8 @@ export const createNewsValidation = () => ({ type: types.CREATE_NEWS_VALIDATION 
 export const createNewsRequest = data => ({ type: types.CREATE_NEWS_REQUEST, data });
 export const createNewsSuccess = () => ({ type: types.CREATE_NEWS_SUCCESS });
 export const createNewsFail = () => ({ type: types.CREATE_NEWS_FAIL });
+
+export const removeNews = id => ({ type: types.REMOVE_NEWS, id });
+export const removeNewsRequest = id => ({ type: types.REMOVE_NEWS_REQUEST, id });
+export const removeNewsSuccess = id => ({ type: types.REMOVE_NEWS_SUCCESS, id });
+export const removeNewsFail = status => ({ type: types.REMOVE_NEWS_FAIL, status });

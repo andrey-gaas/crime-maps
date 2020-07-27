@@ -16,7 +16,7 @@ import {
 } from '@material-ui/icons';
 
 function ListNews(props) {
-  const { list } = props;
+  const { list, onRemove } = props;
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
 
@@ -68,7 +68,7 @@ function ListNews(props) {
                 <IconButton>
                   <EditIcon />
                 </IconButton>
-                <IconButton>
+                <IconButton onClick={() => onRemove(news.id)}>
                   <DeleteIcon />
                 </IconButton>
               </TableCell>
@@ -98,7 +98,8 @@ function ListNews(props) {
 }
 
 ListNews.propTypes = {
-  list: PropTypes.array.isRequired,
+  list:     PropTypes.array.isRequired,
+  onRemove: PropTypes.func.isRequired,
 };
 
 export default ListNews;

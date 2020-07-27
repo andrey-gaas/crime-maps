@@ -14,6 +14,12 @@ export default function (state = initialState, action) {
       return { ...state, activeNews: action.news };
     case actions.SET_CABINET_NEWS:
       return { ...state, cabinetNews: action.news };
+    case actions.REMOVE_NEWS:
+      return {
+        ...state,
+        news: state.news.filter(news => news.id !== action.id),
+        cabinetNews: state.cabinetNews.filter(news => news.id !== action.id),
+      };
     default:
       return state;
   }
