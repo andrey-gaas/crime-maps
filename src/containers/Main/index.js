@@ -13,6 +13,7 @@ import {
   ZoomOut as ZoomOutIcon,
 } from '@material-ui/icons';
 import Context from '../../Context';
+import CitiesSelector from '../../components/CitiesSelector';
 import DesctopMenu from '../../components/DesctopMenu';
 import Map from '../../components/Map';
 import News from '../../components/News';
@@ -25,6 +26,7 @@ function Main(props) {
     zoom,
     location,
     history,
+    isSelectorOpen,
   } = props;
 
   const classes = useStyles();
@@ -58,6 +60,7 @@ function Main(props) {
   return (
     <div className={classes.root}>
       <DesctopMenu location={location} />
+      { isSelectorOpen && <CitiesSelector isOpen={isSelectorOpen} /> }
       <Fab
         color="primary"
         size="large"
@@ -90,9 +93,10 @@ Main.propTypes = {
   location: PropTypes.object.isRequired,
 };
 
-const mapStateToProps = ({ map, system }) => ({
-  geodata:  map.geodata,
-  zoom:     map.zoom,
+const mapStateToProps = ({ map, cities }) => ({
+  geodata:        map.geodata,
+  zoom:           map.zoom,
+  isSelectorOpen: cities.isSelectorOpen
 });
 
 export default connect(mapStateToProps)(Main);

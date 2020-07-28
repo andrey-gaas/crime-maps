@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import {
@@ -7,6 +7,7 @@ import {
   Tooltip,
 } from '@material-ui/core';
 import { Edit as EditIcon } from '@material-ui/icons';
+import Context from '../../Context';
 import useStyles from './styles';
 import emblems from '../../other/cityEmblems';
 
@@ -14,11 +15,9 @@ function Geolocation(props) {
   const {
     titleCity,
     city,
-    // loading,
   } = props;
+  const { toggleCities } = useContext(Context);
   const classes = useStyles();
-
-
 
   return (
     <div className={classes.root}>
@@ -28,7 +27,7 @@ function Geolocation(props) {
       <Typography variant="h6" className={classes.cityName}>{city}</Typography>
       <div className={classes.grow} />
       <Tooltip title="Изменить город">
-        <IconButton>
+        <IconButton onClick={toggleCities}>
           <EditIcon className={classes.changeCityButton} />
         </IconButton>
       </Tooltip>

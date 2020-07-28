@@ -81,6 +81,8 @@ App.propTypes = {
   createNews:          PropTypes.func.isRequired,
   removeNews:          PropTypes.func.isRequired,
   fetchCities:         PropTypes.func.isRequired,
+  changeCity:          PropTypes.func.isRequired,
+  toggleCities:        PropTypes.func.isRequired,
 };
 
 App.defaultProps = {
@@ -113,6 +115,8 @@ const mapDispatchToProps = dispatch => bindActionCreators({
   createNews:          newsAC.createNewsValidation,
   removeNews:          newsAC.removeNewsRequest,
   fetchCities:         citiesAC.fetchCities,
+  changeCity:          citiesAC.changeCity,
+  toggleCities:        citiesAC.toggleCitiesSelector,
 }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
