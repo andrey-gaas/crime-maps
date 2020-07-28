@@ -10,6 +10,7 @@ export default makeStyles(theme => ({
   buttonsContainer: {
     display: 'flex',
     justifyContent: 'space-between',
+    backgroundColor: '#fff',
   },
   button: {
     minWidth: 0,
