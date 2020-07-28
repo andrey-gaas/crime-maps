@@ -1,6 +1,6 @@
 import { call, put } from 'redux-saga/effects';
-import { signUpSuccess, signUpFail } from '../../AC/user';
-import UserApi from '../../../api/user';
+import { signUpSuccess, signUpFail } from '../../../AC/user';
+import UserApi from '../../../../api/user';
 
 function* request({ requestBody }) {
   try {

@@ -18,6 +18,12 @@ class UserApi {
       .then(response => response)
       .catch(({ response }) => ({ ...response}));
   }
+
+  static logout() {
+    return axios.get('/api/auth/logout')
+      .then(response => response)
+      .catch(({ response }) => ({ ...response }));
+  }
 }
 
 export default UserApi;

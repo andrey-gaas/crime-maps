@@ -1,6 +1,6 @@
 import { call, put } from 'redux-saga/effects';
-import { signInSuccess, signInFail } from '../../AC/user';
-import UserApi from '../../../api/user';
+import { signInSuccess, signInFail } from '../../../AC/user';
+import UserApi from '../../../../api/user';
 
 function* request({ email, password }) {
   const requestBody = { email, password };

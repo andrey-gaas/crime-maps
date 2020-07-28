@@ -1,6 +1,12 @@
 import { makeStyles } from '@material-ui/core/styles';
 
 export default makeStyles(theme => ({
+  grow: {
+    flexGrow: 1,
+  },
+  signOutButton: {
+    display: 'none',
+  },
   paper: {
     display: 'flex',
     flexDirection: 'column',
@@ -28,6 +34,12 @@ export default makeStyles(theme => ({
     color: '#888',
   },
   [theme.breakpoints.up('md')]: {
+    signOutButton: {
+      display: 'block',
+    },
+    signOutIconButton: {
+      display: 'none',
+    },
     paper: {
       marginTop: theme.spacing(3),
       marginLeft: 'auto',

@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useContext } from 'react';
 import PropTypes from 'prop-types';
 import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
@@ -6,7 +6,11 @@ import {
   Paper,
   Typography,
   Avatar,
+  Button,
+  IconButton,
 } from '@material-ui/core';
+import { ExitToApp as ExitIcon } from '@material-ui/icons';
+import Context from '../../../Context';
 import Header from '../../../components/Header';
 import Loader from '../../../components/Loader';
 import useStyles from './styles';
@@ -19,6 +23,7 @@ function Profile(props) {
     email,
     isAuth,
   } = props;
+  const { logout } = useContext(Context);
 
   const isLoaded = name && email;
 
@@ -27,6 +32,18 @@ function Profile(props) {
     <Fragment>
       <Header>
         <Typography variant="subtitle1">Личный кабинет</Typography>
+        <div className={classes.grow} />
+        <Button
+          className={classes.signOutButton}
+          variant="contained"
+          color="primary"
+          onClick={logout}
+        >
+          Выход
+        </Button>
+        <IconButton className={classes.signOutIconButton} onClick={logout}>
+          <ExitIcon />
+        </IconButton>
       </Header>
       <Paper className={classes.paper}>
         <Avatar alt="Avatar" src={avatar} className={classes.avatar} />

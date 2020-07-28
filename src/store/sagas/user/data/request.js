@@ -1,8 +1,8 @@
 import { call, put } from 'redux-saga/effects';
 import axios from 'axios';
 import cookie from 'js-cookie';
-import UserApi from '../../../api/user';
-import { fetchUserDataSuccess as success, logout } from '../../AC/user';
+import UserApi from '../../../../api/user';
+import { fetchUserDataSuccess as success, logout } from '../../../AC/user';
 
 function* request() {
   const token = cookie.get('token');

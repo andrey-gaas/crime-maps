@@ -1,8 +1,8 @@
 import { select, cancel, put } from 'redux-saga/effects';
 import emailValidator from 'email-validator';
-import { changeField } from '../../AC/forms';
-import { signInFail, signInRequest } from '../../AC/user';
-import { PASSWORD_TEMPLATE } from '../../../constants/forms';
+import { changeField } from '../../../AC/forms';
+import { signInFail, signInRequest } from '../../../AC/user';
+import { PASSWORD_TEMPLATE } from '../../../../constants/forms';
 
 function* validation() {
   const { email, emailError, password, passwordError } = yield select(({ forms }) => ({
