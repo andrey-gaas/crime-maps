@@ -5,12 +5,14 @@ import { bindActionCreators } from 'redux';
 import { CssBaseline, Snackbar } from '@material-ui/core';
 import { Switch, Route } from 'react-router-dom';
 import Context from '../../Context';
-import { INDEX } from '../../constants/links';
+import * as links from '../../constants/links';
 import * as systemAC from '../../store/AC/system';
 import * as mapAC from '../../store/AC/map';
 import * as userAC from '../../store/AC/user';
+import * as newsAC from '../../store/AC/news';
 
 import Index from '../../components/Index';
+import Main from '../Main';
 
 function App(props) {
   const {
@@ -34,7 +36,8 @@ function App(props) {
     <Context.Provider value={contextValue}>
       <CssBaseline />
       <Switch>
-        <Route path={INDEX} exact component={Index} />
+        <Route path={links.INDEX} exact component={Index} />
+        <Route path={links.MAP} exact component={Main} />
       </Switch>
 
       <Snackbar
@@ -64,6 +67,12 @@ App.propTypes = {
   signInValidate:      PropTypes.func.isRequired,
   signUpValidate:      PropTypes.func.isRequired,
   logout:              PropTypes.func.isRequired,
+  fetchAllNews:        PropTypes.func.isRequired,
+  fetchNews:           PropTypes.func.isRequired,
+  setActiveNews:       PropTypes.func.isRequired,
+  fetchCabinetNews:    PropTypes.func.isRequired,
+  createNews:          PropTypes.func.isRequired,
+  removeNews:          PropTypes.func.isRequired,
 };
 
 App.defaultProps = {
@@ -88,6 +97,12 @@ const mapDispatchToProps = dispatch => bindActionCreators({
   signInValidate:      userAC.signInValidate,
   signUpValidate:      userAC.signUpValidate,
   logout:              userAC.logoutRequest,
+  fetchAllNews:        newsAC.fetchAllNews,
+  fetchNews:           newsAC.fetchNews,
+  setActiveNews:       newsAC.setActiveNews,
+  fetchCabinetNews:    newsAC.fetchCabinetNews,
+  createNews:          newsAC.createNewsValidation,
+  removeNews:          newsAC.removeNewsRequest,
 }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="222" height="430" viewBox="0 0 222 430">
+  <defs>
+    <style>
+      .a {
+        fill: none;
+        stroke: #000;
+        stroke-miterlimit: 10;
+      }
+
+      .b {
+        fill: #fff;
+      }
+
+      .c {
+        fill: #f64b11;
+      }
+    </style>
+  </defs>
+  <title>logo_light</title>
+  <g>
+    <path class="a" d="M0,86.75" transform="translate(-17.63)"/>
+    <path class="b" d="M239.63,113c0,62.41-65,197-109,241-46.5-46.5-113-178.59-113-241a113,113,0,0,1,113-113C193,0,239.63,50.59,239.63,113Z" transform="translate(-17.63)"/>
+    <circle cx="110" cy="112" r="65"/>
+    <circle class="b" cx="110" cy="112" r="62"/>
+    <circle cx="110" cy="112" r="60"/>
+    <circle class="c" cx="109" cy="112" r="37"/>
+    <circle cx="91" cy="96" r="17"/>
+    <circle class="b" cx="113.5" cy="395.5" r="34.5"/>
+  </g>
+</svg>

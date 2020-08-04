@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="216" height="320" viewBox="0 0 216 320">
+  <defs>
+    <style>
+      .a {
+        fill: #fa9900;
+      }
+
+      .b {
+        fill: #fff;
+      }
+    </style>
+  </defs>
+  <title>Ресурс 1</title>
+  <g>
+    <path class="a" d="M216,113c0,65-64,163-108,207C61.5,273.5,0,175.41,0,113S45.59,0,108,0,216,50.59,216,113Z"/>
+    <ellipse class="b" cx="108.5" cy="68" rx="30.5" ry="31"/>
+    <ellipse class="b" cx="108.5" cy="153.5" rx="66.5" ry="31.5"/>
+  </g>
+</svg>
