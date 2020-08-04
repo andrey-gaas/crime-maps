@@ -1,4 +1,0 @@
-export const CHANGE_COORDINATES = 'CHANGE_COORDINATES';
-export const SET_ZOOM = 'SET_ZOOM';
-export const INCREMENT_ZOOM = 'INCREMENT_ZOOM';
-export const DECREMENT_ZOOM = 'DECREMENT_ZOOM';

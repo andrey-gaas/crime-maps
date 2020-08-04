@@ -1,2 +1,0 @@
-export const OPEN_INCIDENT = 'OPEN_INCIDENT';
-export const CLOSE_INCIDENT = 'CLOSE_INCIDENT';
