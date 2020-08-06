@@ -40,6 +40,13 @@ export default makeStyles(theme => ({
     marginTop: theme.spacing(1),
     height: 400,
   },
+  selectCityContainer: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    margin: theme.spacing(2),
+    color: '#888',
+  },
 
   /* Source */
   sourceForm: {
