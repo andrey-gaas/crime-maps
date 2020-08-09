@@ -7,6 +7,7 @@ import { setUserData } from '../../../AC/user';
 
 function* success({ data }) {
   const token = cookie.get('token');
+  localStorage.setItem('role', data.role);
   axios.defaults.headers.common['Authorization'] = token;
   yield put(changeField('signUpButtonDisabled', false));
   yield put(changeSystemField('snackbar', ''));

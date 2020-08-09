@@ -5,6 +5,7 @@ import { logout } from '../../AC/user';
 
 function* logoutRequest() {
   axios.defaults.headers.common['Authorization'] = '';
+  localStorage.removeItem('role');
 
   try {
     const result = yield call(UserApi.logout);
