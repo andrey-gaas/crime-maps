@@ -11,6 +11,7 @@ import useStyles from './styles';
 
 import Profile from './Profile';
 import News from './News';
+import Users from './Users';
 
 function Cabinet(props) {
   const { role } = props;
@@ -32,6 +33,7 @@ function Cabinet(props) {
         <Switch>
           <Route exact path="/cabinet" component={Profile} />
           <Route path="/cabinet/news" component={News} />
+          <Route path="/cabinet/users" component={Users} />
         </Switch>
       </div>
     </Fragment>
