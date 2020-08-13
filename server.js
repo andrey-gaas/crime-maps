@@ -17,6 +17,7 @@ app.use('/api/cities', require('./routes/cities'));
 app.use('/api/news', require('./routes/news'));
 app.use('/api/auth', require('./routes/auth'));
 app.use('/api/settings', require('./routes/settings'));
+app.use('/api/users', require('./routes/users'));
 
 if (process.env.NODE_ENV === 'production') {
   app.use('/', express.static(path.join(__dirname, 'build')));

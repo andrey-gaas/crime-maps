@@ -11,6 +11,7 @@ import * as formsAC from '../../store/AC/forms';
 import * as userAC from '../../store/AC/user';
 import * as newsAC from '../../store/AC/news';
 import * as citiesAC from '../../store/AC/cities';
+import * as cabinetAC from '../../store/AC/cabinet';
 
 import Index from '../Index';
 import Main from '../Main';
@@ -83,6 +84,7 @@ App.propTypes = {
   fetchCities:         PropTypes.func.isRequired,
   changeCity:          PropTypes.func.isRequired,
   toggleCities:        PropTypes.func.isRequired,
+  fetchCabinetUsers:   PropTypes.func.isRequired,
 };
 
 App.defaultProps = {
@@ -117,6 +119,7 @@ const mapDispatchToProps = dispatch => bindActionCreators({
   fetchCities:         citiesAC.fetchCities,
   changeCity:          citiesAC.changeCity,
   toggleCities:        citiesAC.toggleCitiesSelector,
+  fetchCabinetUsers:   cabinetAC.cabinetUsersRequest,
 }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

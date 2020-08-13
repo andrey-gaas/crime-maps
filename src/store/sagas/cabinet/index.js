@@ -1,17 +1,22 @@
-import { takeEvery } from 'redux-saga/effects';
-import * as actionNews from '../../actions/news';
-import fetch from './news/fetch';
-import fetchFail from './news/fetchFail';
-import create from './news/create';
-import remove from './news/remove';
+import { takeEvery, takeLatest } from 'redux-saga/effects';
+import * as actionsNews from '../../actions/news';
+import * as actionsCabinet from '../../actions/cabinet';
+import news from './news';
+import users from './users';
 
 export default function* () {
-  yield takeEvery(actionNews.FETCH_CABINET_NEWS, fetch);
-  yield takeEvery(actionNews.FETCH_CABINET_NEWS_FAIL, fetchFail);
-  yield takeEvery(actionNews.CREATE_NEWS_VALIDATION, create.validation);
-  yield takeEvery(actionNews.CREATE_NEWS_REQUEST, create.request);
-  yield takeEvery(actionNews.CREATE_NEWS_SUCCESS, create.success);
-  yield takeEvery(actionNews.REMOVE_NEWS_REQUEST, remove.request);
-  yield takeEvery(actionNews.REMOVE_NEWS_SUCCESS, remove.success);
-  yield takeEvery(actionNews.REMOVE_NEWS_FAIL, remove.fail);
+  /* NEWS */
+  yield takeEvery(actionsNews.FETCH_CABINET_NEWS, news.fetch);
+  yield takeEvery(actionsNews.FETCH_CABINET_NEWS_FAIL, news.fetchFail);
+  yield takeEvery(actionsNews.CREATE_NEWS_VALIDATION, news.create.validation);
+  yield takeEvery(actionsNews.CREATE_NEWS_REQUEST, news.create.request);
+  yield takeEvery(actionsNews.CREATE_NEWS_SUCCESS, news.create.success);
+  yield takeEvery(actionsNews.REMOVE_NEWS_REQUEST, news.remove.request);
+  yield takeEvery(actionsNews.REMOVE_NEWS_SUCCESS, news.remove.success);
+  yield takeEvery(actionsNews.REMOVE_NEWS_FAIL, news.remove.fail);
+
+  /* USERS */
+  yield takeEvery(actionsCabinet.CABINET_USERS_SUCCESS, users.success);
+  yield takeEvery(actionsCabinet.CABINET_USERS_FAIL, users.fail);
+  yield takeLatest(actionsCabinet.CABINET_USERS_REQUEST, users.fetch);
 };
